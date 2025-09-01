@@ -28,10 +28,10 @@ jobs:
       run: npm ci
       
     - name: Clean output directory
-      run: npm run clean
+      run: rm -rf output && mkdir -p output
       
     - name: Generate landing pages
-      run: npm run build
+      run: node scripts/generate-pages.js
       
     - name: List generated files
       run: |

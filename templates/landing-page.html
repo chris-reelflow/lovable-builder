@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{page_title}}</title>
+    <meta name="description" content="{{hero_subheadline}}">
+    <meta name="author" content="ReelFlow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://share.reelflow.com/{{company_slug}}/">
+    <meta property="og:title" content="{{page_title}}">
+    <meta property="og:description" content="{{hero_subheadline}}">
+    <meta property="og:image" content="{{screenshot_url}}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://share.reelflow.com/{{company_slug}}/">
+    <meta property="twitter:title" content="{{page_title}}">
+    <meta property="twitter:description" content="{{hero_subheadline}}">
+    <meta property="twitter:image" content="{{screenshot_url}}">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://share.reelflow.com/{{company_slug}}/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+    
+    <!-- Preload key assets -->
+    <link rel="preload" href="/assets/fonts/primary-font.woff2" as="font" type="font/woff2" crossorigin>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <img src="/assets/images/reelflow-logo.svg" alt="ReelFlow" class="logo">
+                </div>
+                <div class="nav-menu">
+                    <a href="{{cta_url}}" class="nav-cta-button">{{cta_label}}</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-background">
+                <!-- Background gradient and shapes will be styled via CSS -->
+                <div class="gradient-band"></div>
+                <div class="blur-shape blur-shape-1"></div>
+                <div class="blur-shape blur-shape-2"></div>
+            </div>
+            
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-headline">{{hero_headline}}</h1>
+                    <p class="hero-subheadline">{{hero_subheadline}}</p>
+                    
+                    <div class="hero-cta">
+                        <a href="{{primary_cta_url}}" class="cta-button primary">
+                            {{primary_cta_label}}
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <img src="{{screenshot_url}}" alt="{{company_name}} website experience" class="hero-screenshot">
+                </div>
+            </div>
+        </section>
+
+        <!-- Company-Specific Section -->
+        <section class="company-section">
+            <div class="section-container">
+                <div class="section-badge">
+                    <span class="badge">BENEFITS</span>
+                </div>
+                
+                <h2 class="section-heading">{{s2_heading}}</h2>
+                <p class="section-subheading">{{s2_subheading}}</p>
+                
+                <div class="benefits-grid">
+                    <!-- Benefit 1 -->
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <svg class="icon icon-guide" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                        </div>
+                        <div class="benefit-content">
+                            <h3 class="benefit-title">{{benefit1_title}}</h3>
+                            <ul class="benefit-list">
+                                <li>{{benefit1_bullet1}}</li>
+                                <li>{{benefit1_bullet2}}</li>
+                                <li>{{benefit1_bullet3}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Benefit 2 -->
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <svg class="icon icon-connection" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </div>
+                        <div class="benefit-content">
+                            <h3 class="benefit-title">{{benefit2_title}}</h3>
+                            <ul class="benefit-list">
+                                <li>{{benefit2_bullet1}}</li>
+                                <li>{{benefit2_bullet2}}</li>
+                                <li>{{benefit2_bullet3}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Benefit 3 -->
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <svg class="icon icon-engagement" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            </svg>
+                        </div>
+                        <div class="benefit-content">
+                            <h3 class="benefit-title">{{benefit3_title}}</h3>
+                            <ul class="benefit-list">
+                                <li>{{benefit3_bullet1}}</li>
+                                <li>{{benefit3_bullet2}}</li>
+                                <li>{{benefit3_bullet3}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works">
+            <div class="section-container">
+                <div class="section-badge">
+                    <span class="badge">HOW IT WORKS</span>
+                </div>
+                
+                <h2 class="section-heading">Plan, produce and publish interactive video flows</h2>
+                
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-icon">
+                            <span class="step-number">1</span>
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14,2 14,8 20,8"/>
+                            </svg>
+                        </div>
+                        <h3 class="step-title">Planning</h3>
+                        <p class="step-description">AI-powered website analysis identifies key opportunities for video flows across your website and generates contextual scripts.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-icon">
+                            <span class="step-number">2</span>
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <circle cx="12" cy="12" r="3"/>
+                                <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/>
+                            </svg>
+                        </div>
+                        <h3 class="step-title">Production</h3>
+                        <p class="step-description">Create and edit interactive video content with our intuitive production tools.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-icon">
+                            <span class="step-number">3</span>
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7,10 12,15 17,10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                        </div>
+                        <h3 class="step-title">Publish</h3>
+                        <p class="step-description">Deploy your interactive video experiences across your website with seamless integration.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="final-cta">
+            <div class="cta-container">
+                <h2 class="cta-heading">Ready to transform {{company_name}}'s website?</h2>
+                <p class="cta-subheading">Start creating engaging, interactive video experiences that convert visitors into customers.</p>
+                
+                <div class="cta-actions">
+                    <a href="{{primary_cta_url}}" class="cta-button primary large">
+                        {{primary_cta_label}}
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="/assets/images/reelflow-logo-light.svg" alt="ReelFlow" class="logo">
+            </div>
+            <div class="footer-links">
+                <a href="https://reelflow.com/privacy" class="footer-link">Privacy Policy</a>
+                <a href="https://reelflow.com/terms" class="footer-link">Terms of Service</a>
+                <a href="https://reelflow.com/contact" class="footer-link">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Analytics -->
+    <script>
+        // Add your analytics tracking code here
+        // Example: Google Analytics, Mixpanel, etc.
+    </script>
+</body>
+</html>

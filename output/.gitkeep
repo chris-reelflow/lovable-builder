@@ -1,0 +1,15 @@
+# Output Directory
+
+This directory will contain the generated landing pages.
+
+Structure after running `npm run build`:
+```
+output/
+├── acme-corp/
+│   └── index.html
+├── other-company/
+│   └── index.html
+└── ...
+```
+
+The generator creates a folder for each company with an index.html file.

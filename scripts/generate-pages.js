@@ -54,6 +54,17 @@ async function generatePages() {
     const outputDir = path.join(__dirname, '../output');
     await fs.ensureDir(outputDir);
     
+    // Copy assets directory to output
+    const assetsSourceDir = path.join(__dirname, '../assets');
+    const assetsOutputDir = path.join(outputDir, 'assets');
+    
+    console.log('📦 Copying assets...');
+    await fs.copy(assetsSourceDir, assetsOutputDir, {
+      overwrite: true,
+      errorOnExist: false
+    });
+    console.log('✅ Assets copied successfully');
+    
     // Load template
     const template = await loadTemplate();
     console.log('✅ Template loaded successfully');

@@ -1,13 +1,15 @@
 /* ReelFlow Landing Pages - Main Stylesheet */
 /* This is a placeholder - replace with your actual brand styles */
 
-/* CSS Variables - Update these to match your brand */
+/* CSS Variables - ReelFlow Brand Colors */
 :root {
-  /* Brand Colors - Replace with actual ReelFlow colors */
-  --color-primary: #3b82f6;
-  --color-primary-dark: #2563eb;
-  --color-secondary: #f97316;
-  --color-accent: #06b6d4;
+  /* Brand Colors */
+  --color-primary: #10B5A8;        /* Brand Teal */
+  --color-primary-dark: #0775A0;   /* Inform Blue */
+  --color-secondary: #F99E00;      /* Brand Yellow */
+  --color-accent: #E46447;         /* Brand Red */
+  --color-blue: #175773;           /* Brand Blue */
+  --color-dark: #1F0A38;          /* Base Dark */
   
   /* Neutral Colors */
   --color-white: #ffffff;
@@ -48,6 +50,11 @@
   /* Transitions */
   --transition-fast: 150ms ease-in-out;
   --transition-normal: 300ms ease-in-out;
+  
+  /* Brand Gradients */
+  --gradient-primary: linear-gradient(135deg, var(--color-blue), var(--color-primary));
+  --gradient-accent: linear-gradient(135deg, var(--color-secondary), var(--color-accent));
+  --gradient-hero: linear-gradient(135deg, var(--color-dark), var(--color-blue), var(--color-primary));
 }
 
 /* Font Face Declarations */
@@ -136,6 +143,7 @@ body {
   align-items: center;
   overflow: hidden;
   padding-top: 70px;
+  background: var(--gradient-hero);
 }
 
 .hero-background {
@@ -147,37 +155,42 @@ body {
   z-index: -1;
 }
 
-.gradient-band {
+.background-drop_wrapper {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 200px;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  bottom: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.background-drop_image {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.background-drop_image1 {
+  top: -10%;
+  right: -10%;
+  width: 60%;
   opacity: 0.1;
 }
 
-.blur-shape {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.3;
+.background-drop_image2 {
+  top: 20%;
+  left: -10%;
+  width: 50%;
+  opacity: 0.8;
 }
 
-.blur-shape-1 {
-  width: 400px;
-  height: 400px;
-  background: var(--color-primary);
-  top: 10%;
-  right: 10%;
-}
-
-.blur-shape-2 {
-  width: 300px;
-  height: 300px;
-  background: var(--color-secondary);
-  bottom: 20%;
-  left: 10%;
+.background-drop_image3 {
+  bottom: -20%;
+  right: -20%;
+  width: 70%;
+  opacity: 0.6;
 }
 
 .hero-container {
@@ -196,15 +209,16 @@ body {
   font-weight: var(--font-weight-bold);
   line-height: 1.1;
   margin-bottom: var(--spacing-lg);
-  background: linear-gradient(135deg, var(--color-gray-900), var(--color-primary));
+  background: linear-gradient(135deg, var(--color-white), var(--color-secondary));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  color: var(--color-white); /* Fallback for browsers that don't support gradient text */
 }
 
 .hero-subheadline {
   font-size: 1.25rem;
-  color: var(--color-gray-600);
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: var(--spacing-2xl);
   line-height: 1.6;
 }

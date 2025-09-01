@@ -1,6 +1,10 @@
-const fs = require('fs-extra');
-const csv = require('csv-parser');
-const path = require('path');
+import fs from 'fs-extra';
+import csv from 'csv-parser';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Utility function to create URL-friendly slug from company name
 function createSlug(companyName) {
@@ -99,8 +103,8 @@ async function generatePages() {
 }
 
 // Run if called directly
-if (require.main === module) {
+if (import.meta.url === `file://${process.argv[1]}`) {
   generatePages();
 }
 
-module.exports = { generatePages, createSlug };
+export { generatePages, createSlug };

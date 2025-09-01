@@ -19,7 +19,8 @@
   --color-gray-900: #111827;
   
   /* Typography */
-  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-primary: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Rules Extended', Georgia, serif;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
@@ -47,6 +48,26 @@
   /* Transitions */
   --transition-fast: 150ms ease-in-out;
   --transition-normal: 300ms ease-in-out;
+}
+
+/* Font Face Declarations */
+@font-face {
+  font-family: 'BDO Grotesk';
+  src: url('/assets/fonts/BDOGrotesk-VF.woff2') format('woff2'),
+       url('/assets/fonts/BDOGrotesk-VF.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rules Extended';
+  src: url('/assets/fonts/RulesExtended-Bold.woff2') format('woff2'),
+       url('/assets/fonts/RulesExtended-Bold.woff') format('woff'),
+       url('/assets/fonts/RulesExtended-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* Reset and Base Styles */
@@ -170,6 +191,7 @@ body {
 }
 
 .hero-headline {
+  font-family: var(--font-heading);
   font-size: 3.5rem;
   font-weight: var(--font-weight-bold);
   line-height: 1.1;

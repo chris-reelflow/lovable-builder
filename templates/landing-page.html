@@ -25,192 +25,301 @@
     <link rel="canonical" href="https://share.reelflow.com/{{company_slug}}/">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.png">
 
-    <!-- Styles -->
+    <!-- Styles - Using Webflow exported stylesheets -->
     <link rel="stylesheet" href="../assets/css/normalize.css">
     <link rel="stylesheet" href="../assets/css/webflow.css">
     <link rel="stylesheet" href="../assets/css/reel-flow.webflow.css">
-    <link rel="stylesheet" href="../assets/css/main.css">
     
     <!-- Preload key fonts -->
     <link rel="preload" href="../assets/fonts/BDOGrotesk-VF.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="../assets/fonts/RulesExtended-Bold.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Webflow Animation & Interaction Styles -->
+    <style>
+        @media (min-width:992px) {
+            html.w-mod-js:not(.w-mod-ix) [data-w-id="hero-headline"] {opacity:0;}
+            html.w-mod-js:not(.w-mod-ix) [data-w-id="hero-content"] {opacity:0;}
+            html.w-mod-js:not(.w-mod-ix) [data-w-id="hero-image"] {opacity:0;}
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
-            <div class="nav-container">
-                <div class="nav-logo">
-                    <img src="../assets/images/reelflow_logo_color.svg" alt="ReelFlow" class="logo">
-                </div>
-                <div class="nav-menu">
-                    <a href="{{cta_url}}" class="nav-cta-button">{{cta_label}}</a>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <div class="page-wrapper">
+        <!-- Global Styles (from Webflow) -->
+        <div class="global-styles w-embed">
+            <style>
+                /* Make text look crisper and more legible in all browsers */
+                body {
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                    font-smoothing: antialiased;
+                    text-rendering: optimizeLegibility;
+                }
+                /* Focus state style for keyboard navigation */
+                *[tabindex]:focus-visible,
+                input[type="file"]:focus-visible {
+                    outline: 0.125rem solid #4d65ff;
+                    outline-offset: 0.125rem;
+                }
+            </style>
+        </div>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-background">
-                <!-- ReelFlow Brand Background Elements -->
-                <div class="background-drop_wrapper">
-                    <img src="../assets/images/bg-image-blur-1.svg" loading="lazy" alt="" class="background-drop_image background-drop_image1">
-                    <img src="../assets/images/bg-image-blur-2.svg" loading="lazy" alt="" class="background-drop_image background-drop_image2">
-                    <img src="../assets/images/bg-image-blur-3.svg" loading="lazy" alt="" class="background-drop_image background-drop_image3">
-                </div>
-            </div>
-            
-            <div class="hero-container">
-                <div class="hero-content">
-                    <h1 class="hero-headline">{{hero_headline}}</h1>
-                    <p class="hero-subheadline">{{hero_subheadline}}</p>
-                    
-                    <div class="hero-cta">
-                        <a href="{{primary_cta_url}}" class="cta-button primary">
-                            {{primary_cta_label}}
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="hero-visual">
-                    <img src="{{screenshot_url}}" alt="{{company_name}} website experience" class="hero-screenshot">
-                </div>
-            </div>
-        </section>
-
-        <!-- Company-Specific Section -->
-        <section class="company-section">
-            <div class="section-container">
-                <div class="section-badge">
-                    <span class="badge">BENEFITS</span>
-                </div>
-                
-                <h2 class="section-heading">{{s2_heading}}</h2>
-                <p class="section-subheading">{{s2_subheading}}</p>
-                
-                <div class="benefits-grid">
-                    <!-- Benefit 1 -->
-                    <div class="benefit-card">
-                        <div class="benefit-icon">
-                            <img src="../assets/images/grow_graph_icon.svg" alt="Growth Icon" class="icon">
-                        </div>
-                        <div class="benefit-content">
-                            <h3 class="benefit-title">{{benefit1_title}}</h3>
-                            <ul class="benefit-list">
-                                <li>{{benefit1_bullet1}}</li>
-                                <li>{{benefit1_bullet2}}</li>
-                                <li>{{benefit1_bullet3}}</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Benefit 2 -->
-                    <div class="benefit-card">
-                        <div class="benefit-icon">
-                            <img src="../assets/images/comment_heart_icon.svg" alt="Engagement Icon" class="icon">
-                        </div>
-                        <div class="benefit-content">
-                            <h3 class="benefit-title">{{benefit2_title}}</h3>
-                            <ul class="benefit-list">
-                                <li>{{benefit2_bullet1}}</li>
-                                <li>{{benefit2_bullet2}}</li>
-                                <li>{{benefit2_bullet3}}</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <!-- Benefit 3 -->
-                    <div class="benefit-card">
-                        <div class="benefit-icon">
-                            <img src="../assets/images/artificial_intelligence_icon.svg" alt="AI Icon" class="icon">
-                        </div>
-                        <div class="benefit-content">
-                            <h3 class="benefit-title">{{benefit3_title}}</h3>
-                            <ul class="benefit-list">
-                                <li>{{benefit3_bullet1}}</li>
-                                <li>{{benefit3_bullet2}}</li>
-                                <li>{{benefit3_bullet3}}</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- How It Works Section -->
-        <section class="how-it-works">
-            <div class="section-container">
-                <div class="section-badge">
-                    <span class="badge">HOW IT WORKS</span>
-                </div>
-                
-                <h2 class="section-heading">Plan, produce and publish interactive video flows</h2>
-                
-                <div class="process-steps">
-                    <div class="process-step">
-                        <div class="step-icon">
-                            <span class="step-number">1</span>
-                            <img src="../assets/images/display_setting_icon.svg" alt="Planning Icon" class="icon">
-                        </div>
-                        <h3 class="step-title">Planning</h3>
-                        <p class="step-description">AI-powered website analysis identifies key opportunities for video flows across your website and generates contextual scripts.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-icon">
-                            <span class="step-number">2</span>
-                            <img src="../assets/images/video_front_icon.svg" alt="Production Icon" class="icon">
-                        </div>
-                        <h3 class="step-title">Production</h3>
-                        <p class="step-description">Create and edit interactive video content with our intuitive production tools.</p>
-                    </div>
-                    
-                    <div class="process-step">
-                        <div class="step-icon">
-                            <span class="step-number">3</span>
-                            <img src="../assets/images/web_cam_icon.svg" alt="Publish Icon" class="icon">
-                        </div>
-                        <h3 class="step-title">Publish</h3>
-                        <p class="step-description">Deploy your interactive video experiences across your website with seamless integration.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Final CTA Section -->
-        <section class="final-cta">
-            <div class="cta-container">
-                <h2 class="cta-heading">Ready to transform {{company_name}}'s website?</h2>
-                <p class="cta-subheading">Start creating engaging, interactive video experiences that convert visitors into customers.</p>
-                
-                <div class="cta-actions">
-                    <a href="{{primary_cta_url}}" class="cta-button primary large">
-                        {{primary_cta_label}}
+        <!-- Navbar Component (Webflow Structure) -->
+        <div class="navbar_component">
+            <div data-animation="default" class="navbar_wrapper w-nav" data-easing2="ease" data-easing="ease" data-collapse="medium" role="banner" data-duration="400">
+                <!-- Webflow Navbar Accent Gradient -->
+                <div class="navbar_accent"></div>
+                <div class="navbar_container">
+                    <a href="https://reelflow.com" class="navbar_logo-link w-nav-brand">
+                        <img loading="lazy" src="../assets/images/reelflow_logo_color.svg" alt="ReelFlow Logo" class="navbar_logo">
                     </a>
+                    <div class="navbar_button-wrapper">
+                        <a href="{{cta_url}}" class="button is-navbar-button w-button">{{cta_label}}</a>
+                    </div>
                 </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-logo">
-                <img src="../assets/images/reelflow_inverse_logo.svg" alt="ReelFlow" class="logo">
-            </div>
-            <div class="footer-links">
-                <a href="https://reelflow.com/privacy" class="footer-link">Privacy Policy</a>
-                <a href="https://reelflow.com/terms" class="footer-link">Terms of Service</a>
-                <a href="https://reelflow.com/contact" class="footer-link">Contact</a>
+                <div class="navbar_bg"></div>
             </div>
         </div>
-    </footer>
+
+        <!-- Main Content -->
+        <main class="main-wrapper">
+            <!-- Background Drop Wrapper (Webflow Structure) -->
+            <div class="background-drop_wrapper">
+                <img src="../assets/images/reelflow_dark_large_symbol.svg" loading="lazy" width="Auto" alt="" class="background-drop_image1">
+            </div>
+
+            <!-- Hero Section (Webflow Structure) -->
+            <header class="section_hero">
+                <div class="spacer_sticky-nav"></div>
+                <!-- Hero Background Images -->
+                <div class="background-drop_wrapper">
+                    <img src="../assets/images/bg-image-blur-1.svg" loading="lazy" width="Auto" alt="" class="background-drop_image2">
+                </div>
+                <div class="padding-global">
+                    <div class="container-large">
+                        <div class="spacer-xxlarge"></div>
+                        <div data-w-id="hero-headline" class="header_component text-align-center">
+                            <div class="max-width-xlarge align-center">
+                                <h1 class="heading-style-display">{{hero_headline}}</h1>
+                                <div class="spacer-small"></div>
+                                <div class="max-width-medium align-center">
+                                    <p class="text-size-large">{{hero_subheadline}}</p>
+                                </div>
+                                <div class="spacer-custom2"></div>
+                                <div class="button-group center-align">
+                                    <a href="{{primary_cta_url}}" class="button open-player w-button">{{primary_cta_label}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Showcase Section (Webflow Structure) -->
+            <section class="section_home-showcase">
+                <!-- Background Elements -->
+                <div class="background-drop_wrapper">
+                    <img src="../assets/images/bg-image-blur-4.svg" loading="lazy" width="Auto" alt="" class="background-drop_image7">
+                    <img src="../assets/images/reelflow_dark_large_symbol.svg" loading="lazy" width="Auto" alt="" class="background-drop_image6">
+                </div>
+                <div class="padding-global padding-section-large">
+                    <div class="container-large">
+                        <div class="w-layout-grid features_2_component">
+                            <div data-w-id="hero-image" class="features_2_content-left">
+                                <img src="{{screenshot_url}}" loading="lazy" alt="{{company_name}} website experience" class="image_screenshot-hero">
+                            </div>
+                            <div class="features_2_content-right">
+                                <div data-w-id="hero-content" class="features_2_content">
+                                    <div class="label_component">
+                                        <div class="label">
+                                            <div class="label_icon w-embed">
+                                                <svg role="img" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                                                    <g stroke="currentColor" stroke-width="1.5">
+                                                        <circle cx="12" cy="12" r="10"/>
+                                                        <path d="M12 6v6l4 2"/>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <div>Benefits for {{company_name}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="spacer-small"></div>
+                                    <h2 class="heading-style-h2">{{s2_heading}}</h2>
+                                    <div class="spacer-small"></div>
+                                    <p class="text-size-medium">{{s2_subheading}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Grid Section -->
+            <section class="section_features-simple">
+                <div class="padding-global padding-section-large">
+                    <div class="container-large">
+                        <div class="w-layout-grid features-simple_component">
+                            <!-- Feature 1 -->
+                            <div class="features-simple_item">
+                                <div class="features-simple_icon-wrapper">
+                                    <img src="../assets/images/grow_graph_icon.svg" loading="lazy" alt="Growth Icon" class="features-simple_icon">
+                                </div>
+                                <div class="features-simple_content">
+                                    <h3 class="heading-style-h6">{{benefit1_title}}</h3>
+                                    <div class="spacer-xsmall"></div>
+                                    <ul class="list">
+                                        <li class="list_item">{{benefit1_bullet1}}</li>
+                                        <li class="list_item">{{benefit1_bullet2}}</li>
+                                        <li class="list_item">{{benefit1_bullet3}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Feature 2 -->
+                            <div class="features-simple_item">
+                                <div class="features-simple_icon-wrapper">
+                                    <img src="../assets/images/comment_heart_icon.svg" loading="lazy" alt="Engagement Icon" class="features-simple_icon">
+                                </div>
+                                <div class="features-simple_content">
+                                    <h3 class="heading-style-h6">{{benefit2_title}}</h3>
+                                    <div class="spacer-xsmall"></div>
+                                    <ul class="list">
+                                        <li class="list_item">{{benefit2_bullet1}}</li>
+                                        <li class="list_item">{{benefit2_bullet2}}</li>
+                                        <li class="list_item">{{benefit2_bullet3}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Feature 3 -->
+                            <div class="features-simple_item">
+                                <div class="features-simple_icon-wrapper">
+                                    <img src="../assets/images/artificial_intelligence_icon.svg" loading="lazy" alt="AI Icon" class="features-simple_icon">
+                                </div>
+                                <div class="features-simple_content">
+                                    <h3 class="heading-style-h6">{{benefit3_title}}</h3>
+                                    <div class="spacer-xsmall"></div>
+                                    <ul class="list">
+                                        <li class="list_item">{{benefit3_bullet1}}</li>
+                                        <li class="list_item">{{benefit3_bullet2}}</li>
+                                        <li class="list_item">{{benefit3_bullet3}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How It Works Section -->
+            <section class="section_how-it-works">
+                <div class="background-drop_wrapper">
+                    <img src="../assets/images/bg-image-blur-2.svg" loading="lazy" width="Auto" alt="" class="background-drop_image3">
+                </div>
+                <div class="padding-global padding-section-large">
+                    <div class="container-large">
+                        <div class="how-it-works_component text-align-center">
+                            <div class="max-width-large align-center">
+                                <div class="label_component">
+                                    <div class="label">
+                                        <div>How It Works</div>
+                                    </div>
+                                </div>
+                                <div class="spacer-small"></div>
+                                <h2 class="heading-style-h2">Plan, produce and publish interactive video flows</h2>
+                                <div class="spacer-medium"></div>
+                                <div class="w-layout-grid how-it-works_list">
+                                    <!-- Step 1 -->
+                                    <div class="how-it-works_item">
+                                        <div class="how-it-works_icon-wrapper">
+                                            <div class="how-it-works_number">1</div>
+                                            <img src="../assets/images/display_setting_icon.svg" loading="lazy" alt="Planning Icon" class="how-it-works_icon">
+                                        </div>
+                                        <div class="how-it-works_content">
+                                            <h3 class="heading-style-h6">Planning</h3>
+                                            <div class="spacer-xsmall"></div>
+                                            <p>AI-powered website analysis identifies key opportunities for video flows across your website and generates contextual scripts.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Step 2 -->
+                                    <div class="how-it-works_item">
+                                        <div class="how-it-works_icon-wrapper">
+                                            <div class="how-it-works_number">2</div>
+                                            <img src="../assets/images/video_front_icon.svg" loading="lazy" alt="Production Icon" class="how-it-works_icon">
+                                        </div>
+                                        <div class="how-it-works_content">
+                                            <h3 class="heading-style-h6">Production</h3>
+                                            <div class="spacer-xsmall"></div>
+                                            <p>Create and edit interactive video content with our intuitive production tools.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Step 3 -->
+                                    <div class="how-it-works_item">
+                                        <div class="how-it-works_icon-wrapper">
+                                            <div class="how-it-works_number">3</div>
+                                            <img src="../assets/images/web_cam_icon.svg" loading="lazy" alt="Publish Icon" class="how-it-works_icon">
+                                        </div>
+                                        <div class="how-it-works_content">
+                                            <h3 class="heading-style-h6">Publish</h3>
+                                            <div class="spacer-xsmall"></div>
+                                            <p>Deploy your interactive video experiences across your website with seamless integration.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final CTA Section -->
+            <section class="section_cta">
+                <div class="background-drop_wrapper">
+                    <img src="../assets/images/bg-image-blur-3.svg" loading="lazy" width="Auto" alt="" class="background-drop_image4">
+                </div>
+                <div class="padding-global padding-section-large">
+                    <div class="container-medium">
+                        <div class="cta_component text-align-center">
+                            <h2 class="heading-style-h2">Ready to transform {{company_name}}'s website?</h2>
+                            <div class="spacer-small"></div>
+                            <p class="text-size-large">Start creating engaging, interactive video experiences that convert visitors into customers.</p>
+                            <div class="spacer-large"></div>
+                            <div class="button-group center-align">
+                                <a href="{{primary_cta_url}}" class="button w-button">{{primary_cta_label}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="section_footer">
+            <!-- Footer Accent (Webflow gradient) -->
+            <div class="footer_accent"></div>
+            <div class="padding-global padding-section-small">
+                <div class="container-large">
+                    <div class="footer_component">
+                        <div class="footer_content-left">
+                            <img src="../assets/images/reelflow_inverse_logo.svg" loading="lazy" alt="ReelFlow Logo" class="footer_logo">
+                        </div>
+                        <div class="footer_content-right">
+                            <div class="footer_link-list">
+                                <a href="https://reelflow.com/privacy" class="footer_link">Privacy Policy</a>
+                                <a href="https://reelflow.com/terms" class="footer_link">Terms of Service</a>
+                                <a href="https://reelflow.com/contact" class="footer_link">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
 
     <!-- Analytics -->
     <script>

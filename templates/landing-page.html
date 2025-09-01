@@ -43,15 +43,27 @@
             html.w-mod-js:not(.w-mod-ix) [data-w-id="hero-content"] {opacity:0;}
             html.w-mod-js:not(.w-mod-ix) [data-w-id="hero-image"] {opacity:0;}
         }
+        
+        /* Full viewport background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('../assets/images/bg-image-blur-full.svg');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            z-index: -10;
+            pointer-events: none;
+        }
     </style>
 </head>
 
 <body>
-    <!-- Full Viewport Background -->
-    <div class="background-drop_wrapper" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -10; overflow: hidden;">
-        <div style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; background-image: url('../assets/images/bg-image-blur-full.svg'); background-size: cover; background-position: center center; background-repeat: no-repeat; opacity: 0.3;"></div>
-    </div>
-    
     <div class="page-wrapper">
 
         <!-- Global Styles (from Webflow) -->

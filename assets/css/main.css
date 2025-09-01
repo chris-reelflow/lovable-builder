@@ -53,8 +53,8 @@
 /* Font Face Declarations */
 @font-face {
   font-family: 'BDO Grotesk';
-  src: url('/assets/fonts/BDOGrotesk-VF.woff2') format('woff2'),
-       url('/assets/fonts/BDOGrotesk-VF.ttf') format('truetype');
+  src: url('../fonts/BDOGrotesk-VF.woff2') format('woff2'),
+       url('../fonts/BDOGrotesk-VF.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -62,9 +62,9 @@
 
 @font-face {
   font-family: 'Rules Extended';
-  src: url('/assets/fonts/RulesExtended-Bold.woff2') format('woff2'),
-       url('/assets/fonts/RulesExtended-Bold.woff') format('woff'),
-       url('/assets/fonts/RulesExtended-Bold.otf') format('opentype');
+  src: url('../fonts/RulesExtended-Bold.woff2') format('woff2'),
+       url('../fonts/RulesExtended-Bold.woff') format('woff'),
+       url('../fonts/RulesExtended-Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;

@@ -205,9 +205,9 @@
             <section class="padding-global">
                 <div class="padding-section-large">
                     <div class="container-large">
-                        <div class="max-width-xlarge align-center">
-                            <div class="header_component text-align-center max-width-large z-index-2">
-                                <div class="label_component is-center">
+                        <div class="max-width-xlarge">
+                            <div class="header_component max-width-large z-index-2">
+                                <div class="label_component">
                                     <div class="label is-brand-4">
                                         <div class="label_icon w-embed">
                                             <svg role="img" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -265,7 +265,7 @@
                                             </div>
                                         </div>
                                         <div class="features_1_tabs-menu w-tab-menu">
-                                            <a data-w-tab="Planning" class="features_1_tab-link w-inline-block w-tab-link w--current">
+                                            <a data-w-tab="Planning" class="features_1_tab-link w-inline-block w-tab-link w--current" href="#" onclick="switchTab(event, 'Planning')">
                                                 <div class="features_1_tab-header">
                                                     <div class="features_1_tab-icon-wrapper">
                                                         <img loading="lazy" src="assets/images/artificial_intelligence_icon.svg" alt="" class="icon-1x1-large">
@@ -277,12 +277,12 @@
                                                         </svg>
                                                     </div>
                                                 </div>
-                                                <div class="features_1_tab-content">
+                                                <div class="features_1_tab-content" style="display: block;">
                                                     <div class="spacer-xsmall"></div>
                                                     <p>AI-powered website analysis identifies key opportunities for video flows across your website and generates contextual scripts.</p>
                                                 </div>
                                             </a>
-                                            <a data-w-tab="Production" class="features_1_tab-link w-inline-block w-tab-link">
+                                            <a data-w-tab="Production" class="features_1_tab-link w-inline-block w-tab-link" href="#" onclick="switchTab(event, 'Production')">
                                                 <div class="features_1_tab-header">
                                                     <div class="features_1_tab-icon-wrapper">
                                                         <img loading="lazy" src="assets/images/web_cam_icon.svg" alt="" class="icon-1x1-large">
@@ -294,12 +294,12 @@
                                                         </svg>
                                                     </div>
                                                 </div>
-                                                <div class="features_1_tab-content">
+                                                <div class="features_1_tab-content" style="display: none;">
                                                     <div class="spacer-xsmall"></div>
                                                     <p>Flexible options from self-serve recording to professional services, including AI Video Stand-In for content creation at scale.</p>
                                                 </div>
                                             </a>
-                                            <a data-w-tab="Publish" class="features_1_tab-link w-inline-block w-tab-link">
+                                            <a data-w-tab="Publish" class="features_1_tab-link w-inline-block w-tab-link" href="#" onclick="switchTab(event, 'Publish')">
                                                 <div class="features_1_tab-header">
                                                     <div class="features_1_tab-icon-wrapper">
                                                         <img loading="lazy" src="assets/images/screen_share_icon.svg" alt="" class="icon-1x1-large">
@@ -311,12 +311,12 @@
                                                         </svg>
                                                     </div>
                                                 </div>
-                                                <div class="features_1_tab-content">
+                                                <div class="features_1_tab-content" style="display: none;">
                                                     <div class="spacer-xsmall"></div>
                                                     <p>Deploy the interactive player across your website with a single line of code – overlay or embedded to suit your design.</p>
                                                 </div>
                                             </a>
-                                            <a data-w-tab="Performance" class="features_1_tab-link w-inline-block w-tab-link">
+                                            <a data-w-tab="Performance" class="features_1_tab-link w-inline-block w-tab-link" href="#" onclick="switchTab(event, 'Performance')">
                                                 <div class="features_1_tab-header">
                                                     <div class="features_1_tab-icon-wrapper">
                                                         <img loading="lazy" src="assets/images/grow_graph_icon.svg" alt="" class="icon-1x1-large">
@@ -328,7 +328,7 @@
                                                         </svg>
                                                     </div>
                                                 </div>
-                                                <div class="features_1_tab-content">
+                                                <div class="features_1_tab-content" style="display: none;">
                                                     <div class="spacer-xsmall"></div>
                                                     <p>Track engagement patterns and conversion paths, with insights into how visitors navigate your video experiences.</p>
                                                 </div>
@@ -397,6 +397,60 @@
     <script>
         // Add your analytics tracking code here
         // Example: Google Analytics, Mixpanel, etc.
+    </script>
+
+    <!-- Tab Functionality -->
+    <script>
+        function switchTab(event, tabName) {
+            event.preventDefault();
+            
+            // Hide all tab panes
+            const tabPanes = document.querySelectorAll('.features_1_tab-pane');
+            tabPanes.forEach(pane => {
+                pane.classList.remove('w--tab-active');
+            });
+            
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.features_1_tab-content');
+            tabContents.forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            // Remove current class from all tab links
+            const tabLinks = document.querySelectorAll('.features_1_tab-link');
+            tabLinks.forEach(link => {
+                link.classList.remove('w--current');
+            });
+            
+            // Show the selected tab pane
+            const selectedPane = document.querySelector(`[data-w-tab="${tabName}"]`);
+            if (selectedPane) {
+                selectedPane.classList.add('w--tab-active');
+            }
+            
+            // Show the clicked tab content and add current class
+            const clickedLink = event.currentTarget;
+            clickedLink.classList.add('w--current');
+            const clickedContent = clickedLink.querySelector('.features_1_tab-content');
+            if (clickedContent) {
+                clickedContent.style.display = 'block';
+            }
+            
+            // Update the data-current attribute
+            const tabsContainer = document.querySelector('.features_1_tabs');
+            if (tabsContainer) {
+                tabsContainer.setAttribute('data-current', tabName);
+            }
+        }
+        
+        // Initialize tabs on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ensure only Planning tab content is visible initially
+            const tabContents = document.querySelectorAll('.features_1_tab-content');
+            tabContents.forEach((content, index) => {
+                content.style.display = index === 0 ? 'block' : 'none';
+            });
+        });
     </script>
 </body>
 </html>

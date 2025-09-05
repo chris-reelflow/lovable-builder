@@ -98,6 +98,15 @@
             transform: rotate(-2deg);
             transition: transform 0.3s ease;
         }
+
+        /* Ensure containers don't clip the rotated screenshot */
+        .features_2_content-left {
+            overflow: visible !important;
+        }
+        
+        .features_2_component {
+            overflow: visible !important;
+        }
         
         .screenshot-frame:hover {
             transform: rotate(-1deg) scale(1.02);

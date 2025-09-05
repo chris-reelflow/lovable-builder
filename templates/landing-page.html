@@ -109,6 +109,21 @@
             display: block;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
+        
+        /* Force right alignment for What is ReelFlow section */
+        .header_component.text-align-right * {
+            text-align: right !important;
+        }
+        
+        .header_component.text-align-right .label_component {
+            justify-content: flex-end !important;
+            display: flex !important;
+        }
+        
+        .header_component.text-align-right h2,
+        .header_component.text-align-right p {
+            text-align: right !important;
+        }
     </style>
 </head>
 

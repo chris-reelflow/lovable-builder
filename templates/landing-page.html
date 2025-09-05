@@ -84,6 +84,31 @@
             right: 0;
             z-index: 1000;
         }
+        
+        /* Screenshot frame styling */
+        .screenshot-frame {
+            position: relative;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+        }
+        
+        .screenshot-frame:hover {
+            transform: rotate(-1deg) scale(1.02);
+        }
+        
+        .screenshot-frame .image_screenshot-hero {
+            border-radius: 12px;
+            width: 100%;
+            height: auto;
+            display: block;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
     </style>
 </head>
 
@@ -145,7 +170,9 @@
                         <div class="spacer-xxlarge"></div>
                         <div class="w-layout-grid features_2_component">
                             <div data-w-id="hero-image" class="features_2_content-left">
-                                <img src="{{screenshot_url}}" loading="lazy" alt="{{company_name}} website experience" class="image_screenshot-hero">
+                                <div class="screenshot-frame">
+                                    <img src="{{screenshot_url}}" loading="lazy" alt="{{company_name}} website experience" class="image_screenshot-hero">
+                                </div>
                             </div>
                             <div class="features_2_content-right">
                                 <div data-w-id="hero-headline" class="header_component text-align-left">

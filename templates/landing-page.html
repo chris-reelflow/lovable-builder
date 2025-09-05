@@ -108,6 +108,12 @@
             height: auto;
             display: block;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transform: rotate(2deg); /* Counter-rotate to keep image straight */
+            transition: transform 0.3s ease;
+        }
+        
+        .screenshot-frame:hover .image_screenshot-hero {
+            transform: rotate(1deg); /* Adjust counter-rotation on hover */
         }
         
         /* Force right alignment for What is ReelFlow section */

@@ -99,6 +99,22 @@
             transition: transform 0.3s ease;
         }
         
+        /* Large screenshot frame for hero */
+        .screenshot-frame-large {
+            position: relative;
+            padding: 30px;
+            margin: 40px 20px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            transform: rotate(-1deg);
+            transition: transform 0.3s ease;
+            max-width: 90vw;
+            width: 100%;
+        }
+        
         /* Video overlay styling */
         .video-overlay {
             position: absolute;
@@ -125,7 +141,12 @@
             transform: rotate(-1deg) scale(1.02);
         }
         
-        .screenshot-frame .image_screenshot-hero {
+        .screenshot-frame-large:hover {
+            transform: rotate(0deg) scale(1.01);
+        }
+        
+        .screenshot-frame .image_screenshot-hero,
+        .screenshot-frame-large .image_screenshot-hero {
             border-radius: 12px;
             width: 100%;
             height: auto;
@@ -136,6 +157,10 @@
         
         .screenshot-frame:hover .image_screenshot-hero {
             transform: rotate(1deg); /* Adjust counter-rotation on hover */
+        }
+        
+        .screenshot-frame-large:hover .image_screenshot-hero {
+            transform: rotate(0deg); /* Straighten on hover */
         }
         
         /* Force right alignment for What is ReelFlow section */
@@ -227,30 +252,34 @@
                 <div class="padding-global">
                     <div class="container-large">
                         <div class="spacer-xxlarge"></div>
-                        <div class="w-layout-grid features_2_component">
-                            <div data-w-id="hero-image" class="features_2_content-left">
-                                <div class="screenshot-frame">
-                                    <img src="{{screenshot_url}}" loading="lazy" alt="{{company_name}} website experience" class="image_screenshot-hero">
-                                    <video class="video-overlay" autoplay muted loop playsinline>
-                                        <source src="../assets/images/overlaychris.webm" type="video/webm">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                </div>
-                            </div>
-                            <div class="features_2_content-right">
-                                <div data-w-id="hero-headline" class="header_component text-align-left">
-                                    <div class="max-width-xlarge">
-                                        <h1 class="heading-style-display">{{hero_headline}}</h1>
-                                        <div class="spacer-small"></div>
-                                        <div class="max-width-medium">
-                                            <p class="text-size-large">{{hero_subheadline}}</p>
-                                        </div>
-                                        <div class="spacer-custom2"></div>
-                                        <div class="button-group left-align">
-                                            <a href="#" class="button open-player w-button">See ReelFlow in action</a>
-                                        </div>
+                        
+                        <!-- Centered Hero Content -->
+                        <div class="text-center">
+                            <div data-w-id="hero-headline" class="header_component">
+                                <div class="max-width-xlarge mx-auto">
+                                    <h1 class="heading-style-display">{{hero_headline}}</h1>
+                                    <div class="spacer-small"></div>
+                                    <div class="max-width-medium mx-auto">
+                                        <p class="text-size-large">{{hero_subheadline}}</p>
+                                    </div>
+                                    <div class="spacer-custom2"></div>
+                                    <div class="button-group" style="justify-content: center;">
+                                        <a href="#" class="button open-player w-button">See ReelFlow in action</a>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        
+                        <div class="spacer-large"></div>
+                        
+                        <!-- Large Screenshot Section -->
+                        <div class="hero-screenshot-container" style="display: flex; justify-content: center;">
+                            <div data-w-id="hero-image" class="screenshot-frame-large">
+                                <img src="{{screenshot_url}}" loading="lazy" alt="{{company_name}} website experience" class="image_screenshot-hero">
+                                <video class="video-overlay" autoplay muted loop playsinline>
+                                    <source src="../assets/images/overlaychris.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
                             </div>
                         </div>
                     </div>

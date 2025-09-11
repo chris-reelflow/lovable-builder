@@ -98,6 +98,19 @@
             transform: rotate(-2deg);
             transition: transform 0.3s ease;
         }
+        
+        /* Video overlay styling */
+        .video-overlay {
+            position: absolute;
+            top: 15%;
+            right: 8%;
+            width: 25%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            transform: rotate(2deg); /* Counter-rotate to appear straight within tilted frame */
+        }
 
         /* Ensure containers don't clip the rotated screenshot */
         .features_2_content-left {
@@ -218,6 +231,10 @@
                             <div data-w-id="hero-image" class="features_2_content-left">
                                 <div class="screenshot-frame">
                                     <img src="{{screenshot_url}}" loading="lazy" alt="{{company_name}} website experience" class="image_screenshot-hero">
+                                    <video class="video-overlay" autoplay muted loop playsinline>
+                                        <source src="../assets/images/overlaychris.webm" type="video/webm">
+                                        Your browser does not support the video tag.
+                                    </video>
                                 </div>
                             </div>
                             <div class="features_2_content-right">

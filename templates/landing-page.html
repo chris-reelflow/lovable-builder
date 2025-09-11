@@ -237,7 +237,7 @@
                         <img src="../assets/images/birdie_logo.png" alt="Company Logo" style="height: 40px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
                     </div>
                     <div id="w-node-_51bd28f7-791e-49aa-4761-34a7e3b59e90-e3b59e7f" class="navbar_button-wrapper" style="margin-left: auto;">
-                        <a href="#" class="button is-navbar-button w-button" style="
+                        <a href="#" class="button is-navbar-button w-button" onclick="scrollToGetInTouch(event)" style="
                             background-color: #1F0A38; 
                             color: white; 
                             padding: 0.75rem 1.5rem; 
@@ -654,7 +654,7 @@
                                     </div>
                                     <div class="spacer-medium"></div>
                                     <div class="button-group">
-                                        <a href="#" class="text-link" style="
+                                        <a href="#" class="text-link" onclick="scrollToGetInTouch(event)" style="
                                             display: inline-flex; 
                                             align-items: center; 
                                             gap: 0.5rem; 
@@ -715,7 +715,7 @@
             </section>
 
             <!-- Final CTA Section -->
-            <section class="section_cta">
+            <section class="section_cta" id="get-in-touch-section">
                 <div class="padding-global padding-section-large">
                     <div class="container-large">
                         <div class="cta_component text-align-center">
@@ -1088,6 +1088,18 @@
             const modal = document.getElementById('conversation-modal');
             modal.style.display = 'none';
             document.body.style.overflow = 'auto'; // Restore body scrolling
+        }
+
+        // Smooth scroll to Get in Touch section
+        function scrollToGetInTouch(event) {
+            event.preventDefault();
+            const section = document.getElementById('get-in-touch-section');
+            if (section) {
+                section.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         }
 
         // Close modal when clicking outside

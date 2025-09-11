@@ -795,7 +795,7 @@
                                         <p class="text-size-medium" style="margin-bottom: 1.5rem; color: var(--text-color-secondary); line-height: 1.4;">Use ReelFlow for a 14-day free trial, available for qualified companies.</p>
                                     </div>
                                     <div class="button-wrapper" style="align-self: flex-start;">
-                                        <a href="#" class="button w-button" style="
+                                        <a href="#" class="button w-button" onclick="openTrialModal(event);" style="
                                             background-color: #fcd456;
                                             color: white; 
                                             padding: 0.75rem 1.5rem; 
@@ -922,8 +922,103 @@
 
         </main>
 
+        <!-- Trial Form Modal -->
+        <div id="trialModal" class="modal-overlay" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Start Your Free Trial</h3>
+                    <button class="modal-close" onclick="closeTrialModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="hs-form-frame" data-region="eu1" data-form-id="a9cba3f8-09bc-45c8-ab4c-d654afc63c02" data-portal-id="145238537"></div>
+                </div>
+            </div>
+        </div>
+
     <!-- Custom CSS for Logo Animation -->
     <style>
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1F0A38;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #6b7280;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
         @keyframes scroll-left {
             0% {
                 transform: translateX(0);
@@ -1000,6 +1095,9 @@
     </style>
     </div>
 
+    <!-- HubSpot Form Script -->
+    <script src="https://js-eu1.hsforms.net/forms/embed/145238537.js" defer></script>
+
     <!-- Analytics -->
     <script>
         // Add your analytics tracking code here
@@ -1008,6 +1106,33 @@
 
     <!-- Tab Functionality -->
     <script>
+        // Modal Functions
+        function openTrialModal(event) {
+            event.preventDefault();
+            document.getElementById('trialModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeTrialModal() {
+            document.getElementById('trialModal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('trialModal');
+            if (event.target === modal) {
+                closeTrialModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeTrialModal();
+            }
+        });
+
         function switchTab(event, tabName) {
             event.preventDefault();
             

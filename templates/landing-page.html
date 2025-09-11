@@ -237,7 +237,27 @@
                         <img src="../assets/images/birdie_logo.png" alt="Company Logo" style="height: 40px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
                     </div>
                     <div id="w-node-_51bd28f7-791e-49aa-4761-34a7e3b59e90-e3b59e7f" class="navbar_button-wrapper" style="margin-left: auto;">
-                        <a href="#" class="button is-navbar-button w-button" onclick="scrollToGetInTouch(event)">Get in touch</a>
+                        <a href="#" class="button is-navbar-button w-button" onclick="scrollToGetInTouch(event)" style="
+                            position: relative;
+                            overflow: hidden;
+                            transition: all 0.3s ease;
+                            padding-right: 1.5rem;
+                        "
+                        onmouseover="this.style.backgroundColor='#1F0A38'; this.style.color='white'; this.style.paddingRight='2.5rem'; this.querySelector('.button-text').style.transform='translateX(-8px)'; this.querySelector('.button-arrow').style.opacity='1'; this.querySelector('.button-arrow').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(1)';" 
+                        onmouseout="this.style.backgroundColor='var(--_colors---background-color--background-darkest)'; this.style.color='var(--_colors---text-color--text-alternate)'; this.style.paddingRight='1.5rem'; this.querySelector('.button-text').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.opacity='0'; this.querySelector('.button-arrow').style.transform='translateX(10px)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(0)';">
+                            <span class="button-text" style="transition: transform 0.3s ease;">Get in touch</span>
+                            <img src="../assets/images/arrow_right_icon.svg" class="button-arrow" style="
+                                width: 16px; 
+                                height: 16px; 
+                                margin-left: 8px;
+                                opacity: 0;
+                                transform: translateX(10px);
+                                transition: all 0.3s ease;
+                                filter: brightness(0) invert(0);
+                                position: absolute;
+                                right: 1rem;
+                            " alt="">
+                        </a>
                         <div class="navbar_menu-button w-nav-button">
                             <div class="menu-icon">
                                 <div class="menu-icon_line-top"></div>

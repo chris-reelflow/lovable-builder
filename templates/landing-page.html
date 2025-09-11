@@ -826,7 +826,7 @@
                                         <p class="text-size-medium" style="margin-bottom: 1.5rem; color: var(--text-color-secondary); line-height: 1.4;">Chat with Flick, our AI assistant, with voice or text</p>
                                     </div>
                                     <div class="button-wrapper" style="align-self: flex-start;">
-                                        <a href="#" class="button w-button" style="
+                                        <a href="#" class="button w-button" id="start-conversation-btn" style="
                                             background-color: #fcd456; 
                                             color: black; 
                                             padding: 0.75rem 1.5rem; 
@@ -844,6 +844,7 @@
                                             min-width: 160px;
                                             justify-content: center;
                                         " 
+                                        onclick="openConversationModal(event)"
                                         onmouseover="this.style.backgroundColor='#1F0A38'; this.style.color='white'; this.querySelector('.button-text').style.transform='translateX(-8px)'; this.querySelector('.button-arrow').style.opacity='1'; this.querySelector('.button-arrow').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(1)';" 
                                         onmouseout="this.style.backgroundColor='#fcd456'; this.style.color='black'; this.querySelector('.button-text').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.opacity='0'; this.querySelector('.button-arrow').style.transform='translateX(10px)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(0)';">
                                             <span class="button-text" style="transition: transform 0.3s ease;">Start conversation</span>
@@ -877,6 +878,22 @@
                 </div>
                 <div class="modal-body">
                     <div class="hs-form-frame" data-region="eu1" data-form-id="a9cba3f8-09bc-45c8-ab4c-d654afc63c02" data-portal-id="145238537"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ElevenLabs Conversation Modal -->
+        <div id="conversation-modal" class="modal-overlay" style="display: none;">
+            <div class="modal-content conversation-modal">
+                <div class="modal-header">
+                    <h3 style="margin: 0; color: #1F0A38; font-family: 'BDO Grotesk', sans-serif;">Chat with Flick, ReelFlow's AI Assistant</h3>
+                    <button class="modal-close" onclick="closeConversationModal()">&times;</button>
+                </div>
+                <div class="modal-body" style="text-align: center; padding: 2rem;">
+                    <elevenlabs-convai 
+                        agent-id="agent_5601k2ykw3q6f2svss2pj8dqmfqt"
+                        override-first-message="Hi I'm Flick, ReelFlow's AI Assistant. Ask me anything about ReelFlow, by voice or text, and I'll be happy to help.">
+                    </elevenlabs-convai>
                 </div>
             </div>
         </div>
@@ -983,6 +1000,11 @@
             animation: modalSlideIn 0.3s ease-out;
         }
 
+        .conversation-modal {
+            max-width: 600px;
+            max-height: 85vh;
+        }
+
         .modal-header {
             display: flex;
             justify-content: space-between;
@@ -1028,6 +1050,9 @@
     </style>
     </div>
 
+    <!-- ElevenLabs Script -->
+    <script src="https://elevenlabs.io/convai-widget/index.js" defer></script>
+
     <!-- HubSpot Form Script -->
     <script src="https://js-eu1.hsforms.net/forms/embed/145238537.js" defer></script>
 
@@ -1052,11 +1077,29 @@
             document.body.style.overflow = 'auto'; // Restore body scrolling
         }
 
+        function openConversationModal(event) {
+            event.preventDefault();
+            const modal = document.getElementById('conversation-modal');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent body scrolling
+        }
+
+        function closeConversationModal() {
+            const modal = document.getElementById('conversation-modal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore body scrolling
+        }
+
         // Close modal when clicking outside
         document.addEventListener('click', function(event) {
-            const modal = document.getElementById('trial-modal');
-            if (event.target === modal) {
+            const trialModal = document.getElementById('trial-modal');
+            const conversationModal = document.getElementById('conversation-modal');
+            
+            if (event.target === trialModal) {
                 closeTrialModal();
+            }
+            if (event.target === conversationModal) {
+                closeConversationModal();
             }
         });
 
@@ -1064,6 +1107,7 @@
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closeTrialModal();
+                closeConversationModal();
             }
         });
     </script>

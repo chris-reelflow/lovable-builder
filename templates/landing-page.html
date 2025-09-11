@@ -102,8 +102,8 @@
         /* Large screenshot frame for hero */
         .screenshot-frame-large {
             position: relative;
-            padding: 30px;
-            margin: 40px 20px;
+            padding: 25px;
+            margin: 20px 20px;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
             border-radius: 24px;
             backdrop-filter: blur(10px);
@@ -111,7 +111,7 @@
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
             transform: rotate(-1deg);
             transition: transform 0.3s ease;
-            max-width: 90vw;
+            max-width: 80vw;
             width: 100%;
         }
         
@@ -254,23 +254,23 @@
                         <div class="spacer-xxlarge"></div>
                         
                         <!-- Centered Hero Content -->
-                        <div class="text-center">
+                        <div style="text-align: center;">
                             <div data-w-id="hero-headline" class="header_component">
-                                <div class="max-width-xlarge mx-auto">
-                                    <h1 class="heading-style-display">{{hero_headline}}</h1>
+                                <div class="max-width-xlarge" style="margin: 0 auto;">
+                                    <h1 class="heading-style-display" style="text-align: center;">{{hero_headline}}</h1>
                                     <div class="spacer-small"></div>
-                                    <div class="max-width-medium mx-auto">
-                                        <p class="text-size-large">{{hero_subheadline}}</p>
+                                    <div class="max-width-medium" style="margin: 0 auto;">
+                                        <p class="text-size-large" style="text-align: center;">{{hero_subheadline}}</p>
                                     </div>
                                     <div class="spacer-custom2"></div>
-                                    <div class="button-group" style="justify-content: center;">
+                                    <div class="button-group" style="justify-content: center; display: flex;">
                                         <a href="#" class="button open-player w-button">See ReelFlow in action</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="spacer-large"></div>
+                        <div class="spacer-medium"></div>
                         
                         <!-- Large Screenshot Section -->
                         <div class="hero-screenshot-container" style="display: flex; justify-content: center;">

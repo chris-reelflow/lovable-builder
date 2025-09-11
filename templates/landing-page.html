@@ -238,10 +238,10 @@
                     </div>
                     <div id="w-node-_51bd28f7-791e-49aa-4761-34a7e3b59e90-e3b59e7f" class="navbar_button-wrapper" style="margin-left: auto;">
                         <a href="#" class="button is-navbar-button w-button" onclick="scrollToGetInTouch(event)" style="
-                            background-color: #1F0A38; 
+                            background-color: transparent; 
                             color: white; 
-                            padding: 0.75rem 1.5rem; 
-                            border-radius: 50px; 
+                            padding: 0.75rem 1rem; 
+                            border-radius: 0; 
                             font-size: 1rem;
                             text-decoration: none; 
                             display: inline-flex; 
@@ -251,24 +251,13 @@
                             border: none; 
                             transition: all 0.3s ease;
                             position: relative;
-                            overflow: hidden;
                             justify-content: center;
                             white-space: nowrap;
+                            border-bottom: 2px solid transparent;
                         " 
-                        onmouseover="this.style.backgroundColor='#fcd456'; this.style.color='black'; this.style.paddingRight='2.5rem'; this.querySelector('.button-text').style.transform='translateX(-8px)'; this.querySelector('.button-arrow').style.opacity='1'; this.querySelector('.button-arrow').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(0)';" 
-                        onmouseout="this.style.backgroundColor='#1F0A38'; this.style.color='white'; this.style.paddingRight='1.5rem'; this.querySelector('.button-text').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.opacity='0'; this.querySelector('.button-arrow').style.transform='translateX(10px)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(1)';">
-                            <span class="button-text" style="transition: transform 0.3s ease;">Get in touch</span>
-                            <img src="../assets/images/arrow_right_icon.svg" class="button-arrow" style="
-                                width: 16px; 
-                                height: 16px; 
-                                margin-left: 8px;
-                                opacity: 0;
-                                transform: translateX(10px);
-                                transition: all 0.3s ease;
-                                filter: brightness(0) invert(1);
-                                position: absolute;
-                                right: 1rem;
-                            " alt="">
+                        onmouseover="this.style.borderBottomColor='#fcd456';" 
+                        onmouseout="this.style.borderBottomColor='transparent';">
+                            <span class="button-text" style="transition: all 0.3s ease;">Get in touch</span>
                         </a>
                         <div class="navbar_menu-button w-nav-button">
                             <div class="menu-icon">

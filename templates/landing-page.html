@@ -243,19 +243,20 @@
                             transition: all 0.3s ease;
                             padding-right: 1.5rem;
                         "
-                        onmouseover="this.style.backgroundColor='#1F0A38'; this.style.color='white'; this.style.paddingRight='2.5rem'; this.querySelector('.button-text').style.transform='translateX(-8px)'; this.querySelector('.button-arrow').style.opacity='1'; this.querySelector('.button-arrow').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(1)';" 
-                        onmouseout="this.style.backgroundColor='var(--_colors---background-color--background-darkest)'; this.style.color='var(--_colors---text-color--text-alternate)'; this.style.paddingRight='1.5rem'; this.querySelector('.button-text').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.opacity='0'; this.querySelector('.button-arrow').style.transform='translateX(10px)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(0)';">
+                        onmouseover="this.style.backgroundColor='#1F0A38'; this.style.color='white'; this.style.paddingRight='2.5rem'; this.querySelector('.button-text').style.transform='translateX(-8px)'; this.querySelector('.button-arrow').style.opacity='1'; this.querySelector('.button-arrow').style.transform='translateX(0) translateY(-50%)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(1)';"
+                        onmouseout="this.style.backgroundColor='var(--_colors---background-color--background-darkest)'; this.style.color='var(--_colors---text-color--text-alternate)'; this.style.paddingRight='1.5rem'; this.querySelector('.button-text').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.opacity='0'; this.querySelector('.button-arrow').style.transform='translateX(10px) translateY(-50%)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(0)';">
                             <span class="button-text" style="transition: transform 0.3s ease;">Get in touch</span>
                             <img src="../assets/images/arrow_right_icon.svg" class="button-arrow" style="
                                 width: 16px; 
                                 height: 16px; 
                                 margin-left: 8px;
                                 opacity: 0;
-                                transform: translateX(10px);
+                                transform: translateX(10px) translateY(-50%);
                                 transition: all 0.3s ease;
                                 filter: brightness(0) invert(0);
                                 position: absolute;
                                 right: 1rem;
+                                top: 50%;
                             " alt="">
                         </a>
                         <div class="navbar_menu-button w-nav-button">

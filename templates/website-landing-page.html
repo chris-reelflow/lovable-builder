@@ -113,17 +113,27 @@
             position: relative;
             padding: 25px;
             margin: 20px 20px;
-            transform: rotate(-2deg); /* Initial left tilt */
-            transition: transform 0.3s ease;
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
             border-radius: 24px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.15);
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
-            transform: rotate(-1deg);
-            transition: transform 0.3s ease;
             max-width: 60vw;
             width: 100%;
+        }
+        
+        /* Backplate/framing behind screenshot */
+        .screenshot-frame-large::before {
+            content: "";
+            position: absolute;
+            inset: -18px;
+            border-radius: 28px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9));
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            transition: box-shadow 0.3s ease, filter 0.3s ease;
+            z-index: 1;
         }
         
         /* Video overlay styling */
@@ -155,6 +165,10 @@
         
         .screenshot-frame-large:hover {
             transform: rotate(0deg) scale(1.01);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
+        }
+        .screenshot-frame-large:hover::before {
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.25);
         }
         
         .screenshot-frame .image_screenshot-hero,
@@ -163,6 +177,8 @@
             width: 100%;
             height: auto;
             display: block;
+            position: relative;
+            z-index: 2;
             transform: rotate(2deg); /* Counter-rotate to keep image straight */
             transition: transform 0.3s ease;
         }

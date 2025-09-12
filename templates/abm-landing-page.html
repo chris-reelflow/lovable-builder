@@ -139,6 +139,11 @@
             transform: rotate(2deg); /* Counter-rotate to appear straight within tilted frame */
             transition: transform 0.3s ease;
         }
+        
+        /* Make eye catcher video half the size */
+        #eyeCatcherVideo {
+            width: 9.5%; /* Half of the original 19% */
+        }
 
         /* Ensure containers don't clip the rotated screenshot */
         .features_2_content-left {
@@ -470,13 +475,15 @@
                                     (function() {
                                         const eyeCatcher = document.getElementById('eyeCatcherVideo');
                                         const chrisVideo = document.getElementById('chrisVideo');
-                                        let cycleStartTime = Date.now();
                                         
                                         function switchToChris() {
                                             eyeCatcher.style.opacity = '0';
                                             chrisVideo.style.opacity = '1';
                                             chrisVideo.currentTime = 0;
                                             chrisVideo.play();
+                                            
+                                            // Switch back to eye catcher after 14 seconds
+                                            setTimeout(switchToEyeCatcher, 14000);
                                         }
                                         
                                         function switchToEyeCatcher() {
@@ -484,18 +491,13 @@
                                             eyeCatcher.style.opacity = '1';
                                             eyeCatcher.currentTime = 0;
                                             eyeCatcher.play();
-                                            cycleStartTime = Date.now();
+                                            
+                                            // Switch to Chris video after 2.5 seconds
+                                            setTimeout(switchToChris, 2500);
                                         }
                                         
-                                        // Switch to Chris video after 2.5 seconds
+                                        // Start the cycle: eye catcher plays for 2.5 seconds
                                         setTimeout(switchToChris, 2500);
-                                        
-                                        // When Chris video ends, switch back to eye catcher
-                                        chrisVideo.addEventListener('ended', function() {
-                                            switchToEyeCatcher();
-                                            // Set up the next switch to Chris
-                                            setTimeout(switchToChris, 2500);
-                                        });
                                         
                                         // Ensure videos are ready
                                         eyeCatcher.addEventListener('loadeddata', function() {

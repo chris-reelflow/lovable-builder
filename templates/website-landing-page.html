@@ -371,6 +371,108 @@
                 height: 32px !important;
             }
         }
+        
+        /* CTA Cards Responsive Grid */
+        .cta-cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .cta-card {
+            text-align: left;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 150px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .cta-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .cta-card-header .icon-1x1-medium {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+        }
+        
+        .cta-card-header h3 {
+            margin: 0;
+            white-space: nowrap;
+        }
+        
+        .cta-card-description {
+            margin-bottom: 1.5rem;
+            color: var(--text-color-secondary);
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+        
+        .cta-card .button-wrapper {
+            align-self: flex-start;
+        }
+        
+        .cta-card .button {
+            background-color: #fcd456;
+            color: black;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            font-weight: 400;
+            font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            border: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            justify-content: center;
+            white-space: nowrap;
+        }
+        
+        .button-text {
+            transition: transform 0.3s ease;
+        }
+        
+        .button-arrow {
+            width: 16px;
+            height: 16px;
+            margin-left: 8px;
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.3s ease;
+            filter: brightness(0) invert(0);
+            position: absolute;
+            right: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .cta-cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+            
+            .cta-card-header h3 {
+                white-space: normal;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .cta-cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+            }
+        }
     </style>
 </head>
 
@@ -904,144 +1006,61 @@
                             <div class="spacer-large"></div>
                             
                             <!-- Three horizontal CTA cards -->
-                            <div class="cta-cards-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1200px; margin: 0 auto;">
+                            <div class="cta-cards-grid">
                                 
                                 <!-- Start a free trial -->
-                                <div class="cards-list_item" style="text-align: left; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 150px;">
+                                <div class="cards-list_item cta-card">
                                     <div class="cards-list_content-wrapper">
-                                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem;">
-                                            <img src="../assets/images/comment_heart_icon.svg" loading="lazy" alt="" class="icon-1x1-medium" style="width: 32px; height: 32px;">
-                                            <h3 class="heading-style-h5" style="white-space: nowrap;">Start a free trial</h3>
+                                        <div class="cta-card-header">
+                                            <img src="../assets/images/comment_heart_icon.svg" loading="lazy" alt="" class="icon-1x1-medium">
+                                            <h3 class="heading-style-h5">Start a free trial</h3>
                                         </div>
-                                        <p class="text-size-medium" style="margin-bottom: 1.5rem; color: var(--text-color-secondary); line-height: 1.4;">Use ReelFlow for a 14-day free trial, available for qualified companies.</p>
+                                        <p class="text-size-medium cta-card-description">Use ReelFlow for a 14-day free trial, available for qualified companies.</p>
                                     </div>
-                                    <div class="button-wrapper" style="align-self: flex-start;">
-                                        <a href="#" class="button w-button" id="start-trial-btn" style="
-                                            background-color: #fcd456;
-                                            color: black; 
-                                            padding: 0.75rem 1.5rem; 
-                                            border-radius: 50px; 
-                                            font-size: 1rem;
-                                            text-decoration: none; 
-                                            display: inline-flex; 
-                                            align-items: center; 
-                                            font-weight: 400; 
-                                            font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-                                            border: none; 
-                                            transition: all 0.3s ease;
-                                            position: relative;
-                                            overflow: hidden;
-                                            justify-content: center;
-                                            white-space: nowrap;
-                                        " 
-                                        onclick="openTrialModal(event)"
+                                    <div class="button-wrapper">
+                                        <a href="#" class="button w-button" id="start-trial-btn" onclick="openTrialModal(event)"
                                         onmouseover="this.style.backgroundColor='#1F0A38'; this.style.color='white'; this.style.paddingRight='2.5rem'; this.querySelector('.button-text').style.transform='translateX(-8px)'; this.querySelector('.button-arrow').style.opacity='1'; this.querySelector('.button-arrow').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(1)';" 
                                         onmouseout="this.style.backgroundColor='#fcd456'; this.style.color='black'; this.style.paddingRight='1.5rem'; this.querySelector('.button-text').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.opacity='0'; this.querySelector('.button-arrow').style.transform='translateX(10px)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(0)';">
-                                            <span class="button-text" style="transition: transform 0.3s ease;">Start free trial</span>
-                                            <img src="../assets/images/arrow_right_icon.svg" class="button-arrow" style="
-                                                width: 16px; 
-                                                height: 16px; 
-                                                margin-left: 8px;
-                                                opacity: 0;
-                                                transform: translateX(10px);
-                                                transition: all 0.3s ease;
-                                                filter: brightness(0) invert(0);
-                                                position: absolute;
-                                                right: 1rem;
-                                            " alt="">
+                                            <span class="button-text">Start free trial</span>
+                                            <img src="../assets/images/arrow_right_icon.svg" class="button-arrow" alt="">
                                         </a>
                                     </div>
                                 </div>
                                 
                                 <!-- Book a meeting -->
-                                <div class="cards-list_item" style="text-align: left; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 150px;">
+                                <div class="cards-list_item cta-card">
                                     <div class="cards-list_content-wrapper">
-                                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem;">
-                                            <img src="../assets/images/video_front_icon.svg" loading="lazy" alt="" class="icon-1x1-medium" style="width: 32px; height: 32px;">
-                                            <h3 class="heading-style-h5" style="white-space: nowrap;">Book a meeting</h3>
+                                        <div class="cta-card-header">
+                                            <img src="../assets/images/video_front_icon.svg" loading="lazy" alt="" class="icon-1x1-medium">
+                                            <h3 class="heading-style-h5">Book a meeting</h3>
                                         </div>
-                                        <p class="text-size-medium" style="margin-bottom: 1.5rem; color: var(--text-color-secondary); line-height: 1.4;">Book a meeting with ReelFlow Co-Founder & CEO, Chris Wickson</p>
+                                        <p class="text-size-medium cta-card-description">Book a meeting with ReelFlow Co-Founder & CEO, Chris Wickson</p>
                                     </div>
-                                    <div class="button-wrapper" style="align-self: flex-start;">
-                                        <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3l6RnBKjaPzWn3-U85qkk3zzLYIEeHAXPQF5fTEQRUdCk_huMtda7_H4RqtXfdqHIXXYCUIe7y" target="_blank" class="button w-button" style="
-                                            background-color: #fcd456;
-                                            color: black; 
-                                            padding: 0.75rem 1.5rem; 
-                                            border-radius: 50px; 
-                                            font-size: 1rem;
-                                            text-decoration: none; 
-                                            display: inline-flex; 
-                                            align-items: center; 
-                                            font-weight: 400; 
-                                            font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-                                            border: none; 
-                                            transition: all 0.3s ease;
-                                            position: relative;
-                                            overflow: hidden;
-                                            justify-content: center;
-                                            white-space: nowrap;
-                                        " 
+                                    <div class="button-wrapper">
+                                        <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3l6RnBKjaPzWn3-U85qkk3zzLYIEeHAXPQF5fTEQRUdCk_huMtda7_H4RqtXfdqHIXXYCUIe7y" target="_blank" class="button w-button"
                                         onmouseover="this.style.backgroundColor='#1F0A38'; this.style.color='white'; this.style.paddingRight='2.5rem'; this.querySelector('.button-text').style.transform='translateX(-8px)'; this.querySelector('.button-arrow').style.opacity='1'; this.querySelector('.button-arrow').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(1)';" 
                                         onmouseout="this.style.backgroundColor='#fcd456'; this.style.color='black'; this.style.paddingRight='1.5rem'; this.querySelector('.button-text').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.opacity='0'; this.querySelector('.button-arrow').style.transform='translateX(10px)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(0)';">
-                                            <span class="button-text" style="transition: transform 0.3s ease;">Book a meeting</span>
-                                            <img src="../assets/images/arrow_right_icon.svg" class="button-arrow" style="
-                                                width: 16px; 
-                                                height: 16px; 
-                                                margin-left: 8px;
-                                                opacity: 0;
-                                                transform: translateX(10px);
-                                                transition: all 0.3s ease;
-                                                filter: brightness(0) invert(0);
-                                                position: absolute;
-                                                right: 1rem;
-                                            " alt="">
+                                            <span class="button-text">Book a meeting</span>
+                                            <img src="../assets/images/arrow_right_icon.svg" class="button-arrow" alt="">
                                         </a>
                                     </div>
                                 </div>
                                 
                                 <!-- Start an AI conversation -->
-                                <div class="cards-list_item" style="text-align: left; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 150px;">
+                                <div class="cards-list_item cta-card">
                                     <div class="cards-list_content-wrapper">
-                                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem;">
-                                            <img src="../assets/images/artificial_intelligence_icon.svg" loading="lazy" alt="" class="icon-1x1-medium" style="width: 32px; height: 32px;">
-                                            <h3 class="heading-style-h5" style="white-space: nowrap;">Start an AI conversation</h3>
+                                        <div class="cta-card-header">
+                                            <img src="../assets/images/artificial_intelligence_icon.svg" loading="lazy" alt="" class="icon-1x1-medium">
+                                            <h3 class="heading-style-h5">Start an AI conversation</h3>
                                         </div>
-                                        <p class="text-size-medium" style="margin-bottom: 1.5rem; color: var(--text-color-secondary); line-height: 1.4;">Chat with Flick, our AI assistant, with voice or text</p>
+                                        <p class="text-size-medium cta-card-description">Chat with Flick, our AI assistant, with voice or text</p>
                                     </div>
-                                    <div class="button-wrapper" style="align-self: flex-start;">
-                                        <a href="#" class="button w-button" id="start-conversation-btn" style="
-                                            background-color: #fcd456; 
-                                            color: black; 
-                                            padding: 0.75rem 1.5rem; 
-                                            border-radius: 50px; 
-                                            font-size: 1rem; 
-                                            text-decoration: none; 
-                                            display: inline-flex; 
-                                            align-items: center; 
-                                            font-weight: 400; 
-                                            font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-                                            border: none; 
-                                            transition: all 0.3s ease;
-                                            position: relative;
-                                            overflow: hidden;
-                                            justify-content: center;
-                                            white-space: nowrap;
-                                        " 
-                                        onclick="openConversationModal(event)"
+                                    <div class="button-wrapper">
+                                        <a href="#" class="button w-button" id="start-conversation-btn" onclick="openConversationModal(event)"
                                         onmouseover="this.style.backgroundColor='#1F0A38'; this.style.color='white'; this.style.paddingRight='2.5rem'; this.querySelector('.button-text').style.transform='translateX(-8px)'; this.querySelector('.button-arrow').style.opacity='1'; this.querySelector('.button-arrow').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(1)';" 
                                         onmouseout="this.style.backgroundColor='#fcd456'; this.style.color='black'; this.style.paddingRight='1.5rem'; this.querySelector('.button-text').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.opacity='0'; this.querySelector('.button-arrow').style.transform='translateX(10px)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(0)';">
-                                            <span class="button-text" style="transition: transform 0.3s ease;">Start conversation</span>
-                                            <img src="../assets/images/arrow_right_icon.svg" class="button-arrow" style="
-                                                width: 16px; 
-                                                height: 16px; 
-                                                margin-left: 8px;
-                                                opacity: 0;
-                                                transform: translateX(10px);
-                                                transition: all 0.3s ease;
-                                                filter: brightness(0) invert(0);
-                                                position: absolute;
-                                                right: 1rem;
-                                            " alt="">
+                                            <span class="button-text">Start conversation</span>
+                                            <img src="../assets/images/arrow_right_icon.svg" class="button-arrow" alt="">
                                         </a>
                                     </div>
                                 </div>

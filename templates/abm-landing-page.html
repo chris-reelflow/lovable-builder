@@ -139,11 +139,6 @@
             transform: rotate(2deg); /* Counter-rotate to appear straight within tilted frame */
             transition: transform 0.3s ease;
         }
-        
-        /* Make eye catcher video half the size */
-        #eyeCatcherVideo {
-            width: 9.5%; /* Half of the original 19% */
-        }
 
         /* Ensure containers don't clip the rotated screenshot */
         .features_2_content-left {
@@ -459,56 +454,10 @@
                         <div class="hero-screenshot-container" style="display: flex; justify-content: center;">
                             <div data-w-id="hero-image" class="screenshot-frame-large">
                                 <img src="{{screenshot_url}}" loading="lazy" alt="{{company_name}} personalized landing page" class="image_screenshot-hero">
-                                <!-- Eye Catcher Video (plays first) -->
-                                <video id="eyeCatcherVideo" class="video-overlay" autoplay muted playsinline style="opacity: 1;">
-                                    <source src="../assets/images/overlayeyecatcher.webm" type="video/webm">
-                                    Your browser does not support the video tag.
-                                </video>
-                                
-                                <!-- Main Chris Video (plays after eye catcher) -->
-                                <video id="chrisVideo" class="video-overlay" muted loop playsinline style="opacity: 0;">
+                                <video class="video-overlay" autoplay muted loop playsinline>
                                     <source src="../assets/images/overlaychris.webm" type="video/webm">
                                     Your browser does not support the video tag.
                                 </video>
-                                
-                                <script>
-                                    (function() {
-                                        const eyeCatcher = document.getElementById('eyeCatcherVideo');
-                                        const chrisVideo = document.getElementById('chrisVideo');
-                                        
-                                        function switchToChris() {
-                                            eyeCatcher.style.opacity = '0';
-                                            chrisVideo.style.opacity = '1';
-                                            chrisVideo.currentTime = 0;
-                                            chrisVideo.play();
-                                            
-                                            // Switch back to eye catcher after 14 seconds
-                                            setTimeout(switchToEyeCatcher, 14000);
-                                        }
-                                        
-                                        function switchToEyeCatcher() {
-                                            chrisVideo.style.opacity = '0';
-                                            eyeCatcher.style.opacity = '1';
-                                            eyeCatcher.currentTime = 0;
-                                            eyeCatcher.play();
-                                            
-                                            // Switch to Chris video after 2.5 seconds
-                                            setTimeout(switchToChris, 2500);
-                                        }
-                                        
-                                        // Start the cycle: eye catcher plays for 2.5 seconds
-                                        setTimeout(switchToChris, 2500);
-                                        
-                                        // Ensure videos are ready
-                                        eyeCatcher.addEventListener('loadeddata', function() {
-                                            eyeCatcher.play();
-                                        });
-                                        
-                                        chrisVideo.addEventListener('loadeddata', function() {
-                                            chrisVideo.load(); // Prepare for playback
-                                        });
-                                    })();
-                                </script>
                             </div>
                         </div>
                     </div>

@@ -135,6 +135,7 @@
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
             z-index: 10;
             transform: rotate(2deg); /* Counter-rotate to appear straight within tilted frame */
+            transition: transform 0.3s ease;
         }
 
         /* Ensure containers don't clip the rotated screenshot */
@@ -170,6 +171,11 @@
         
         .screenshot-frame-large:hover .image_screenshot-hero {
             transform: rotate(0deg); /* Straighten on hover */
+        }
+        
+        /* Ensure overlay video follows the same micro-interaction */
+        .screenshot-frame-large:hover .video-overlay {
+            transform: rotate(0deg);
         }
         
         /* Force right alignment for What is ReelFlow section */

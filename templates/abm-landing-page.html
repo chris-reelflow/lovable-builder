@@ -1209,6 +1209,82 @@
                 gap: 1.5rem;
             }
         }
+        
+        /* Custom CSS for Logo Animation */
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .section_brands {
+            overflow: hidden;
+            width: 100%;
+            padding: 4rem 0;
+        }
+
+        .brands_component {
+            display: flex;
+            align-items: center;
+        }
+
+        .brands_scroll-container {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .brands_list {
+            display: flex;
+            align-items: center;
+            gap: 5rem;
+            animation: scroll-left 30s linear infinite;
+            width: max-content;
+        }
+
+        .brands_wrapper {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brands_logo {
+            max-height: 5rem;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* Pause animation on hover */
+        .section_brands:hover .brands_list {
+            animation-play-state: paused;
+        }
+
+        @media screen and (max-width: 767px) {
+            .brands_list {
+                gap: 2rem;
+            }
+            
+            .brands_logo {
+                max-height: 3rem;
+            }
+        }
+
+        @media screen and (max-width: 479px) {
+            .brands_list {
+                flex-direction: column;
+                animation: none;
+                gap: 1.5rem;
+                padding: 1rem 0;
+            }
+
+            .brands_wrapper {
+                padding: 0.5rem;
+            }
+        }
     </style>
 
 </body>

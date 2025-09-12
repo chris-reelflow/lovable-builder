@@ -308,6 +308,69 @@
                 max-width: 60vw !important;
             }
         }
+        
+        /* Fit section mobile layout */
+        .fit-section-mobile-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        
+        /* Desktop layout for fit section */
+        @media (min-width: 992px) {
+            .fit-section-mobile-layout {
+                grid-template-columns: 1fr 1fr;
+                gap: 4rem;
+                align-items: center;
+            }
+            
+            .fit-header-mobile {
+                order: 2;
+            }
+            
+            .features_2_content-left {
+                order: 1;
+            }
+            
+            .fit-header-mobile .header_component {
+                text-align: left !important;
+            }
+            
+            .fit-header-mobile .button-group {
+                justify-content: flex-start;
+            }
+            
+            .fit-header-mobile .logo-arrangement {
+                justify-content: flex-start !important;
+            }
+            
+            .fit-header-mobile .logo-arrangement img:first-child {
+                height: 60px !important;
+            }
+            
+            .fit-header-mobile .logo-arrangement img:last-child {
+                height: 60px !important;
+            }
+            
+            .fit-header-mobile .logo-arrangement div {
+                height: 50px !important;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .fit-header-mobile .logo-arrangement {
+                flex-wrap: wrap;
+                gap: 1rem !important;
+            }
+            
+            .fit-header-mobile .logo-arrangement img {
+                height: 40px !important;
+            }
+            
+            .fit-header-mobile .logo-arrangement div {
+                height: 32px !important;
+            }
+        }
     </style>
 </head>
 
@@ -534,62 +597,27 @@
             <section class="section_personalized-benefits">
                 <div class="padding-global padding-section-large">
                     <div class="container-large">
-                        <div class="w-layout-grid features_2_component">
-                            <div class="features_2_content-left">
-                                <div class="cards-list_component max-width-small">
-                                    <div class="cards-list_item">
-                                        <div class="cards-list_icon-wrapper">
-                                            <img src="../assets/images/grow_graph_yellow_icon.svg" loading="lazy" alt="" class="icon-1x1-large">
-                                        </div>
-                                     <div class="cards-list_content-wrapper">
-                                         <h3 class="heading-style-h5">{{Fit_1_heading}}</h3>
-                                         <div class="spacer-xsmall"></div>
-                                         <p class="text-size-medium">{{Fit_1_subheading}}</p>
-                                     </div>
-                                 </div>
-                                 
-                                 <div class="cards-list_item">
-                                     <div class="cards-list_icon-wrapper">
-                                         <img src="../assets/images/comment_heart_icon.svg" loading="lazy" alt="" class="icon-1x1-large">
-                                     </div>
-                                     <div class="cards-list_content-wrapper">
-                                         <h3 class="heading-style-h5">{{Fit_2_heading}}</h3>
-                                         <div class="spacer-xsmall"></div>
-                                         <p class="text-size-medium">{{Fit_2_subheading}}</p>
-                                     </div>
-                                 </div>
-                                 
-                                 <div class="cards-list_item">
-                                     <div class="cards-list_icon-wrapper">
-                                         <img src="../assets/images/artificial_intelligence_yellow_icon.svg" loading="lazy" alt="" class="icon-1x1-large">
-                                     </div>
-                                     <div class="cards-list_content-wrapper">
-                                         <h3 class="heading-style-h5">{{Fit_3_heading}}</h3>
-                                         <div class="spacer-xsmall"></div>
-                                         <p class="text-size-medium">{{Fit_3_subheading}}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="features_2_content-right">
+                        <div class="fit-section-mobile-layout">
+                            <!-- Mobile: Show header content first -->
+                            <div class="features_2_content-right fit-header-mobile">
                                 <!-- Logo arrangement with ReelFlow first -->
-                                <div class="logo-arrangement" style="display: flex; align-items: center; justify-content: flex-start; margin-bottom: 2rem; gap: 1.5rem;">
-                                    <img src="../assets/images/reelflow_logo_color.svg" alt="ReelFlow Logo" style="height: 60px;">
+                                <div class="logo-arrangement" style="display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; gap: 1.5rem;">
+                                    <img src="../assets/images/reelflow_logo_color.svg" alt="ReelFlow Logo" style="height: 48px;">
                                     <div style="
                                         width: 1px; 
-                                        height: 50px; 
+                                        height: 40px; 
                                         border-left: 2px solid #e5e7eb;
                                         flex-shrink: 0;
                                     "></div>
-                                    <img src="{{company_logo}}" alt="{{company_name}} Logo" style="height: 60px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                                    <img src="{{company_logo}}" alt="{{company_name}} Logo" style="height: 48px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
                                 </div>
                                 
-                                 <div class="header_component max-width-large text-align-left">
+                                 <div class="header_component max-width-large text-align-center">
                                      <h2 class="heading-style-display">{{fit_headline}}</h2>
                                      <div class="spacer-small"></div>
                                      <p class="text-size-medium text-color-grey-2 margin-bottom margin-medium">{{Fit_subheadline}}</p>
                                     <div class="spacer-medium"></div>
-                                    <div class="button-group left-align">
+                                    <div class="button-group center-align">
                                         <a href="#" class="button w-button" onclick="scrollToGetInTouch(event)" style="
                                             background-color: #fcd456;
                                             color: black; 
@@ -623,6 +651,44 @@
                                                 right: 1rem;
                                             " alt="">
                                         </a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Cards section -->
+                            <div class="features_2_content-left">
+                                <div class="cards-list_component max-width-small">
+                                    <div class="cards-list_item">
+                                        <div class="cards-list_icon-wrapper">
+                                            <img src="../assets/images/grow_graph_yellow_icon.svg" loading="lazy" alt="" class="icon-1x1-large">
+                                        </div>
+                                     <div class="cards-list_content-wrapper">
+                                         <h3 class="heading-style-h5">{{Fit_1_heading}}</h3>
+                                         <div class="spacer-xsmall"></div>
+                                         <p class="text-size-medium">{{Fit_1_subheading}}</p>
+                                     </div>
+                                 </div>
+                                 
+                                 <div class="cards-list_item">
+                                     <div class="cards-list_icon-wrapper">
+                                         <img src="../assets/images/comment_heart_icon.svg" loading="lazy" alt="" class="icon-1x1-large">
+                                     </div>
+                                     <div class="cards-list_content-wrapper">
+                                         <h3 class="heading-style-h5">{{Fit_2_heading}}</h3>
+                                         <div class="spacer-xsmall"></div>
+                                         <p class="text-size-medium">{{Fit_2_subheading}}</p>
+                                     </div>
+                                 </div>
+                                 
+                                 <div class="cards-list_item">
+                                     <div class="cards-list_icon-wrapper">
+                                         <img src="../assets/images/artificial_intelligence_yellow_icon.svg" loading="lazy" alt="" class="icon-1x1-large">
+                                     </div>
+                                     <div class="cards-list_content-wrapper">
+                                         <h3 class="heading-style-h5">{{Fit_3_heading}}</h3>
+                                         <div class="spacer-xsmall"></div>
+                                         <p class="text-size-medium">{{Fit_3_subheading}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -534,7 +534,54 @@
             <section class="section_personalized-benefits">
                 <div class="padding-global padding-section-large">
                     <div class="container-large">
-                        <div class="w-layout-grid features_2_component">
+                        <div class="fit-section-mobile-layout">
+                            <!-- Mobile: Show header content first -->
+                            <div class="features_2_content-right fit-header-mobile">
+                                <!-- Logo arrangement with ReelFlow first -->
+                                <div class="logo-arrangement" style="display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; gap: 1.5rem;">
+                                    <img src="../assets/images/reelflow_logo_color.svg" alt="ReelFlow Logo" style="height: 48px;">
+                                    <div style="
+                                        width: 1px; 
+                                        height: 40px; 
+                                        border-left: 2px solid #e5e7eb;
+                                        flex-shrink: 0;
+                                    "></div>
+                                    <img src="{{company_logo}}" alt="{{company_name}} Logo" style="height: 48px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                                </div>
+                                
+                                <div class="header_component max-width-large text-align-center">
+                                    <h2 class="heading-style-display">{{fit_headline}}</h2>
+                                    <div class="spacer-small"></div>
+                                    <p class="text-size-medium text-color-grey-2 margin-bottom margin-medium">{{Fit_subheadline}}</p>
+                                   <div class="spacer-medium"></div>
+                                   <div class="button-group center-align">
+                                       <a href="#" class="button w-button" onclick="scrollToGetInTouch(event)" style="
+                                           background-color: #fcd456;
+                                           color: black; 
+                                           padding: 0.75rem 1.5rem; 
+                                           border-radius: 50px; 
+                                           font-size: 1rem;
+                                           text-decoration: none; 
+                                           display: inline-flex; 
+                                           align-items: center; 
+                                           font-weight: 400; 
+                                           font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+                                           border: none; 
+                                           transition: all 0.3s ease;
+                                           position: relative;
+                                           overflow: hidden;
+                                           justify-content: center;
+                                           white-space: nowrap;
+                                       " 
+                                       onmouseover="this.style.backgroundColor='#1F0A38'; this.style.color='white';" 
+                                       onmouseout="this.style.backgroundColor='#fcd456'; this.style.color='black';">
+                                           Get in touch
+                                       </a>
+                                   </div>
+                               </div>
+                            </div>
+                            
+                            <!-- Cards section -->
                             <div class="features_2_content-left">
                                 <div class="cards-list_component max-width-small">
                                     <div class="cards-list_item">
@@ -568,50 +615,6 @@
                                              <div class="spacer-xsmall"></div>
                                              <p class="text-size-medium">{{Fit_3_subheading}}</p>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="features_2_content-right">
-                                <!-- Logo arrangement with ReelFlow first -->
-                                <div class="logo-arrangement" style="display: flex; align-items: center; justify-content: flex-start; margin-bottom: 2rem; gap: 1.5rem;">
-                                    <img src="../assets/images/reelflow_logo_color.svg" alt="ReelFlow Logo" style="height: 60px;">
-                                    <div style="
-                                        width: 1px; 
-                                        height: 50px; 
-                                        border-left: 2px solid #e5e7eb;
-                                        flex-shrink: 0;
-                                    "></div>
-                                    <img src="{{company_logo}}" alt="{{company_name}} Logo" style="height: 60px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
-                                </div>
-                                
-                                 <div class="header_component max-width-large text-align-left">
-                                     <h2 class="heading-style-display">{{fit_headline}}</h2>
-                                     <div class="spacer-small"></div>
-                                     <p class="text-size-medium text-color-grey-2 margin-bottom margin-medium">{{Fit_subheadline}}</p>
-                                    <div class="spacer-medium"></div>
-                                    <div class="button-group left-align">
-                                        <a href="#" class="button w-button" onclick="scrollToGetInTouch(event)" style="
-                                            background-color: #fcd456;
-                                            color: black; 
-                                            padding: 0.75rem 1.5rem; 
-                                            border-radius: 50px; 
-                                            font-size: 1rem;
-                                            text-decoration: none; 
-                                            display: inline-flex; 
-                                            align-items: center; 
-                                            font-weight: 400; 
-                                            font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-                                            border: none; 
-                                            transition: all 0.3s ease;
-                                            position: relative;
-                                            overflow: hidden;
-                                            justify-content: center;
-                                            white-space: nowrap;
-                                        " 
-                                        onmouseover="this.style.backgroundColor='#1F0A38'; this.style.color='white';" 
-                                        onmouseout="this.style.backgroundColor='#fcd456'; this.style.color='black';">
-                                            Get in touch
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -970,6 +973,49 @@
             window.open('https://calendly.com/reelflow', '_blank');
         }
 
+        // Tab functionality for How It Works section
+        function switchTab(event, tabName) {
+            event.preventDefault();
+            
+            // Hide all tab panes
+            const tabPanes = document.querySelectorAll('.features_1_tab-pane');
+            tabPanes.forEach(pane => {
+                pane.classList.remove('w--tab-active');
+            });
+            
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.features_1_tab-content');
+            tabContents.forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            // Remove current class from all tab links
+            const tabLinks = document.querySelectorAll('.features_1_tab-link');
+            tabLinks.forEach(link => {
+                link.classList.remove('w--current');
+            });
+            
+            // Show the selected tab pane
+            const selectedPane = document.querySelector(`[data-w-tab="${tabName}"]`);
+            if (selectedPane) {
+                selectedPane.classList.add('w--tab-active');
+            }
+            
+            // Show the clicked tab content and add current class
+            const clickedLink = event.currentTarget;
+            clickedLink.classList.add('w--current');
+            const clickedContent = clickedLink.querySelector('.features_1_tab-content');
+            if (clickedContent) {
+                clickedContent.style.display = 'block';
+            }
+            
+            // Update the data-current attribute
+            const tabsContainer = document.querySelector('.features_1_tabs');
+            if (tabsContainer) {
+                tabsContainer.setAttribute('data-current', tabName);
+            }
+        }
+
         // Webflow animations (simplified)
         document.addEventListener('DOMContentLoaded', function() {
             // Simple fade-in animation for hero elements
@@ -983,6 +1029,12 @@
                     element.style.opacity = '1';
                     element.style.transform = 'translateY(0)';
                 }, index * 200);
+            });
+            
+            // Initialize tabs on page load
+            const tabContents = document.querySelectorAll('.features_1_tab-content');
+            tabContents.forEach((content, index) => {
+                content.style.display = index === 0 ? 'block' : 'none';
             });
         });
     </script>
@@ -1037,6 +1089,69 @@
         .how-it-works-step p {
             color: rgba(255, 255, 255, 0.8);
             margin: 0;
+        }
+        
+        /* Fit section mobile layout */
+        .fit-section-mobile-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        
+        /* Desktop layout for fit section */
+        @media (min-width: 992px) {
+            .fit-section-mobile-layout {
+                grid-template-columns: 1fr 1fr;
+                gap: 4rem;
+                align-items: center;
+            }
+            
+            .fit-header-mobile {
+                order: 2;
+            }
+            
+            .features_2_content-left {
+                order: 1;
+            }
+            
+            .fit-header-mobile .header_component {
+                text-align: left !important;
+            }
+            
+            .fit-header-mobile .button-group {
+                justify-content: flex-start;
+            }
+            
+            .fit-header-mobile .logo-arrangement {
+                justify-content: flex-start !important;
+            }
+            
+            .fit-header-mobile .logo-arrangement img:first-child {
+                height: 60px !important;
+            }
+            
+            .fit-header-mobile .logo-arrangement img:last-child {
+                height: 60px !important;
+            }
+            
+            .fit-header-mobile .logo-arrangement div {
+                height: 50px !important;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .fit-header-mobile .logo-arrangement {
+                flex-wrap: wrap;
+                gap: 1rem !important;
+            }
+            
+            .fit-header-mobile .logo-arrangement img {
+                height: 40px !important;
+            }
+            
+            .fit-header-mobile .logo-arrangement div {
+                height: 32px !important;
+            }
         }
     </style>
 

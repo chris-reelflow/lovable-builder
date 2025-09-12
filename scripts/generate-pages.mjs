@@ -41,7 +41,8 @@ function populateTemplate(template, data) {
   });
   
   // Add computed values
-  const companySlug = createSlug(data.company_name);
+  const providedSlug = (data.company_slug || '').toString().trim();
+  const companySlug = providedSlug ? createSlug(providedSlug) : createSlug(data.company_name);
   populatedTemplate = populatedTemplate.replace(/{{company_slug}}/g, companySlug);
   
   return populatedTemplate;
@@ -77,13 +78,13 @@ async function generatePages(csvFile = null) {
     } else {
       // Process both CSV files if no specific file provided
       const websitesPath = path.join(__dirname, '../data/websites.csv');
-      const landingPagesPath = path.join(__dirname, '../data/landing-pages.csv');
+      const abmPath = path.join(__dirname, '../data/abm.csv');
       
       if (await fs.pathExists(websitesPath)) {
         csvFiles.push('websites.csv');
       }
-      if (await fs.pathExists(landingPagesPath)) {
-        csvFiles.push('landing-pages.csv');
+      if (await fs.pathExists(abmPath)) {
+        csvFiles.push('abm.csv');
       }
     }
     
@@ -108,7 +109,7 @@ async function generatePages(csvFile = null) {
                 const useCase = row.use_case || row['Use Case'] || csvFileName;
                 let templateType;
                 
-                if (csvFileName === 'landing-pages.csv' || useCase.toLowerCase() === 'landing page') {
+                if (csvFileName === 'abm.csv' || useCase.toLowerCase() === 'abm') {
                   templateType = 'abm';
                 } else {
                   templateType = 'website';
@@ -119,8 +120,9 @@ async function generatePages(csvFile = null) {
                 // Load appropriate template
                 const template = await loadTemplate(templateType);
                 
-                // Create company-specific directory
-                const companySlug = createSlug(row.company_name);
+                // Prefer CSV-provided slug when available
+                const providedSlug = (row.company_slug || '').toString().trim();
+                const companySlug = providedSlug ? createSlug(providedSlug) : createSlug(row.company_name);
                 const pageDir = path.join(outputDir, companySlug);
                 await fs.ensureDir(pageDir);
                 

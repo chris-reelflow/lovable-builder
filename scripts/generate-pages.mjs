@@ -19,7 +19,7 @@ function createSlug(companyName) {
 // Load and parse template based on template type
 async function loadTemplate(templateType = 'website') {
   try {
-    const templateName = templateType === 'abm' ? 'landing-page-abm.html' : 'landing-page.html';
+    const templateName = templateType === 'abm' ? 'abm-landing-page.html' : 'website-landing-page.html';
     const templatePath = path.join(__dirname, '../templates/', templateName);
     console.log(`📄 Loading template: ${templateName}`);
     return await fs.readFile(templatePath, 'utf8');
@@ -83,8 +83,9 @@ async function generatePages() {
           
           for (const row of results) {
             try {
-              // Determine template type (default to 'website' if not specified)
-              const templateType = row.template_type || 'website';
+              // Determine template type based on use case column
+              const useCase = row.use_case || row['Use Case'] || 'Website';
+              const templateType = useCase.toLowerCase() === 'landing page' ? 'abm' : 'website';
               templateUsage[templateType] = (templateUsage[templateType] || 0) + 1;
               
               // Load appropriate template

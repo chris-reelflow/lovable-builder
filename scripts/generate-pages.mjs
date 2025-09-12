@@ -16,10 +16,12 @@ function createSlug(companyName) {
     .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
 }
 
-// Load and parse template
-async function loadTemplate() {
+// Load and parse template based on template type
+async function loadTemplate(templateType = 'website') {
   try {
-    const templatePath = path.join(__dirname, '../templates/landing-page.html');
+    const templateName = templateType === 'abm' ? 'landing-page-abm.html' : 'landing-page.html';
+    const templatePath = path.join(__dirname, '../templates/', templateName);
+    console.log(`📄 Loading template: ${templateName}`);
     return await fs.readFile(templatePath, 'utf8');
   } catch (error) {
     console.error('Error loading template:', error.message);
@@ -65,9 +67,8 @@ async function generatePages() {
     });
     console.log('✅ Assets copied successfully');
     
-    // Load template
-    const template = await loadTemplate();
-    console.log('✅ Template loaded successfully');
+    // Process each row to determine template usage
+    const templateUsage = { website: 0, abm: 0 };
     
     // Read and process CSV
     const csvPath = path.join(__dirname, '../data/landingpages.csv');
@@ -82,6 +83,13 @@ async function generatePages() {
           
           for (const row of results) {
             try {
+              // Determine template type (default to 'website' if not specified)
+              const templateType = row.template_type || 'website';
+              templateUsage[templateType] = (templateUsage[templateType] || 0) + 1;
+              
+              // Load appropriate template
+              const template = await loadTemplate(templateType);
+              
               // Create company-specific directory
               const companySlug = createSlug(row.company_name);
               const pageDir = path.join(outputDir, companySlug);
@@ -94,11 +102,13 @@ async function generatePages() {
               const htmlPath = path.join(pageDir, 'index.html');
               await fs.writeFile(htmlPath, htmlContent);
               
-              console.log(`✅ Generated: /${companySlug}/index.html`);
+              console.log(`✅ Generated: /${companySlug}/index.html (${templateType} template)`);
             } catch (error) {
               console.error(`❌ Error generating page for ${row.company_name}:`, error.message);
             }
           }
+          
+          console.log(`📊 Template usage: Website: ${templateUsage.website}, ABM: ${templateUsage.abm || 0}`);
           
           console.log('🎉 Landing page generation complete!');
           console.log(`📁 Pages generated in: ${outputDir}`);

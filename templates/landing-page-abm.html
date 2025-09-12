@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{page_title}}</title>
+    <meta name="description" content="{{hero_subheadline}}">
+    <meta name="author" content="ReelFlow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://share.reelflow.com/{{company_slug}}/">
+    <meta property="og:title" content="{{page_title}}">
+    <meta property="og:description" content="{{hero_subheadline}}">
+    <meta property="og:image" content="{{screenshot_url}}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://share.reelflow.com/{{company_slug}}/">
+    <meta property="twitter:title" content="{{page_title}}">
+    <meta property="twitter:description" content="{{hero_subheadline}}">
+    <meta property="twitter:image" content="{{screenshot_url}}">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://share.reelflow.com/{{company_slug}}/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.png">
+
+    <!-- Styles - Using Webflow exported stylesheets -->
+    <link rel="stylesheet" href="../assets/css/normalize.css">
+    <link rel="stylesheet" href="../assets/css/webflow.css">
+    <link rel="stylesheet" href="../assets/css/reel-flow.webflow.css">
+    
+    <!-- Preload key fonts -->
+    <link rel="preload" href="../assets/fonts/BDOGrotesk-VF.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../assets/fonts/RulesExtended-Bold.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Webflow Animation & Interaction Styles -->
+    <style>
+        @media (min-width:992px) {
+            html.w-mod-js:not(.w-mod-ix) [data-w-id="hero-headline"] {opacity:0;}
+            html.w-mod-js:not(.w-mod-ix) [data-w-id="hero-content"] {opacity:0;}
+            html.w-mod-js:not(.w-mod-ix) [data-w-id="hero-image"] {opacity:0;}
+        }
+        
+        /* Full viewport background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('../assets/images/bg-image-full7.png');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            z-index: -10;
+            pointer-events: none;
+        }
+        
+        /* Glassy effect for benefit cards */
+        .cards-list_item {
+            background-color: rgba(255, 255, 255, 0.08) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--_colors---border-color--border-primary) !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        /* Hover animation for benefit cards */
+        .cards-list_item:hover {
+            transform: translateY(-4px) scale(1.02) !important;
+            background-color: rgba(255, 255, 255, 0.12) !important;
+            border-color: rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        /* Make benefit cards wider */
+        .cards-list_component.max-width-small {
+            max-width: none !important;
+            width: 100% !important;
+        }
+        
+        /* Add navbar background */
+        .navbar_component {
+            background-color: rgba(255, 255, 255, 0.08) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        
+        /* Screenshot frame styling */
+        .screenshot-frame {
+            position: relative;
+            padding: 20px;
+            margin: 40px 20px; /* Add margin to prevent rotation clipping */
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Large screenshot frame for hero */
+        .screenshot-frame-large {
+            position: relative;
+            padding: 25px;
+            margin: 20px 20px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            transform: rotate(-1deg);
+            transition: transform 0.3s ease;
+            max-width: 80vw;
+            width: 100%;
+        }
+        
+        /* Video overlay styling */
+        .video-overlay {
+            position: absolute;
+            bottom: 8%;
+            right: 4%;
+            width: 25%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            transform: rotate(2deg); /* Counter-rotate to appear straight within tilted frame */
+        }
+
+        /* Ensure containers don't clip the rotated screenshot */
+        .features_2_content-left {
+            overflow: visible !important;
+        }
+        
+        .features_2_component {
+            overflow: visible !important;
+        }
+        
+        .screenshot-frame:hover {
+            transform: rotate(-1deg) scale(1.02);
+        }
+        
+        .screenshot-frame-large:hover {
+            transform: rotate(0deg) scale(1.01);
+        }
+        
+        .screenshot-frame .image_screenshot-hero,
+        .screenshot-frame-large .image_screenshot-hero {
+            border-radius: 12px;
+            width: 100%;
+            height: auto;
+            display: block;
+            transform: rotate(2deg); /* Counter-rotate to keep image straight */
+            transition: transform 0.3s ease;
+        }
+        
+        .screenshot-frame:hover .image_screenshot-hero {
+            transform: rotate(1deg); /* Adjust counter-rotation on hover */
+        }
+        
+        .screenshot-frame-large:hover .image_screenshot-hero {
+            transform: rotate(0deg); /* Straighten on hover */
+        }
+        
+        /* Force right alignment for What is ReelFlow section */
+        .header_component.text-align-right * {
+            text-align: right !important;
+        }
+        
+        .header_component.text-align-right .label_component {
+            justify-content: flex-end !important;
+            display: flex !important;
+        }
+        
+        .header_component.text-align-right h2,
+        .header_component.text-align-right p {
+            text-align: right !important;
+        }
+        
+        /* Reduce heading size for better proportions */
+        .heading-style-display {
+            font-size: 3rem !important;
+            line-height: 1.2 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-wrapper">
+
+        <!-- Global Styles (from Webflow) -->
+        <div class="global-styles w-embed">
+            <style>
+                /* Make text look crisper and more legible in all browsers */
+                body {
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                    font-smoothing: antialiased;
+                    text-rendering: optimizeLegibility;
+                }
+                /* Focus state style for keyboard navigation */
+                *[tabindex]:focus-visible,
+                input[type="file"]:focus-visible {
+                    outline: 0.125rem solid #4d65ff;
+                    outline-offset: 0.125rem;
+                }
+            </style>
+        </div>
+
+        <!-- Navbar Component (Webflow Structure) -->
+        <div class="navbar_component">
+            <div data-animation="default" class="navbar_wrapper w-nav" data-easing2="ease" data-easing="ease" data-collapse="medium" role="banner" data-duration="400">
+                <!-- Webflow Navbar Accent Gradient -->
+                <div class="navbar_accent"></div>
+                <div class="navbar_container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                    <!-- Logo arrangement with ReelFlow first -->
+                    <div class="navbar-logo-arrangement" style="display: flex; align-items: center; gap: 1.5rem;">
+                        <a href="https://reelflow.com" class="navbar_logo-link w-nav-brand">
+                            <img loading="lazy" src="../assets/images/reelflow_logo_color.svg" alt="ReelFlow Logo" class="navbar_logo">
+                        </a>
+                        <div style="
+                            width: 1px; 
+                            height: 40px; 
+                            border-left: 2px solid #e5e7eb;
+                            flex-shrink: 0;
+                        "></div>
+                        <img src="../assets/images/birdie_logo.png" alt="Company Logo" style="height: 40px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                    </div>
+                    <div id="w-node-_51bd28f7-791e-49aa-4761-34a7e3b59e90-e3b59e7f" class="navbar_button-wrapper" style="margin-left: auto;">
+                        <a href="#" class="button is-navbar-button w-button" onclick="scrollToGetInTouch(event)" style="
+                            position: relative;
+                            overflow: hidden;
+                            transition: all 0.3s ease;
+                            padding-right: 1.5rem;
+                        "
+                        onmouseover="this.style.backgroundColor='#1F0A38'; this.style.color='white'; this.style.paddingRight='2.5rem'; this.querySelector('.button-text').style.transform='translateX(-8px)'; this.querySelector('.button-arrow').style.opacity='1'; this.querySelector('.button-arrow').style.transform='translateX(0) translateY(-50%)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(1)';"
+                        onmouseout="this.style.backgroundColor='var(--_colors---background-color--background-darkest)'; this.style.color='var(--_colors---text-color--text-alternate)'; this.style.paddingRight='1.5rem'; this.querySelector('.button-text').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.opacity='0'; this.querySelector('.button-arrow').style.transform='translateX(10px) translateY(-50%)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(0)';">
+                            <span class="button-text" style="transition: transform 0.3s ease;">Get in touch</span>
+                            <img src="../assets/images/arrow_right_icon.svg" class="button-arrow" style="
+                                width: 16px; 
+                                height: 16px; 
+                                margin-left: 8px;
+                                opacity: 0;
+                                transform: translateX(10px) translateY(-50%);
+                                transition: all 0.3s ease;
+                                filter: brightness(0) invert(0);
+                                position: absolute;
+                                right: 1rem;
+                                top: 50%;
+                            " alt="">
+                        </a>
+                        <div class="navbar_menu-button w-nav-button">
+                            <div class="menu-icon">
+                                <div class="menu-icon_line-top"></div>
+                                <div class="menu-icon_line-middle">
+                                    <div class="menu-icon_line-middle-inner"></div>
+                                </div>
+                                <div class="menu-icon_line-bottom"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="navbar_bg"></div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-wrapper">
+            <!-- Hero Section (Webflow Structure) -->
+            <header class="section_hero">
+                <div class="spacer_sticky-nav"></div>
+                <div class="padding-global">
+                    <div class="container-large">
+                        <div class="spacer-xlarge"></div>
+                        
+                        <!-- Centered Hero Content -->
+                        <div style="text-align: center;">
+                            <div data-w-id="hero-headline" class="header_component">
+                                <div class="max-width-xlarge" style="margin: 0 auto;">
+                                    <h1 class="heading-style-display" style="text-align: center;">{{hero_headline}}</h1>
+                                    <div class="spacer-small"></div>
+                                    <div class="max-width-medium" style="margin: 0 auto;">
+                                        <p class="text-size-large" style="text-align: center;">{{hero_subheadline}}</p>
+                                    </div>
+                                    <div class="spacer-custom2"></div>
+                                    <div class="button-group" style="justify-content: center; display: flex;">
+                                        <a href="#" class="button open-player w-button" style="
+                                            background-color: #fcd456;
+                                            color: black; 
+                                            padding: 0.75rem 1.5rem; 
+                                            border-radius: 50px; 
+                                            font-size: 1rem;
+                                            text-decoration: none; 
+                                            display: inline-flex; 
+                                            align-items: center; 
+                                            font-weight: 400; 
+                                            font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+                                            border: none; 
+                                            transition: all 0.3s ease;
+                                            position: relative;
+                                            overflow: hidden;
+                                            justify-content: center;
+                                            white-space: nowrap;
+                                        " 
+                                        onmouseover="this.style.backgroundColor='#1F0A38'; this.style.color='white'; this.style.paddingRight='2.5rem'; this.querySelector('.button-text').style.transform='translateX(-8px)'; this.querySelector('.button-arrow').style.opacity='1'; this.querySelector('.button-arrow').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(1)';" 
+                                        onmouseout="this.style.backgroundColor='#fcd456'; this.style.color='black'; this.style.paddingRight='1.5rem'; this.querySelector('.button-text').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.opacity='0'; this.querySelector('.button-arrow').style.transform='translateX(10px)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(0)';">
+                                            <span class="button-text" style="transition: transform 0.3s ease;">See your personalized landing page</span>
+                                            <img src="../assets/images/arrow_right_icon.svg" class="button-arrow" style="
+                                                width: 16px; 
+                                                height: 16px; 
+                                                margin-left: 8px;
+                                                opacity: 0;
+                                                transform: translateX(10px);
+                                                transition: all 0.3s ease;
+                                                filter: brightness(0) invert(0);
+                                                position: absolute;
+                                                right: 1rem;
+                                            " alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="spacer-medium"></div>
+                        
+                        <!-- Large Screenshot Section -->
+                        <div class="hero-screenshot-container" style="display: flex; justify-content: center;">
+                            <div data-w-id="hero-image" class="screenshot-frame-large">
+                                <img src="{{screenshot_url}}" loading="lazy" alt="{{company_name}} personalized landing page" class="image_screenshot-hero">
+                                <video class="video-overlay" autoplay muted loop playsinline>
+                                    <source src="../assets/images/overlaychris.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- What is ReelFlow Section -->
+            <section class="section_home-benefits">
+                <div class="padding-global padding-section-large">
+                    <div class="container-large">
+                        <div class="w-layout-grid features_2_component">
+                            <!-- Right Column: Header -->
+                            <div id="w-node-_27e641e3-6618-d745-f6dd-df44bbdffbc5-5bbdffbe" class="features_2_content-right" style="text-align: right;">
+                                <div class="header_component text-align-right">
+                                    <div class="label_component">
+                                        <div class="text-size-small">ABM PERSONALIZATION</div>
+                                    </div>
+                                    <div class="spacer-xsmall"></div>
+                                    <h2>What is ReelFlow for Account-Based Marketing?</h2>
+                                    <div class="spacer-small"></div>
+                                    <p class="text-size-medium">ReelFlow for ABM transforms your personalized landing pages into interactive video experiences that speak directly to each target account. Instead of static pages, prospects get engaging, account-specific videos that showcase your solution in their context, driving higher engagement and faster conversions across your ABM campaigns.</p>
+                                </div>
+                            </div>
+                            <!-- Left Column: Benefits Cards -->
+                            <div id="w-node-_27e641e3-6618-d745-f6dd-df44bbdffc8-5bbdffbe" class="features_2_content-left">
+                                <div class="cards-list_component max-width-small">
+                                    <div class="cards-list">
+                                        <!-- Benefit 1: {{benefit_1_heading}} -->
+                                        <div class="cards-list_item">
+                                            <img loading="lazy" src="../assets/images/artificial_intelligence_yellow_icon.svg" alt="" class="icon-small">
+                                            <div class="spacer-xsmall"></div>
+                                            <div class="text-size-medium text-weight-bold">{{benefit_1_heading}}</div>
+                                            <div class="spacer-xsmall"></div>
+                                            <div class="text-size-small">
+                                                <div>• {{benefit_1_point_1}}</div>
+                                                <div>• {{benefit_1_point_2}}</div>
+                                                <div>• {{benefit_1_point_3}}</div>
+                                            </div>
+                                        </div>
+                                        <!-- Benefit 2: {{benefit_2_heading}} -->
+                                        <div class="cards-list_item">
+                                            <img loading="lazy" src="../assets/images/grow_graph_yellow_icon.svg" alt="" class="icon-small">
+                                            <div class="spacer-xsmall"></div>
+                                            <div class="text-size-medium text-weight-bold">{{benefit_2_heading}}</div>
+                                            <div class="spacer-xsmall"></div>
+                                            <div class="text-size-small">
+                                                <div>• {{benefit_2_point_1}}</div>
+                                                <div>• {{benefit_2_point_2}}</div>
+                                                <div>• {{benefit_2_point_3}}</div>
+                                            </div>
+                                        </div>
+                                        <!-- Benefit 3: {{benefit_3_heading}} -->
+                                        <div class="cards-list_item">
+                                            <img loading="lazy" src="../assets/images/comment_heart_icon.svg" alt="" class="icon-small">
+                                            <div class="spacer-xsmall"></div>
+                                            <div class="text-size-medium text-weight-bold">{{benefit_3_heading}}</div>
+                                            <div class="spacer-xsmall"></div>
+                                            <div class="text-size-small">
+                                                <div>• {{benefit_3_point_1}}</div>
+                                                <div>• {{benefit_3_point_2}}</div>
+                                                <div>• {{benefit_3_point_3}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How it Works Section -->
+            <section class="section_home-benefits">
+                <div class="padding-global padding-section-large">
+                    <div class="container-large">
+                        <div class="header_component">
+                            <div class="max-width-xlarge" style="margin: 0 auto; text-align: center;">
+                                <div class="label_component" style="justify-content: center; display: flex;">
+                                    <div class="text-size-small">HOW IT WORKS</div>
+                                </div>
+                                <div class="spacer-xsmall"></div>
+                                <h2 style="text-align: center;">Personalized video for every prospect</h2>
+                                <div class="spacer-small"></div>
+                                <p class="text-size-medium" style="text-align: center;">ReelFlow integrates seamlessly with your ABM stack to deliver personalized video experiences at scale.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="spacer-large"></div>
+                        
+                        <!-- How it Works Steps Grid -->
+                        <div class="w-layout-grid how-it-works-grid">
+                            <!-- Step 1 -->
+                            <div class="how-it-works-step">
+                                <div class="step-number">1</div>
+                                <div class="spacer-xsmall"></div>
+                                <h3>Connect Your ABM Data</h3>
+                                <div class="spacer-xsmall"></div>
+                                <p class="text-size-small">Integrate with your CRM and ABM platform to pull account-specific data and create personalized video content for each target prospect.</p>
+                            </div>
+                            
+                            <!-- Step 2 -->
+                            <div class="how-it-works-step">
+                                <div class="step-number">2</div>
+                                <div class="spacer-xsmall"></div>
+                                <h3>Generate Personalized Videos</h3>
+                                <div class="spacer-xsmall"></div>
+                                <p class="text-size-small">AI automatically creates custom videos featuring your prospect's company name, use case, and specific pain points - all at scale.</p>
+                            </div>
+                            
+                            <!-- Step 3 -->
+                            <div class="how-it-works-step">
+                                <div class="step-number">3</div>
+                                <div class="spacer-xsmall"></div>
+                                <h3>Deploy to Landing Pages</h3>
+                                <div class="spacer-xsmall"></div>
+                                <p class="text-size-small">Videos automatically populate your personalized landing pages, creating unique experiences for each account in your ABM campaigns.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="spacer-large"></div>
+                        
+                        <!-- CTA Section -->
+                        <div style="text-align: center;">
+                            <a href="#" class="button w-button" onclick="scrollToGetInTouch(event)" style="
+                                background-color: transparent;
+                                color: white; 
+                                padding: 0.75rem 1.5rem; 
+                                border-radius: 50px; 
+                                font-size: 1rem;
+                                text-decoration: none; 
+                                display: inline-flex; 
+                                align-items: center; 
+                                font-weight: 400; 
+                                font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+                                border: 1px solid rgba(255, 255, 255, 0.3);
+                                transition: all 0.3s ease;
+                                position: relative;
+                                overflow: hidden;
+                                justify-content: center;
+                                white-space: nowrap;
+                            " 
+                            onmouseover="this.style.borderBottom='2px solid #fcd456';" 
+                            onmouseout="this.style.borderBottom='1px solid rgba(255, 255, 255, 0.3)';">
+                                See how it works for your ABM campaigns
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final CTA Section -->
+            <section class="section_cta3" id="get-in-touch">
+                <div class="padding-global padding-section-large">
+                    <div class="container-large">
+                        <div class="cta3_component">
+                            <div class="max-width-large">
+                                <div class="header_component">
+                                    <h2 class="heading-style-h2 color-text-white">{{final_cta_heading}}</h2>
+                                    <div class="spacer-small"></div>
+                                    <p class="text-size-medium color-text-white">{{final_cta_subheading}}</p>
+                                </div>
+                                <div class="spacer-medium"></div>
+                                <div class="button-group justify-center">
+                                    <a href="#" class="button is-secondary w-button" onclick="bookMeeting()" style="
+                                        background-color: #fcd456;
+                                        color: black; 
+                                        padding: 0.875rem 2rem; 
+                                        border-radius: 50px; 
+                                        font-size: 1.125rem;
+                                        text-decoration: none; 
+                                        display: inline-flex; 
+                                        align-items: center; 
+                                        font-weight: 500; 
+                                        font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+                                        border: none; 
+                                        transition: all 0.3s ease;
+                                        gap: 0.5rem;
+                                    " 
+                                    onmouseover="this.style.backgroundColor='#e6c04a'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(252, 212, 86, 0.3)';" 
+                                    onmouseout="this.style.backgroundColor='#fcd456'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                                        <img src="../assets/images/video_front_icon.svg" alt="" style="width: 20px; height: 20px;">
+                                        Book a personalized demo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer (simplified) -->
+        <footer class="footer_component">
+            <div class="padding-global padding-section-medium">
+                <div class="container-large">
+                    <div class="footer_bottom-wrapper">
+                        <div class="footer_credit-text">
+                            <div class="text-size-small color-text-light">© 2024 ReelFlow. All rights reserved.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Scroll to Get in Touch section
+        function scrollToGetInTouch(event) {
+            event.preventDefault();
+            document.getElementById('get-in-touch').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Book meeting functionality
+        function bookMeeting() {
+            // This can be customized based on your booking system
+            window.open('https://calendly.com/reelflow', '_blank');
+        }
+
+        // Webflow animations (simplified)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simple fade-in animation for hero elements
+            const heroElements = document.querySelectorAll('[data-w-id]');
+            heroElements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    element.style.transition = 'all 0.8s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
+
+    <!-- Additional styles for how-it-works section -->
+    <style>
+        .how-it-works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            align-items: start;
+        }
+        
+        .how-it-works-step {
+            text-align: center;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .how-it-works-step:hover {
+            transform: translateY(-4px);
+            background-color: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background-color: #fcd456;
+            color: black;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.25rem;
+            margin: 0 auto;
+        }
+        
+        .how-it-works-step h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+            margin: 0;
+        }
+        
+        .how-it-works-step p {
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+        }
+    </style>
+
+</body>
+</html>

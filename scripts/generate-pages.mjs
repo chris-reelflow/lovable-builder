@@ -47,8 +47,8 @@ function populateTemplate(template, data) {
   return populatedTemplate;
 }
 
-// Generate pages from CSV
-async function generatePages() {
+// Generate pages from CSV files
+async function generatePages(csvFile = null) {
   console.log('🚀 Starting ReelFlow landing page generation...');
   
   try {
@@ -70,54 +70,81 @@ async function generatePages() {
     // Process each row to determine template usage
     const templateUsage = { website: 0, abm: 0 };
     
-    // Read and process CSV
-    const csvPath = path.join(__dirname, '../data/landingpages.csv');
-    const results = [];
+    // Determine which CSV files to process
+    const csvFiles = [];
+    if (csvFile) {
+      csvFiles.push(csvFile);
+    } else {
+      // Process both CSV files if no specific file provided
+      const websitesPath = path.join(__dirname, '../data/websites.csv');
+      const landingPagesPath = path.join(__dirname, '../data/landing-pages.csv');
+      
+      if (await fs.pathExists(websitesPath)) {
+        csvFiles.push('websites.csv');
+      }
+      if (await fs.pathExists(landingPagesPath)) {
+        csvFiles.push('landing-pages.csv');
+      }
+    }
     
-    return new Promise((resolve, reject) => {
-      fs.createReadStream(csvPath)
-        .pipe(csv())
-        .on('data', (data) => results.push(data))
-        .on('end', async () => {
-          console.log(`📊 Processing ${results.length} landing page(s)...`);
-          
-          for (const row of results) {
-            try {
-              // Determine template type based on use case column
-              const useCase = row.use_case || row['Use Case'] || 'Website';
-              const templateType = useCase.toLowerCase() === 'landing page' ? 'abm' : 'website';
-              templateUsage[templateType] = (templateUsage[templateType] || 0) + 1;
-              
-              // Load appropriate template
-              const template = await loadTemplate(templateType);
-              
-              // Create company-specific directory
-              const companySlug = createSlug(row.company_name);
-              const pageDir = path.join(outputDir, companySlug);
-              await fs.ensureDir(pageDir);
-              
-              // Generate HTML content
-              const htmlContent = populateTemplate(template, row);
-              
-              // Write index.html file
-              const htmlPath = path.join(pageDir, 'index.html');
-              await fs.writeFile(htmlPath, htmlContent);
-              
-              console.log(`✅ Generated: /${companySlug}/index.html (${templateType} template)`);
-            } catch (error) {
-              console.error(`❌ Error generating page for ${row.company_name}:`, error.message);
+    console.log(`📊 Processing ${csvFiles.length} CSV file(s): ${csvFiles.join(', ')}`);
+    
+    // Process each CSV file
+    for (const csvFileName of csvFiles) {
+      const csvPath = path.join(__dirname, '../data', csvFileName);
+      console.log(`\n📄 Processing ${csvFileName}...`);
+      const results = [];
+      
+      await new Promise((resolve, reject) => {
+        fs.createReadStream(csvPath)
+          .pipe(csv())
+          .on('data', (data) => results.push(data))
+          .on('end', async () => {
+            console.log(`📊 Processing ${results.length} landing page(s) from ${csvFileName}...`);
+            
+            for (const row of results) {
+              try {
+                // Determine template type based on use case column or CSV file name
+                const useCase = row.use_case || row['Use Case'] || csvFileName;
+                let templateType;
+                
+                if (csvFileName === 'landing-pages.csv' || useCase.toLowerCase() === 'landing page') {
+                  templateType = 'abm';
+                } else {
+                  templateType = 'website';
+                }
+                
+                templateUsage[templateType] = (templateUsage[templateType] || 0) + 1;
+                
+                // Load appropriate template
+                const template = await loadTemplate(templateType);
+                
+                // Create company-specific directory
+                const companySlug = createSlug(row.company_name);
+                const pageDir = path.join(outputDir, companySlug);
+                await fs.ensureDir(pageDir);
+                
+                // Generate HTML content
+                const htmlContent = populateTemplate(template, row);
+                
+                // Write index.html file
+                const htmlPath = path.join(pageDir, 'index.html');
+                await fs.writeFile(htmlPath, htmlContent);
+                
+                console.log(`✅ Generated: /${companySlug}/index.html (${templateType} template from ${csvFileName})`);
+              } catch (error) {
+                console.error(`❌ Error generating page for ${row.company_name}:`, error.message);
+              }
             }
-          }
-          
-          console.log(`📊 Template usage: Website: ${templateUsage.website}, ABM: ${templateUsage.abm || 0}`);
-          
-          console.log('🎉 Landing page generation complete!');
-          console.log(`📁 Pages generated in: ${outputDir}`);
-          resolve();
-        })
-        .on('error', reject);
-    });
+            resolve();
+          })
+          .on('error', reject);
+      });
+    }
     
+    console.log(`\n📊 Final template usage: Website: ${templateUsage.website}, ABM: ${templateUsage.abm || 0}`);
+    console.log('🎉 Landing page generation complete!');
+    console.log(`📁 Pages generated in: ${outputDir}`);
   } catch (error) {
     console.error('❌ Generation failed:', error.message);
     process.exit(1);
@@ -126,7 +153,9 @@ async function generatePages() {
 
 // Run if called directly
 if (import.meta.url === `file://${process.argv[1]}`) {
-  generatePages();
+  // Check for specific CSV file argument
+  const csvFile = process.argv[2];
+  generatePages(csvFile);
 }
 
 export { generatePages, createSlug };

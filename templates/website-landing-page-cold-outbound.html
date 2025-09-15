@@ -156,11 +156,11 @@
         }
         
         .screenshot-frame:hover {
-            transform: rotate(-1deg) scale(1.02);
+            transform: rotate(-1deg) scale(1.02) !important;
         }
         
         .screenshot-frame-large:hover {
-            transform: rotate(0deg) scale(1.01);
+            transform: rotate(0deg) scale(1.01) !important;
         }
         
         .screenshot-frame .image_screenshot-hero,
@@ -174,16 +174,16 @@
         }
         
         .screenshot-frame:hover .image_screenshot-hero {
-            transform: rotate(1deg); /* Adjust counter-rotation on hover */
+            transform: rotate(1deg) !important; /* Adjust counter-rotation on hover */
         }
         
         .screenshot-frame-large:hover .image_screenshot-hero {
-            transform: rotate(0deg); /* Straighten on hover */
+            transform: rotate(0deg) !important; /* Straighten on hover */
         }
         
         /* Ensure overlay video follows the same micro-interaction */
         .screenshot-frame-large:hover .video-overlay {
-            transform: rotate(0deg);
+            transform: rotate(0deg) !important;
         }
         
         /* Force right alignment for What is ReelFlow section */

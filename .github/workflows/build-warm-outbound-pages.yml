@@ -1,11 +1,11 @@
-name: Build Landing Pages
+name: Build Website Warm Outbound Landing Pages
 
 on:
   # Manual trigger only
   workflow_dispatch:
     inputs:
       force_build:
-        description: 'Force rebuild all pages'
+        description: 'Force rebuild all warm outbound pages'
         required: false
         default: 'false'
         type: boolean
@@ -30,24 +30,24 @@ jobs:
     - name: Clean output directory
       run: rm -rf output && mkdir -p output
       
-    - name: Generate landing pages
-      run: node scripts/generate-pages.mjs
+    - name: Generate warm outbound landing pages
+      run: node scripts/generate-pages.mjs data/websites-warm-outbound.csv
       
     - name: List generated files
       run: |
-        echo "Generated files:"
+        echo "Generated warm outbound pages:"
         find output -name "*.html" | head -20
         
-    - name: Deploy to GitHub Pages
+    - name: Deploy to GitHub Pages (Warm Outbound subfolder)
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./output
-        publish_branch: gh-pages
+        publish_branch: gh-pages-warm-outbound
         force_orphan: true
         
     - name: Summary
       run: |
-        echo "✅ Landing pages built and deployed!"
-        echo "📊 Generated $(find output -name "*.html" | wc -l) page(s)"
-        echo "🔗 Available at: https://$(echo $GITHUB_REPOSITORY | cut -d'/' -f1).github.io/$(echo $GITHUB_REPOSITORY | cut -d'/' -f2)/"
+        echo "✅ Warm outbound landing pages built and deployed!"
+        echo "📊 Generated $(find output -name "*.html" | wc -l) warm outbound page(s)"
+        echo "🔗 Available at: https://$(echo $GITHUB_REPOSITORY | cut -d'/' -f1).github.io/$(echo $GITHUB_REPOSITORY | cut -d'/' -f2)/warm-outbound/"

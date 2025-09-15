@@ -1,0 +1,53 @@
+name: Build All Landing Pages (All Templates)
+
+on:
+  # Manual trigger only
+  workflow_dispatch:
+    inputs:
+      force_build:
+        description: 'Force rebuild all pages from all templates'
+        required: false
+        default: 'false'
+        type: boolean
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Clean output directory
+      run: rm -rf output && mkdir -p output
+      
+    - name: Generate landing pages
+      run: node scripts/generate-pages.mjs
+      
+    - name: List generated files
+      run: |
+        echo "Generated files:"
+        find output -name "*.html" | head -20
+        
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./output
+        publish_branch: gh-pages
+        force_orphan: true
+        
+    - name: Summary
+      run: |
+        echo "✅ Landing pages built and deployed!"
+        echo "📊 Generated $(find output -name "*.html" | wc -l) page(s)"
+        echo "🔗 Available at: https://$(echo $GITHUB_REPOSITORY | cut -d'/' -f1).github.io/$(echo $GITHUB_REPOSITORY | cut -d'/' -f2)/"

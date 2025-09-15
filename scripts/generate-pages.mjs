@@ -171,7 +171,9 @@ async function generatePages(csvFile = null) {
                 // Adjust asset paths from ../assets to assets for root-level placement
                 const rootLevelContent = htmlContent
                   .replace(/src="\.\.\/assets\//g, 'src="assets/')
-                  .replace(/href="\.\.\/assets\//g, 'href="assets/');
+                  .replace(/href="\.\.\/assets\//g, 'href="assets/')
+                  .replace(/url\('\.\.\/assets\//g, "url('assets/")
+                  .replace(/url\("\.\.\/assets\//g, 'url("assets/');
                 const htmlPathRoot = path.join(outputDir, `${companySlug}.html`);
                 await fs.writeFile(htmlPathRoot, rootLevelContent);
                 

@@ -20,7 +20,14 @@ function createSlug(companyName = '') {
 // Load and parse template based on template type
 async function loadTemplate(templateType = 'website') {
   try {
-    const templateName = templateType === 'abm' ? 'abm-landing-page.html' : 'website-landing-page.html';
+    let templateName;
+    if (templateType === 'abm') {
+      templateName = 'abm-landing-page.html';
+    } else if (templateType === 'website-cold') {
+      templateName = 'website-cold.html';
+    } else {
+      templateName = 'website-landing-page.html';
+    }
     const templatePath = path.join(__dirname, '../templates/', templateName);
     console.log(`📄 Loading template: ${templateName}`);
     return await fs.readFile(templatePath, 'utf8');
@@ -77,15 +84,19 @@ async function generatePages(csvFile = null) {
     if (csvFile) {
       csvFiles.push(csvFile);
     } else {
-      // Process both CSV files if no specific file provided
+      // Process all available CSV files if no specific file provided
       const websitesPath = path.join(__dirname, '../data/websites.csv');
       const abmPath = path.join(__dirname, '../data/abm.csv');
+      const websiteColdPath = path.join(__dirname, '../data/website-cold.csv');
       
       if (await fs.pathExists(websitesPath)) {
         csvFiles.push('websites.csv');
       }
       if (await fs.pathExists(abmPath)) {
         csvFiles.push('abm.csv');
+      }
+      if (await fs.pathExists(websiteColdPath)) {
+        csvFiles.push('website-cold.csv');
       }
     }
     
@@ -119,6 +130,8 @@ async function generatePages(csvFile = null) {
                 
                 if (csvFileName === 'abm.csv' || useCase.toLowerCase() === 'abm') {
                   templateType = 'abm';
+                } else if (csvFileName === 'website-cold.csv' || useCase.toLowerCase() === 'website cold') {
+                  templateType = 'website-cold';
                 } else {
                   templateType = 'website';
                 }

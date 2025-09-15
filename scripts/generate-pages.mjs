@@ -213,8 +213,33 @@ async function generatePages(csvFile = null, baseUrl = 'https://chris-reelflow.g
                 csvContent += values.join(',') + '\n';
               }
               
+              // Update original CSV
               await fs.writeFile(csvPath, csvContent);
               console.log(`✅ Updated ${csvFileName} with generated URLs`);
+              
+              // Save to Final Lead List folder with date
+              const finalLeadListDir = path.join(__dirname, '../Final Lead List');
+              await fs.ensureDir(finalLeadListDir);
+              
+              // Determine lead list type based on CSV file
+              let leadListType;
+              if (csvFileName === 'abm.csv') {
+                leadListType = 'ABM Lead List';
+              } else if (csvFileName === 'websites-full.csv') {
+                leadListType = 'Full Lead List';
+              } else if (csvFileName === 'websites-simple.csv') {
+                leadListType = 'Simple Lead List';
+              } else {
+                leadListType = 'Lead List';
+              }
+              
+              // Create dated filename
+              const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+              const finalFileName = `${leadListType} - ${currentDate}.csv`;
+              const finalFilePath = path.join(finalLeadListDir, finalFileName);
+              
+              await fs.writeFile(finalFilePath, csvContent);
+              console.log(`✅ Saved final lead list: ${finalFileName}`);
             } catch (error) {
               console.error(`❌ Error updating CSV ${csvFileName}:`, error.message);
             }

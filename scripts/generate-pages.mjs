@@ -115,8 +115,9 @@ async function generatePages(csvFile = null, baseUrl = 'https://chris-reelflow.g
         // Otherwise, assume it's just a filename in the data directory
         csvPath = path.join(__dirname, '../data', csvFileName);
       }
+      const baseCsvName = path.basename(csvPath);
       
-      console.log(`\n📄 Processing ${csvFileName}...`);
+      console.log(`\n📄 Processing ${baseCsvName}...`);
       const results = [];
       const updatedResults = [];
       let headers = [];
@@ -135,19 +136,19 @@ async function generatePages(csvFile = null, baseUrl = 'https://chris-reelflow.g
           .pipe(csv({ separator, mapHeaders: ({ header }) => header.trim() }))
           .on('data', (data) => results.push(data))
           .on('end', async () => {
-            console.log(`📊 Processing ${results.length} landing page(s) from ${csvFileName}...`);
+            console.log(`📊 Processing ${results.length} landing page(s) from ${baseCsvName}...`);
             
             for (const row of results) {
               try {
                 // Determine template type based on use case column or CSV file name
-                const useCase = row.use_case || row['Use Case'] || csvFileName;
+                const useCase = row.use_case || row['Use Case'] || baseCsvName;
                 let templateType;
                 
-                if (csvFileName === 'abm.csv' || useCase.toLowerCase() === 'abm') {
+                if (baseCsvName === 'abm.csv' || useCase.toLowerCase() === 'abm') {
                   templateType = 'abm';
-                } else if (csvFileName === 'websites-full.csv' || useCase.toLowerCase() === 'website landing page full') {
+                } else if (baseCsvName === 'websites-full.csv' || useCase.toLowerCase() === 'website landing page full') {
                   templateType = 'website-landing-page-full';
-                } else if (csvFileName === 'websites-simple.csv' || useCase.toLowerCase() === 'website landing page simple') {
+                } else if (baseCsvName === 'websites-simple.csv' || useCase.toLowerCase() === 'website landing page simple') {
                   templateType = 'website-landing-page-simple';
                 } else {
                   templateType = 'website-landing-page-simple'; // default fallback
@@ -223,11 +224,11 @@ async function generatePages(csvFile = null, baseUrl = 'https://chris-reelflow.g
               
               // Determine lead list type based on CSV file
               let leadListType;
-              if (csvFileName === 'abm.csv') {
+              if (baseCsvName === 'abm.csv') {
                 leadListType = 'ABM Lead List';
-              } else if (csvFileName === 'websites-full.csv') {
+              } else if (baseCsvName === 'websites-full.csv') {
                 leadListType = 'Full Lead List';
-              } else if (csvFileName === 'websites-simple.csv') {
+              } else if (baseCsvName === 'websites-simple.csv') {
                 leadListType = 'Simple Lead List';
               } else {
                 leadListType = 'Lead List';
@@ -240,6 +241,13 @@ async function generatePages(csvFile = null, baseUrl = 'https://chris-reelflow.g
               
               await fs.writeFile(finalFilePath, csvContent);
               console.log(`✅ Saved final lead list: ${finalFileName}`);
+
+              // Also save a copy into output for GH Pages visibility
+              const finalLeadListOutDir = path.join(outputDir, 'final_lead_lists');
+              await fs.ensureDir(finalLeadListOutDir);
+              const finalOutPath = path.join(finalLeadListOutDir, finalFileName);
+              await fs.writeFile(finalOutPath, csvContent);
+              console.log(`✅ Published final lead list to output: ${path.relative(process.cwd(), finalOutPath)}`);
             } catch (error) {
               console.error(`❌ Error updating CSV ${csvFileName}:`, error.message);
             }

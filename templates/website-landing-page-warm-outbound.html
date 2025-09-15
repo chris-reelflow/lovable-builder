@@ -584,6 +584,45 @@
                             </div>
                         </div>
                         
+                        <!-- Hero CTA Button -->
+                        <div class="spacer-small"></div>
+                        <div style="display: flex; justify-content: center;">
+                            <a href="#" onclick="scrollToGetInTouch(event)" class="button hero-cta-button" style="
+                                background-color: #fcd456;
+                                color: black; 
+                                padding: 0.875rem 2rem; 
+                                border-radius: 50px; 
+                                font-size: 1.1rem;
+                                text-decoration: none; 
+                                display: inline-flex; 
+                                align-items: center; 
+                                font-weight: 500; 
+                                font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+                                border: none; 
+                                transition: all 0.3s ease;
+                                position: relative;
+                                overflow: hidden;
+                                justify-content: center;
+                                white-space: nowrap;
+                                box-shadow: 0 4px 12px rgba(252, 212, 86, 0.3);
+                            " 
+                            onmouseover="this.style.backgroundColor='#1F0A38'; this.style.color='white'; this.style.paddingRight='2.75rem'; this.querySelector('.button-text').style.transform='translateX(-8px)'; this.querySelector('.button-arrow').style.opacity='1'; this.querySelector('.button-arrow').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(1)'; this.style.boxShadow='0 6px 20px rgba(31, 10, 56, 0.3)';" 
+                            onmouseout="this.style.backgroundColor='#fcd456'; this.style.color='black'; this.style.paddingRight='2rem'; this.querySelector('.button-text').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.opacity='0'; this.querySelector('.button-arrow').style.transform='translateX(10px)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(0)'; this.style.boxShadow='0 4px 12px rgba(252, 212, 86, 0.3)';">
+                                <span class="button-text" style="transition: transform 0.3s ease;">See ReelFlow in action</span>
+                                <img src="../assets/images/arrow_right_icon.svg" class="button-arrow" style="
+                                    width: 16px; 
+                                    height: 16px; 
+                                    margin-left: 8px;
+                                    opacity: 0;
+                                    transform: translateX(10px);
+                                    transition: all 0.3s ease;
+                                    filter: brightness(0) invert(0);
+                                    position: absolute;
+                                    right: 1rem;
+                                " alt="">
+                            </a>
+                        </div>
+                        
                         <div class="spacer-medium"></div>
                         
                         <!-- Large Screenshot Section -->

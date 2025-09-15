@@ -7,13 +7,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Utility function to create URL-friendly slug from company name
-function createSlug(companyName) {
+function createSlug(companyName = '') {
   return companyName
+    .toString()
     .toLowerCase()
-    .replace(/[^a-z0-9\s]/g, '') // Remove special characters
+    .replace(/[^a-z0-9\s_-]/g, '') // Keep hyphens and underscores
     .replace(/\s+/g, '-') // Replace spaces with hyphens
-    .replace(/-+/g, '-') // Replace multiple hyphens with single
-    .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
+    .replace(/-+/g, '-') // Collapse multiple hyphens
+    .replace(/^[-_]+|[-_]+$/g, ''); // Trim leading/trailing hyphens/underscores
 }
 
 // Load and parse template based on template type
@@ -95,10 +96,17 @@ async function generatePages(csvFile = null) {
       const csvPath = path.join(__dirname, '../data', csvFileName);
       console.log(`\n📄 Processing ${csvFileName}...`);
       const results = [];
-      
+      // Detect delimiter (CSV vs TSV)
+      let separator = ',';
+      try {
+        const sample = await fs.readFile(csvPath, 'utf8');
+        const firstLine = (sample.split('\n')[0] || '').trim();
+        if (firstLine.includes('\t')) separator = '\t';
+      } catch {}
+
       await new Promise((resolve, reject) => {
         fs.createReadStream(csvPath)
-          .pipe(csv())
+          .pipe(csv({ separator, mapHeaders: ({ header }) => header.trim() }))
           .on('data', (data) => results.push(data))
           .on('end', async () => {
             console.log(`📊 Processing ${results.length} landing page(s) from ${csvFileName}...`);

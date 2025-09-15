@@ -25,8 +25,10 @@ async function loadTemplate(templateType = 'website') {
       templateName = 'abm-landing-page.html';
     } else if (templateType === 'website-landing-page-cold-outbound') {
       templateName = 'website-landing-page-cold-outbound.html';
+    } else if (templateType === 'website-landing-page-warm-outbound') {
+      templateName = 'website-landing-page-warm-outbound.html';
     } else {
-      templateName = 'website-landing-page.html';
+      templateName = 'website-landing-page-warm-outbound.html'; // default fallback
     }
     const templatePath = path.join(__dirname, '../templates/', templateName);
     console.log(`📄 Loading template: ${templateName}`);
@@ -85,18 +87,18 @@ async function generatePages(csvFile = null) {
       csvFiles.push(csvFile);
     } else {
       // Process all available CSV files if no specific file provided
-      const websitesPath = path.join(__dirname, '../data/websites.csv');
+      const websitesWarmPath = path.join(__dirname, '../data/websites-warm-outbound.csv');
+      const websitesColdPath = path.join(__dirname, '../data/websites-cold-outbound.csv');
       const abmPath = path.join(__dirname, '../data/abm.csv');
-      const websiteColdPath = path.join(__dirname, '../data/website-cold.csv');
       
-      if (await fs.pathExists(websitesPath)) {
-        csvFiles.push('websites.csv');
+      if (await fs.pathExists(websitesWarmPath)) {
+        csvFiles.push('websites-warm-outbound.csv');
+      }
+      if (await fs.pathExists(websitesColdPath)) {
+        csvFiles.push('websites-cold-outbound.csv');
       }
       if (await fs.pathExists(abmPath)) {
         csvFiles.push('abm.csv');
-      }
-      if (await fs.pathExists(websiteColdPath)) {
-        csvFiles.push('website-cold.csv');
       }
     }
     
@@ -130,10 +132,12 @@ async function generatePages(csvFile = null) {
                 
                 if (csvFileName === 'abm.csv' || useCase.toLowerCase() === 'abm') {
                   templateType = 'abm';
-                } else if (csvFileName === 'website-cold.csv' || useCase.toLowerCase() === 'website landing page cold outbound') {
+                } else if (csvFileName === 'websites-cold-outbound.csv' || useCase.toLowerCase() === 'website landing page cold outbound') {
                   templateType = 'website-landing-page-cold-outbound';
+                } else if (csvFileName === 'websites-warm-outbound.csv' || useCase.toLowerCase() === 'website landing page warm outbound') {
+                  templateType = 'website-landing-page-warm-outbound';
                 } else {
-                  templateType = 'website';
+                  templateType = 'website-landing-page-warm-outbound'; // default fallback
                 }
                 
                 templateUsage[templateType] = (templateUsage[templateType] || 0) + 1;

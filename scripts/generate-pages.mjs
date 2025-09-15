@@ -23,8 +23,8 @@ async function loadTemplate(templateType = 'website') {
     let templateName;
     if (templateType === 'abm') {
       templateName = 'abm-landing-page.html';
-    } else if (templateType === 'website-cold') {
-      templateName = 'website-cold.html';
+    } else if (templateType === 'website-landing-page-cold-outbound') {
+      templateName = 'website-landing-page-cold-outbound.html';
     } else {
       templateName = 'website-landing-page.html';
     }
@@ -130,8 +130,8 @@ async function generatePages(csvFile = null) {
                 
                 if (csvFileName === 'abm.csv' || useCase.toLowerCase() === 'abm') {
                   templateType = 'abm';
-                } else if (csvFileName === 'website-cold.csv' || useCase.toLowerCase() === 'website cold') {
-                  templateType = 'website-cold';
+                } else if (csvFileName === 'website-cold.csv' || useCase.toLowerCase() === 'website landing page cold outbound') {
+                  templateType = 'website-landing-page-cold-outbound';
                 } else {
                   templateType = 'website';
                 }

@@ -38,16 +38,15 @@ jobs:
         echo "Generated cold outbound pages:"
         find output -name "*.html" | head -20
         
-    - name: Deploy to GitHub Pages (Cold Outbound subfolder)
+    - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./output
         publish_branch: gh-pages
-        destination_dir: cold-outbound
         
     - name: Summary
       run: |
         echo "✅ Cold outbound landing pages built and deployed!"
         echo "📊 Generated $(find output -name "*.html" | wc -l) cold outbound page(s)"
-        echo "🔗 Available at: https://$(echo $GITHUB_REPOSITORY | cut -d'/' -f1).github.io/$(echo $GITHUB_REPOSITORY | cut -d'/' -f2)/cold-outbound/"
+        echo "🔗 Available at: https://$(echo $GITHUB_REPOSITORY | cut -d'/' -f1).github.io/$(echo $GITHUB_REPOSITORY | cut -d'/' -f2)/"

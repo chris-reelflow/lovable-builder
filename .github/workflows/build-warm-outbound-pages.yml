@@ -31,7 +31,7 @@ jobs:
       run: rm -rf output && mkdir -p output
       
     - name: Generate warm outbound landing pages
-      run: node scripts/generate-pages.mjs data/websites-warm-outbound.csv
+      run: node scripts/generate-pages.mjs websites-warm-outbound.csv
       
     - name: List generated files
       run: |

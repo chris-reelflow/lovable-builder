@@ -106,7 +106,16 @@ async function generatePages(csvFile = null) {
     
     // Process each CSV file
     for (const csvFileName of csvFiles) {
-      const csvPath = path.join(__dirname, '../data', csvFileName);
+      // Handle both relative and absolute paths for CSV files
+      let csvPath;
+      if (csvFileName.startsWith('data/')) {
+        // If path already includes data/, use it relative to project root
+        csvPath = path.join(__dirname, '../', csvFileName);
+      } else {
+        // Otherwise, assume it's just a filename in the data directory
+        csvPath = path.join(__dirname, '../data', csvFileName);
+      }
+      
       console.log(`\n📄 Processing ${csvFileName}...`);
       const results = [];
       // Detect delimiter (CSV vs TSV)

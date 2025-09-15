@@ -31,7 +31,7 @@ jobs:
       run: rm -rf output && mkdir -p output
       
     - name: Generate ABM landing pages
-      run: node scripts/generate-pages.mjs data/abm.csv
+      run: node scripts/generate-pages.mjs abm.csv
       
     - name: List generated files
       run: |

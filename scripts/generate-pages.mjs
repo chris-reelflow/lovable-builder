@@ -217,8 +217,8 @@ async function generatePages(csvFile = null, baseUrl = 'https://chris-reelflow.g
               await fs.writeFile(csvPath, csvContent);
               console.log(`✅ Updated ${csvFileName} with generated URLs`);
               
-              // Save to Final Lead List folder with date
-              const finalLeadListDir = path.join(__dirname, '../Final Lead List');
+              // Save to final_lead_lists folder with date
+              const finalLeadListDir = path.join(__dirname, '../final_lead_lists');
               await fs.ensureDir(finalLeadListDir);
               
               // Determine lead list type based on CSV file

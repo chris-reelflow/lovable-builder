@@ -112,7 +112,7 @@
         .screenshot-frame-large {
             position: relative;
             padding: 25px;
-            margin: 20px 20px;
+            margin: 40px 20px 60px 20px; /* Increased bottom margin for shadow */
             transform: rotate(-2deg); /* Initial left tilt */
             transition: transform 0.3s ease;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
@@ -121,6 +121,11 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             overflow: hidden;
+        }
+        
+        /* Hero screenshot container padding */
+        .hero-screenshot-container {
+            padding: 2rem 1rem 4rem 1rem; /* Added bottom padding for shadow visibility */
         }
         
         .screenshot-frame-large .image_screenshot-hero {

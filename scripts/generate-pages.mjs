@@ -59,7 +59,7 @@ function populateTemplate(template, data) {
 }
 
 // Generate pages from CSV files
-async function generatePages(csvFile = null) {
+async function generatePages(csvFile = null, baseUrl = 'https://chris-reelflow.github.io/lovable-builder') {
   console.log('🚀 Starting ReelFlow landing page generation...');
   
   try {
@@ -118,12 +118,16 @@ async function generatePages(csvFile = null) {
       
       console.log(`\n📄 Processing ${csvFileName}...`);
       const results = [];
+      const updatedResults = [];
+      let headers = [];
+      
       // Detect delimiter (CSV vs TSV)
       let separator = ',';
       try {
         const sample = await fs.readFile(csvPath, 'utf8');
         const firstLine = (sample.split('\n')[0] || '').trim();
         if (firstLine.includes('\t')) separator = '\t';
+        headers = firstLine.split(separator).map(h => h.trim());
       } catch {}
 
       await new Promise((resolve, reject) => {
@@ -177,11 +181,44 @@ async function generatePages(csvFile = null) {
                 const htmlPathRoot = path.join(outputDir, `${companySlug}.html`);
                 await fs.writeFile(htmlPathRoot, rootLevelContent);
                 
+                // Add generated URL to the row data
+                const generatedUrl = `${baseUrl}/${companySlug}`;
+                const updatedRow = { ...row, generated_url: generatedUrl };
+                updatedResults.push(updatedRow);
+                
                 console.log(`✅ Generated: /${companySlug}/index.html and /${companySlug}.html (${templateType} template from ${csvFileName})`);
               } catch (error) {
                 console.error(`❌ Error generating page for ${row.company_name}:`, error.message);
+                // Still add the row even if generation failed, but without URL
+                updatedResults.push({ ...row, generated_url: 'ERROR' });
               }
             }
+            
+            // Write updated CSV with generated URLs
+            try {
+              // Add generated_url to headers if not already present
+              if (!headers.includes('generated_url')) {
+                headers.push('generated_url');
+              }
+              
+              // Create CSV content
+              let csvContent = headers.join(',') + '\n';
+              for (const row of updatedResults) {
+                const values = headers.map(header => {
+                  const value = row[header] || '';
+                  // Escape quotes and wrap in quotes if contains comma
+                  const escaped = value.toString().replace(/"/g, '""');
+                  return escaped.includes(',') ? `"${escaped}"` : escaped;
+                });
+                csvContent += values.join(',') + '\n';
+              }
+              
+              await fs.writeFile(csvPath, csvContent);
+              console.log(`✅ Updated ${csvFileName} with generated URLs`);
+            } catch (error) {
+              console.error(`❌ Error updating CSV ${csvFileName}:`, error.message);
+            }
+            
             resolve();
           })
           .on('error', reject);
@@ -199,9 +236,10 @@ async function generatePages(csvFile = null) {
 
 // Run if called directly
 if (import.meta.url === `file://${process.argv[1]}`) {
-  // Check for specific CSV file argument
+  // Check for specific CSV file argument and base URL
   const csvFile = process.argv[2];
-  generatePages(csvFile);
+  const baseUrl = process.argv[3] || 'https://chris-reelflow.github.io/lovable-builder';
+  generatePages(csvFile, baseUrl);
 }
 
 export { generatePages, createSlug };

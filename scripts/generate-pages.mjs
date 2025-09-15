@@ -183,22 +183,22 @@ async function generatePages(csvFile = null, baseUrl = 'https://chris-reelflow.g
                 
                 // Add generated URL to the row data
                 const generatedUrl = `${baseUrl}/${companySlug}`;
-                const updatedRow = { ...row, generated_url: generatedUrl };
+                const updatedRow = { ...row, landing_page_url: generatedUrl };
                 updatedResults.push(updatedRow);
                 
                 console.log(`✅ Generated: /${companySlug}/index.html and /${companySlug}.html (${templateType} template from ${csvFileName})`);
               } catch (error) {
                 console.error(`❌ Error generating page for ${row.company_name}:`, error.message);
                 // Still add the row even if generation failed, but without URL
-                updatedResults.push({ ...row, generated_url: 'ERROR' });
+                updatedResults.push({ ...row, landing_page_url: 'ERROR' });
               }
             }
             
             // Write updated CSV with generated URLs
             try {
-              // Add generated_url to headers if not already present
-              if (!headers.includes('generated_url')) {
-                headers.push('generated_url');
+              // Add landing_page_url to headers if not already present
+              if (!headers.includes('landing_page_url')) {
+                headers.push('landing_page_url');
               }
               
               // Create CSV content

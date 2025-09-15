@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReelFlow X Morgana</title>
+    <meta name="description" content="Give buyers a more engaging, self-guided video experience around your website with ReelFlow">
+    <meta name="author" content="ReelFlow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://share.reelflow.com/morgana/">
+    <meta property="og:title" content="ReelFlow X Morgana">
+    <meta property="og:description" content="Give buyers a more engaging, self-guided video experience around your website with ReelFlow">
+    <meta property="og:image" content="https://clay-screenshot.s3.us-east-1.amazonaws.com/580afc6b-848f-4026-9176-4b9d044e2129.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://share.reelflow.com/morgana/">
+    <meta property="twitter:title" content="ReelFlow X Morgana">
+    <meta property="twitter:description" content="Give buyers a more engaging, self-guided video experience around your website with ReelFlow">
+    <meta property="twitter:image" content="https://clay-screenshot.s3.us-east-1.amazonaws.com/580afc6b-848f-4026-9176-4b9d044e2129.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://share.reelflow.com/morgana/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.png">
+
+    <!-- Styles - Using Webflow exported stylesheets -->
+    <link rel="stylesheet" href="../assets/css/normalize.css">
+    <link rel="stylesheet" href="../assets/css/webflow.css">
+    <link rel="stylesheet" href="../assets/css/reel-flow.webflow.css">
+    
+    <!-- Preload key fonts -->
+    <link rel="preload" href="../assets/fonts/BDOGrotesk-VF.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../assets/fonts/RulesExtended-Bold.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Webflow Animation & Interaction Styles -->
+    <style>
+        @media (min-width:992px) {
+            html.w-mod-js:not(.w-mod-ix) [data-w-id="hero-headline"] {opacity:0;}
+            html.w-mod-js:not(.w-mod-ix) [data-w-id="hero-content"] {opacity:0;}
+            html.w-mod-js:not(.w-mod-ix) [data-w-id="hero-image"] {opacity:0;}
+        }
+        
+        /* Full viewport background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('../assets/images/bg-image-full7.png');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            z-index: -10;
+            pointer-events: none;
+        }
+        
+        /* Glassy effect for benefit cards */
+        .cards-list_item {
+            background-color: rgba(255, 255, 255, 0.08) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--_colors---border-color--border-primary) !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        /* Hover animation for benefit cards */
+        .cards-list_item:hover {
+            transform: translateY(-4px) scale(1.02) !important;
+            background-color: rgba(255, 255, 255, 0.12) !important;
+            border-color: rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        /* Make benefit cards wider */
+        .cards-list_component.max-width-small {
+            max-width: none !important;
+            width: 100% !important;
+        }
+        
+        /* Add navbar background */
+        .navbar_component {
+            background-color: rgba(255, 255, 255, 0.08) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        
+        /* Screenshot frame styling */
+        .screenshot-frame {
+            position: relative;
+            padding: 20px;
+            margin: 40px 20px; /* Add margin to prevent rotation clipping */
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Large screenshot frame for hero */
+        .screenshot-frame-large {
+            position: relative;
+            padding: 25px;
+            margin: 40px 20px 60px 20px; /* Increased bottom margin for shadow */
+            transform: rotate(-2deg); /* Initial left tilt */
+            transition: transform 0.3s ease;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        /* Hero screenshot container padding */
+        .hero-screenshot-container {
+            padding: 1rem 1rem 4rem 1rem; /* Reduced top padding to bring screenshot closer to button */
+        }
+        
+        .screenshot-frame-large .image_screenshot-hero {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+        }
+        
+        /* Narrower hero headline container */
+        [data-w-id="hero-headline"] .max-width-xlarge {
+            max-width: 85% !important;
+        }
+        
+        /* Video overlay styling */
+        .video-overlay {
+            position: absolute;
+            bottom: 5%;
+            right: -11%;
+            width: 47.5%;
+            height: auto;
+            z-index: 10;
+            transform: rotate(2deg); /* Counter-rotate to appear straight within tilted frame */
+            transition: transform 0.3s ease;
+        }
+
+        /* Ensure containers don't clip the rotated screenshot */
+        .features_2_content-left {
+            overflow: visible !important;
+        }
+        
+        .features_2_component {
+            overflow: visible !important;
+        }
+        
+        .screenshot-frame:hover {
+            transform: rotate(-1deg) scale(1.02) !important;
+        }
+        
+        .screenshot-frame-large:hover {
+            transform: rotate(0deg) scale(1.01) !important;
+        }
+        
+        .screenshot-frame .image_screenshot-hero,
+        .screenshot-frame-large .image_screenshot-hero {
+            border-radius: 12px;
+            width: 100%;
+            height: auto;
+            display: block;
+            transform: rotate(2deg); /* Counter-rotate to keep image straight */
+            transition: transform 0.3s ease;
+        }
+        
+        .screenshot-frame:hover .image_screenshot-hero {
+            transform: rotate(1deg) !important; /* Adjust counter-rotation on hover */
+        }
+        
+        .screenshot-frame-large:hover .image_screenshot-hero {
+            transform: rotate(0deg) !important; /* Straighten on hover */
+        }
+        
+        /* Ensure overlay video follows the same micro-interaction */
+        .screenshot-frame-large:hover .video-overlay {
+            transform: rotate(0deg) !important;
+        }
+        
+        /* Force right alignment for What is ReelFlow section */
+        .header_component.text-align-right * {
+            text-align: right !important;
+        }
+        
+        .header_component.text-align-right .label_component {
+            justify-content: flex-end !important;
+            display: flex !important;
+        }
+        
+        .header_component.text-align-right h2,
+        .header_component.text-align-right p {
+            text-align: right !important;
+        }
+        
+        /* Reduce heading size for better proportions */
+        .heading-style-display {
+            font-size: 3rem !important;
+            line-height: 1.2 !important;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            /* Mobile screenshot frame adjustments */
+            .screenshot-frame-large {
+                max-width: 90vw !important;
+                margin: 15px 10px !important;
+                padding: 15px !important;
+            }
+            
+            .screenshot-frame {
+                margin: 20px 10px !important;
+                padding: 15px !important;
+            }
+            
+            /* Mobile typography */
+            .heading-style-display {
+                font-size: 2rem !important;
+                line-height: 1.1 !important;
+            }
+            
+            .text-size-large {
+                font-size: 1rem !important;
+            }
+            
+            /* Mobile navbar adjustments */
+            .navbar-logo-arrangement {
+                gap: 1rem !important;
+            }
+            
+            .navbar-logo-arrangement img {
+                height: 32px !important;
+            }
+            
+            /* Mobile button adjustments */
+            .button {
+                padding: 0.625rem 1.25rem !important;
+                font-size: 0.875rem !important;
+            }
+            
+            /* Mobile video overlay */
+            .video-overlay {
+                width: 62.5% !important;
+                bottom: 4% !important;
+                right: -11% !important;
+            }
+            
+            /* Mobile spacing adjustments */
+            .spacer-xlarge {
+                margin-bottom: 2rem !important;
+            }
+            
+            .spacer-medium {
+                margin-bottom: 1.5rem !important;
+            }
+            
+            /* Mobile padding adjustments */
+            .padding-global {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            /* Extra small mobile adjustments */
+            .screenshot-frame-large {
+                max-width: 95vw !important;
+                margin: 10px 5px !important;
+                padding: 12px !important;
+            }
+            
+            .heading-style-display {
+                font-size: 1.75rem !important;
+            }
+            
+            .navbar-logo-arrangement {
+                gap: 0.75rem !important;
+            }
+            
+            .video-overlay {
+                width: 75% !important;
+                bottom: 2% !important;
+                right: -11% !important;
+            }
+            
+            .padding-global {
+                padding-left: 0.75rem !important;
+                padding-right: 0.75rem !important;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            /* Tablet adjustments */
+            .screenshot-frame-large {
+                max-width: 75vw !important;
+            }
+            
+            .heading-style-display {
+                font-size: 2.5rem !important;
+            }
+        }
+        
+        @media (min-width: 1025px) {
+            /* Desktop adjustments */
+            .screenshot-frame-large {
+                max-width: 60vw !important;
+            }
+        }
+        
+        /* Fit section mobile layout */
+        .fit-section-mobile-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        
+        /* Desktop layout for fit section */
+        @media (min-width: 992px) {
+            .fit-section-mobile-layout {
+                grid-template-columns: 1fr 1fr;
+                gap: 4rem;
+                align-items: center;
+            }
+            
+            .fit-header-mobile {
+                order: 2;
+            }
+            
+            .features_2_content-left {
+                order: 1;
+            }
+            
+            .fit-header-mobile .header_component {
+                text-align: left !important;
+            }
+            
+            .fit-header-mobile .button-group {
+                justify-content: flex-start;
+            }
+            
+            .fit-header-mobile .logo-arrangement {
+                justify-content: flex-start !important;
+            }
+            
+            .fit-header-mobile .logo-arrangement img:first-child {
+                height: 60px !important;
+            }
+            
+            .fit-header-mobile .logo-arrangement img:last-child {
+                height: 60px !important;
+            }
+            
+            .fit-header-mobile .logo-arrangement div {
+                height: 50px !important;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .fit-header-mobile .logo-arrangement {
+                flex-wrap: wrap;
+                gap: 1rem !important;
+            }
+            
+            .fit-header-mobile .logo-arrangement img {
+                height: 40px !important;
+            }
+            
+            .fit-header-mobile .logo-arrangement div {
+                height: 32px !important;
+            }
+        }
+        
+        /* CTA Cards Responsive Grid */
+        .cta-cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .cta-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 200px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .cta-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .cta-card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-card-header .icon-1x1-medium {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+        
+        .cta-card-header h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1F0A38;
+            line-height: 1.3;
+        }
+        
+        .cta-card-description {
+            margin-bottom: 1.5rem;
+            color: #6b7280;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .cta-card-description p {
+            margin: 0;
+        }
+        
+        .cta-card .button-wrapper {
+            align-self: flex-start;
+        }
+        
+        .cta-card .button {
+            background-color: #fcd456;
+            color: black;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            font-weight: 400;
+            font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            border: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            padding-right: 2.5rem;
+            justify-content: center;
+        }
+
+        .cta-card .button:hover {
+            background-color: #1F0A38;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(31, 10, 56, 0.3);
+        }
+
+        .cta-card .button .button-text {
+            transition: transform 0.3s ease;
+        }
+
+        .cta-card .button .button-arrow {
+            width: 16px;
+            height: 16px;
+            margin-left: 8px;
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.3s ease;
+            filter: brightness(0) invert(0);
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%) translateX(10px);
+        }
+
+        .cta-card .button:hover .button-text {
+            transform: translateX(-4px);
+        }
+
+        .cta-card .button:hover .button-arrow {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0);
+            filter: brightness(0) invert(1);
+        }
+        
+        @media (min-width: 768px) {
+            .cta-cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+            
+            .cta-card-header h3 {
+                white-space: normal;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .cta-cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-wrapper">
+
+        <!-- Global Styles (from Webflow) -->
+        <div class="global-styles w-embed">
+            <style>
+                /* Make text look crisper and more legible in all browsers */
+                body {
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                    font-smoothing: antialiased;
+                    text-rendering: optimizeLegibility;
+                }
+                /* Focus state style for keyboard navigation */
+                *[tabindex]:focus-visible,
+                input[type="file"]:focus-visible {
+                    outline: 0.125rem solid #4d65ff;
+                    outline-offset: 0.125rem;
+                }
+            </style>
+        </div>
+
+        <!-- Navbar Component (Webflow Structure) -->
+        <div class="navbar_component">
+            <div data-animation="default" class="navbar_wrapper w-nav" data-easing2="ease" data-easing="ease" data-collapse="medium" role="banner" data-duration="400">
+                <!-- Webflow Navbar Accent Gradient -->
+                <div class="navbar_accent"></div>
+                <div class="navbar_container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                    <!-- Logo arrangement with ReelFlow first -->
+                    <div class="navbar-logo-arrangement" style="display: flex; align-items: center; gap: 1.5rem;">
+                        <a href="https://reelflow.com" class="navbar_logo-link w-nav-brand">
+                            <img loading="lazy" src="../assets/images/reelflow_logo_color.svg" alt="ReelFlow Logo" class="navbar_logo">
+                        </a>
+                        <div style="
+                            width: 1px; 
+                            height: 40px; 
+                            border-left: 2px solid #e5e7eb;
+                            flex-shrink: 0;
+                        "></div>
+                        <img src="https://logo.clearbit.com/plockmaticgroup.com" alt="Morgana Logo" style="height: 40px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                    </div>
+                    <div id="w-node-_51bd28f7-791e-49aa-4761-34a7e3b59e90-e3b59e7f" class="navbar_button-wrapper" style="margin-left: auto;">
+                        <a href="#" class="button is-navbar-button w-button" onclick="scrollToGetInTouch(event)" style="
+                            position: relative;
+                            overflow: hidden;
+                            transition: all 0.3s ease;
+                            padding-right: 1.5rem;
+                        "
+                        onmouseover="this.style.backgroundColor='#1F0A38'; this.style.color='white'; this.style.paddingRight='2.5rem'; this.querySelector('.button-text').style.transform='translateX(-8px)'; this.querySelector('.button-arrow').style.opacity='1'; this.querySelector('.button-arrow').style.transform='translateX(0) translateY(-50%)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(1)';"
+                        onmouseout="this.style.backgroundColor='var(--_colors---background-color--background-darkest)'; this.style.color='var(--_colors---text-color--text-alternate)'; this.style.paddingRight='1.5rem'; this.querySelector('.button-text').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.opacity='0'; this.querySelector('.button-arrow').style.transform='translateX(10px) translateY(-50%)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(0)';">
+                            <span class="button-text" style="transition: transform 0.3s ease;">Get in touch</span>
+                            <img src="../assets/images/arrow_right_icon.svg" class="button-arrow" style="
+                                width: 16px; 
+                                height: 16px; 
+                                margin-left: 8px;
+                                opacity: 0;
+                                transform: translateX(10px) translateY(-50%);
+                                transition: all 0.3s ease;
+                                filter: brightness(0) invert(0);
+                                position: absolute;
+                                right: 1rem;
+                                top: 50%;
+                            " alt="">
+                        </a>
+                        <div class="navbar_menu-button w-nav-button">
+                            <div class="menu-icon">
+                                <div class="menu-icon_line-top"></div>
+                                <div class="menu-icon_line-middle">
+                                    <div class="menu-icon_line-middle-inner"></div>
+                                </div>
+                                <div class="menu-icon_line-bottom"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="navbar_bg"></div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-wrapper">
+            <!-- Hero Section (Webflow Structure) -->
+            <header class="section_hero">
+                <div class="spacer_sticky-nav"></div>
+                <div class="padding-global">
+                    <div class="container-large">
+                        <div class="spacer-xlarge"></div>
+                        
+                        <!-- Centered Hero Content -->
+                        <div style="text-align: center;">
+                            <div data-w-id="hero-headline" class="header_component">
+                                <div class="max-width-xlarge" style="margin: 0 auto;">
+                                    <h1 class="heading-style-display" style="text-align: center;">Interactive short-form video for Morgana’s website</h1>
+                                    <div class="spacer-small"></div>
+                                    <div class="max-width-medium" style="margin: 0 auto;">
+                                        <p class="text-size-large" style="text-align: center;">Give buyers a more engaging, self-guided video experience around your website with ReelFlow</p>
+                                    </div>
+                                    <div class="spacer-custom2"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hero CTA Button -->
+                        <div class="spacer-small"></div>
+                        <div style="display: flex; justify-content: center;">
+                            <a href="#" onclick="scrollToGetInTouch(event)" class="button hero-cta-button" style="
+                                background-color: #fcd456;
+                                color: black; 
+                                padding: 0.875rem 2rem; 
+                                border-radius: 50px; 
+                                font-size: 1.1rem;
+                                text-decoration: none; 
+                                display: inline-flex; 
+                                align-items: center; 
+                                font-weight: 400;
+                                font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+                                border: none; 
+                                transition: all 0.3s ease;
+                                position: relative;
+                                overflow: hidden;
+                                justify-content: center;
+                                white-space: nowrap;
+                                box-shadow: 0 4px 12px rgba(252, 212, 86, 0.3);
+                            " 
+                            onmouseover="this.style.backgroundColor='#1F0A38'; this.style.color='white'; this.style.paddingRight='2.75rem'; this.querySelector('.button-text').style.transform='translateX(-8px)'; this.querySelector('.button-arrow').style.opacity='1'; this.querySelector('.button-arrow').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(1)'; this.style.boxShadow='0 6px 20px rgba(31, 10, 56, 0.3)';" 
+                            onmouseout="this.style.backgroundColor='#fcd456'; this.style.color='black'; this.style.paddingRight='2rem'; this.querySelector('.button-text').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.opacity='0'; this.querySelector('.button-arrow').style.transform='translateX(10px)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(0)'; this.style.boxShadow='0 4px 12px rgba(252, 212, 86, 0.3)';">
+                                <span class="button-text" style="transition: transform 0.3s ease;">See ReelFlow in action</span>
+                                <img src="../assets/images/arrow_right_icon.svg" class="button-arrow" style="
+                                    width: 16px; 
+                                    height: 16px; 
+                                    margin-left: 8px;
+                                    opacity: 0;
+                                    transform: translateX(10px);
+                                    transition: all 0.3s ease;
+                                    filter: brightness(0) invert(0);
+                                    position: absolute;
+                                    right: 1rem;
+                                " alt="">
+                            </a>
+                        </div>
+                        
+                        <div class="spacer-small"></div>
+                        
+                        <!-- Large Screenshot Section -->
+                        <div class="hero-screenshot-container" style="display: flex; justify-content: center;">
+                            <div data-w-id="hero-image" class="screenshot-frame-large">
+                                <img src="https://clay-screenshot.s3.us-east-1.amazonaws.com/580afc6b-848f-4026-9176-4b9d044e2129.png" loading="lazy" alt="Morgana website experience" class="image_screenshot-hero">
+                                <video class="video-overlay" autoplay muted loop playsinline>
+                                    <source src="../assets/images/overlayeyecatcher.mov" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- What is ReelFlow Section -->
+            <section class="section_home-benefits">
+                <div class="padding-global padding-section-large">
+                    <div class="container-large">
+                        <div class="w-layout-grid features_2_component">
+                            <div class="features_2_content-left">
+                                <div class="cards-list_component max-width-small">
+                                     <div data-w-id="benefit-card-1" class="cards-list_item">
+                                         <div class="cards-list_icon-wrapper">
+                                             <img src="../assets/images/grow_graph_icon.svg" loading="lazy" alt="" class="icon-1x1-large">
+                                         </div>
+                                         <div class="cards-list_content-wrapper">
+                                              <h3 class="heading-style-h5">Guide buyers through your site</h3>
+                                              <div class="spacer-xsmall"></div>
+                                              <p class="text-size-medium">Interactive video to help visitors find exactly what they need during independent research.</p>
+                                         </div>
+                                     </div>
+                                     <div data-w-id="benefit-card-2" class="cards-list_item">
+                                         <div class="cards-list_icon-wrapper">
+                                             <img src="../assets/images/comment_heart_icon.svg" loading="lazy" alt="" class="icon-1x1-large">
+                                         </div>
+                                         <div class="cards-list_content-wrapper">
+                                              <h3 class="heading-style-h5">Build real connection</h3>
+                                              <div class="spacer-xsmall"></div>
+                                              <p class="text-size-medium">Show the people behind your brand through authentic video that creates trust during crucial research phases.</p>
+                                         </div>
+                                     </div>
+                                     <div data-w-id="benefit-card-3" class="cards-list_item">
+                                         <div class="cards-list_icon-wrapper">
+                                             <img src="../assets/images/artificial_intelligence_icon.svg" loading="lazy" alt="" class="icon-1x1-large">
+                                         </div>
+                                         <div class="cards-list_content-wrapper">
+                                              <h3 class="heading-style-h5">Increase engagement & conversion</h3>
+                                              <div class="spacer-xsmall"></div>
+                                              <p class="text-size-medium">Create self-guided experiences that respect how modern buyers research, improving conversion quality.</p>
+                                         </div>
+                                     </div>
+                                 </div>
+                            </div>
+                            <div class="features_2_content-right">
+                                <div class="header_component max-width-large text-align-right">
+                                    <div class="label_component">
+                                        <div class="label is-brand-4">
+                                            <div class="label_icon w-embed">
+                                                <svg role="img" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g style="fill-rule:evenodd;clip-rule:evenodd;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round">
+                                                        <path d="m10 17c-.20391-2.6724-2.32759-4.7961-5-5 2.67241-.2039 4.79609-2.32759 5-5 .2039 2.67241 2.3276 4.7961 5 5-2.6724.2039-4.7961 2.3276-5 5z"></path>
+                                                        <path d="m16 9c-.1223-1.60345-1.3966-2.87766-3-3 1.6034-.12234 2.8777-1.39655 3-3 .1223 1.60345 1.3966 2.87766 3 3-1.6034.12234-2.8777 1.39655-3 3z"></path>
+                                                        <path d="m16 21c-.1223-1.6034-1.3966-2.8777-3-3 1.6034-.1223 2.8777-1.3966 3-3 .1223 1.6034 1.3966 2.8777 3 3-1.6034.1223-2.8777 1.3966-3 3z"></path>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <div class="label_text">WHAT IS REELFLOW?</div>
+                                        </div>
+                                    </div>
+                                    <div class="spacer-custom1"></div>
+                                     <h2 class="heading-style-display">Interactive, short-form video for a better buyer experience</h2>
+                                     <div class="spacer-small"></div>
+                                     <p class="text-size-large">Most B2B websites are static, text-heavy and outdated; the opposite of what modern buyers are craving today.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Personalized Benefits Section -->
+            <section class="section_personalized-benefits">
+                <div class="padding-global padding-section-large">
+                    <div class="container-large">
+                        <div class="fit-section-mobile-layout">
+                            <!-- Mobile: Show header content first -->
+                            <div class="features_2_content-right fit-header-mobile">
+                                <!-- Logo arrangement with ReelFlow first -->
+                                <div class="logo-arrangement" style="display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; gap: 1.5rem;">
+                                    <img src="../assets/images/reelflow_logo_color.svg" alt="ReelFlow Logo" style="height: 48px;">
+                                    <div style="
+                                        width: 1px; 
+                                        height: 40px; 
+                                        border-left: 2px solid #e5e7eb;
+                                        flex-shrink: 0;
+                                    "></div>
+                                    <img src="https://logo.clearbit.com/plockmaticgroup.com" alt="Morgana Logo" style="height: 48px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                                </div>
+                                
+                                 <div class="header_component max-width-large text-align-center">
+                                     <h2 class="heading-style-display">Why is ReelFlow a good fit for Morgana?</h2>
+                                     <div class="spacer-small"></div>
+                                     <p class="text-size-medium text-color-grey-2 margin-bottom margin-medium">You're already active with video on your socials, and getting some great engagement. But on your site itself, visitors are met with static, text-heavy pages instead of that same rich video content.</p>
+                                    <div class="spacer-medium"></div>
+                                    <div class="button-group center-align">
+                                        <a href="#" class="button w-button" onclick="scrollToGetInTouch(event)" style="
+                                            background-color: #fcd456;
+                                            color: black; 
+                                            padding: 0.75rem 1.5rem; 
+                                            border-radius: 50px; 
+                                            font-size: 1rem;
+                                            text-decoration: none; 
+                                            display: inline-flex; 
+                                            align-items: center; 
+                                            font-weight: 400; 
+                                            font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+                                            border: none; 
+                                            transition: all 0.3s ease;
+                                            position: relative;
+                                            overflow: hidden;
+                                            justify-content: center;
+                                            white-space: nowrap;
+                                        " 
+                                        onmouseover="this.style.backgroundColor='#1F0A38'; this.style.color='white'; this.style.paddingRight='2.5rem'; this.querySelector('.button-text').style.transform='translateX(-8px)'; this.querySelector('.button-arrow').style.opacity='1'; this.querySelector('.button-arrow').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(1)';" 
+                                        onmouseout="this.style.backgroundColor='#fcd456'; this.style.color='black'; this.style.paddingRight='1.5rem'; this.querySelector('.button-text').style.transform='translateX(0)'; this.querySelector('.button-arrow').style.opacity='0'; this.querySelector('.button-arrow').style.transform='translateX(10px)'; this.querySelector('.button-arrow').style.filter='brightness(0) invert(0)';">
+                                            <span class="button-text" style="transition: transform 0.3s ease;">Get in touch</span>
+                                            <img src="../assets/images/arrow_right_icon.svg" class="button-arrow" style="
+                                                width: 16px; 
+                                                height: 16px; 
+                                                margin-left: 8px;
+                                                opacity: 0;
+                                                transform: translateX(10px);
+                                                transition: all 0.3s ease;
+                                                filter: brightness(0) invert(0);
+                                                position: absolute;
+                                                right: 1rem;
+                                            " alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Cards section -->
+                            <div class="features_2_content-left">
+                                <div class="cards-list_component max-width-small">
+                                    <div class="cards-list_item">
+                                        <div class="cards-list_icon-wrapper">
+                                            <img src="../assets/images/grow_graph_yellow_icon.svg" loading="lazy" alt="" class="icon-1x1-large">
+                                        </div>
+                                     <div class="cards-list_content-wrapper">
+                                         <h3 class="heading-style-h5">You already know video works</h3>
+                                         <div class="spacer-xsmall"></div>
+                                         <p class="text-size-medium">4 of your last 10 LinkedIn posts were video and saw 63% more likes than your posts without video</p>
+                                     </div>
+                                 </div>
+                                 
+                                 <div class="cards-list_item">
+                                     <div class="cards-list_icon-wrapper">
+                                         <img src="../assets/images/comment_heart_icon.svg" loading="lazy" alt="" class="icon-1x1-large">
+                                     </div>
+                                     <div class="cards-list_content-wrapper">
+                                         <h3 class="heading-style-h5">But your site visitors are met with static, text-heavy pages</h3>
+                                         <div class="spacer-xsmall"></div>
+                                         <p class="text-size-medium">This creates a disconnect with your engaging, rich video content on socials</p>
+                                     </div>
+                                 </div>
+                                 
+                                 <div class="cards-list_item">
+                                     <div class="cards-list_icon-wrapper">
+                                         <img src="../assets/images/artificial_intelligence_yellow_icon.svg" loading="lazy" alt="" class="icon-1x1-large">
+                                     </div>
+                                     <div class="cards-list_content-wrapper">
+                                         <h3 class="heading-style-h5">Opportunity for huge improvements in site engagement</h3>
+                                         <div class="spacer-xsmall"></div>
+                                         <p class="text-size-medium">Interactive video can 2x your engagement stats - data suggests your visitors spend less than ~30 seconds on site, visiting less than 2 pages.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How It Works Section -->
+            <section class="padding-global">
+                <div class="padding-section-large">
+                    <div class="container-large">
+                        <div class="max-width-xlarge">
+                            <div class="header_component max-width-large z-index-2">
+                                <div class="label_component">
+                                    <div class="label is-brand-4">
+                                        <div class="label_icon w-embed">
+                                            <svg role="img" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <g style="fill-rule:evenodd;clip-rule:evenodd;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round">
+                                                    <path d="m10 17c-.20391-2.6724-2.32759-4.7961-5-5 2.67241-.2039 4.79609-2.32759 5-5 .2039 2.67241 2.3276 4.7961 5 5-2.6724.2039-4.7961 2.3276-5 5z"></path>
+                                                    <path d="m16 9c-.1223-1.60345-1.3966-2.87766-3-3 1.6034-.12234 2.8777-1.39655 3-3 .1223 1.60345 1.3966 2.87766 3 3-1.6034.12234-2.8777 1.39655-3 3z"></path>
+                                                    <path d="m16 21c-.1223-1.6034-1.3966-2.8777-3-3 1.6034-.1223 2.8777-1.3966 3-3 .1223 1.6034 1.3966 2.8777 3 3-1.6034.1223-2.8777 1.3966-3 3z"></path>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="label_text">HOW IT WORKS</div>
+                                    </div>
+                                </div>
+                                <div class="spacer-custom1"></div>
+                                <h2>Plan, produce and publish interactive video flows</h2>
+                            </div>
+                            <div class="spacer-medium"></div>
+                        </div>
+                        <div class="features_1_component">
+                            <div class="features_1_layout">
+                                <div class="features_1_content">
+                                    <div data-duration-in="400" data-duration-out="200" data-current="Planning" data-easing="ease" class="features_1_tabs w-tabs">
+                                        <div class="features_1_tabs-content w-tab-content">
+                                            <div data-w-tab="Planning" class="features_1_tab-pane w-tab-pane w--tab-active">
+                                                <div class="video-wrapper w-embed">
+                                                    <video autoplay="" muted="" loop="" playsinline="" style="width: 100%; height: 100%; object-fit: cover;">
+                                                        <source src="../assets/images/p_product_planning.webm" type="video/webm">
+                                                        Your browser does not support the video tag.
+                                                    </video>
+                                                </div>
+                                            </div>
+                                            <div data-w-tab="Production" class="features_1_tab-pane w-tab-pane">
+                                                <div class="video-wrapper w-embed">
+                                                    <video autoplay="" muted="" loop="" playsinline="" style="width: 100%; height: 100%; object-fit: cover;">
+                                                        <source src="../assets/images/p_product_production.webm" type="video/webm">
+                                                        Your browser does not support the video tag.
+                                                    </video>
+                                                </div>
+                                            </div>
+                                            <div data-w-tab="Publish" class="features_1_tab-pane w-tab-pane">
+                                                <div class="video-wrapper w-embed">
+                                                    <video autoplay="" muted="" loop="" playsinline="" style="width: 100%; height: 100%; object-fit: cover;">
+                                                        <source src="../assets/images/p_product_publishing.webm" type="video/webm">
+                                                        Your browser does not support the video tag.
+                                                    </video>
+                                                </div>
+                                            </div>
+                                            <div data-w-tab="Performance" class="features_1_tab-pane w-tab-pane">
+                                                <div class="video-wrapper w-embed">
+                                                    <video autoplay="" muted="" loop="" playsinline="" style="width: 100%; height: 100%; object-fit: cover;">
+                                                        <source src="../assets/images/p_product_performance.webm" type="video/webm">
+                                                        Your browser does not support the video tag.
+                                                    </video>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="features_1_tabs-menu w-tab-menu">
+                                            <a data-w-tab="Planning" class="features_1_tab-link w-inline-block w-tab-link w--current" href="#" onclick="switchTab(event, 'Planning')">
+                                                <div class="features_1_tab-header">
+                                                    <div class="features_1_tab-icon-wrapper">
+                                                        <img loading="lazy" src="../assets/images/artificial_intelligence_icon.svg" alt="" class="icon-1x1-large">
+                                                    </div>
+                                                    <h3 class="features_1_tab-title">Planning</h3>
+                                                    <div class="features_1_tab-arrow w-embed">
+                                                        <svg role="img" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div class="features_1_tab-content" style="display: block;">
+                                                    <div class="spacer-xsmall"></div>
+                                                    <p>AI-powered website analysis identifies key opportunities for video flows across your website and generates contextual scripts.</p>
+                                                </div>
+                                            </a>
+                                            <a data-w-tab="Production" class="features_1_tab-link w-inline-block w-tab-link" href="#" onclick="switchTab(event, 'Production')">
+                                                <div class="features_1_tab-header">
+                                                    <div class="features_1_tab-icon-wrapper">
+                                                        <img loading="lazy" src="../assets/images/web_cam_icon.svg" alt="" class="icon-1x1-large">
+                                                    </div>
+                                                    <h3 class="features_1_tab-title">Production</h3>
+                                                    <div class="features_1_tab-arrow w-embed">
+                                                        <svg role="img" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div class="features_1_tab-content" style="display: none;">
+                                                    <div class="spacer-xsmall"></div>
+                                                    <p>Flexible options from self-serve recording to professional services, including AI Video Stand-In for content creation at scale.</p>
+                                                </div>
+                                            </a>
+                                            <a data-w-tab="Publish" class="features_1_tab-link w-inline-block w-tab-link" href="#" onclick="switchTab(event, 'Publish')">
+                                                <div class="features_1_tab-header">
+                                                    <div class="features_1_tab-icon-wrapper">
+                                                        <img loading="lazy" src="../assets/images/screen_share_icon.svg" alt="" class="icon-1x1-large">
+                                                    </div>
+                                                    <h3 class="features_1_tab-title">Publish</h3>
+                                                    <div class="features_1_tab-arrow w-embed">
+                                                        <svg role="img" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div class="features_1_tab-content" style="display: none;">
+                                                    <div class="spacer-xsmall"></div>
+                                                    <p>Deploy the interactive player across your website with a single line of code – overlay or embedded to suit your design.</p>
+                                                </div>
+                                            </a>
+                                            <a data-w-tab="Performance" class="features_1_tab-link w-inline-block w-tab-link" href="#" onclick="switchTab(event, 'Performance')">
+                                                <div class="features_1_tab-header">
+                                                    <div class="features_1_tab-icon-wrapper">
+                                                        <img loading="lazy" src="../assets/images/grow_graph_icon.svg" alt="" class="icon-1x1-large">
+                                                    </div>
+                                                    <h3 class="features_1_tab-title">Performance</h3>
+                                                    <div class="features_1_tab-arrow w-embed">
+                                                        <svg role="img" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div class="features_1_tab-content" style="display: none;">
+                                                    <div class="spacer-xsmall"></div>
+                                                    <p>Track engagement patterns and conversion paths, with insights into how visitors navigate your video experiences.</p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="spacer-medium"></div>
+                                    <div class="button-group">
+                                        <a href="#" class="text-link" onclick="scrollToGetInTouch(event)" style="
+                                            display: inline-flex; 
+                                            align-items: center; 
+                                            gap: 0.5rem; 
+                                            color: #1F0A38; 
+                                            text-decoration: none; 
+                                            font-weight: 500;
+                                            transition: all 0.3s ease;
+                                            border-bottom: 2px solid transparent;
+                                        "
+                                        onmouseover="this.style.borderBottomColor='#fcd456';"
+                                        onmouseout="this.style.borderBottomColor='transparent';">
+                                            <img src="../assets/images/circle_play_icon.svg" loading="lazy" alt="" style="width: 20px; height: 20px;">
+                                            <span>Get in touch</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Logo Carousel Section -->
+            <section class="section_brands" data-w-id="229e97e5-7d36-bbb6-21bb-37735bc28208">
+                <div class="brands_component">
+                    <div class="brands_scroll-container">
+                        <div class="brands_list">
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/trumpet_logo.svg" alt="" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/gripped_logo.svg" alt="Gripped logo" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/wastelogics_logo.svg" alt="Waste Logics logo" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/trustkeith_logo.svg" alt="Trust Keith logo" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/higherin_logo.svg" alt="Higherin logo" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/london_reporting_house_logo.svg" alt="London Reporting House logo" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/orbitalX_logo.svg" alt="OrbitalX logo" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/mysalescoach_logo.svg" alt="My Sales Coach logo" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/vestd_logo.svg" alt="" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/event_tech_live_logo.svg" alt="Event Tech Live logo" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/iampausing_logo.svg" alt="I am pausing logo" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/B2B_marketing_logo.svg" alt="B2B Marketing logo" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/propolis_logo.svg" alt="Propolis logo" class="brands_logo"></div>
+                            <!-- Duplicate for seamless loop -->
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/trumpet_logo.svg" alt="" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/gripped_logo.svg" alt="Gripped logo" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/wastelogics_logo.svg" alt="Waste Logics logo" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/trustkeith_logo.svg" alt="Trust Keith logo" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/higherin_logo.svg" alt="Higherin logo" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/london_reporting_house_logo.svg" alt="London Reporting House logo" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/orbitalX_logo.svg" alt="OrbitalX logo" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/mysalescoach_logo.svg" alt="My Sales Coach logo" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/vestd_logo.svg" alt="" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/event_tech_live_logo.svg" alt="Event Tech Live logo" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/iampausing_logo.svg" alt="I am pausing logo" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/B2B_marketing_logo.svg" alt="B2B Marketing logo" class="brands_logo"></div>
+                            <div class="brands_wrapper"><img loading="lazy" src="../assets/images/propolis_logo.svg" alt="Propolis logo" class="brands_logo"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final CTA Section -->
+            <section class="section_cta" id="get-in-touch-section">
+                <div class="padding-global padding-section-large">
+                    <div class="container-large">
+                        <div class="cta_component text-align-center">
+                            <h2 class="heading-style-h2">Are you ready to explore further?</h2>
+                            <div class="spacer-small"></div>
+                            <p class="text-size-large">Click a button below</p>
+                            <div class="spacer-medium"></div>
+                            
+                            <!-- Three CTA Cards -->
+                            <div class="cta-cards-grid">
+                                <!-- Card 1: Start a free trial -->
+                                <div class="cta-card cards-list_item">
+                                    <div class="cta-card-header">
+                                        <img src="../assets/images/grow_graph_yellow_icon.svg" alt="Money icon" class="icon-1x1-medium">
+                                        <h3 class="heading-style-h6">Start a free trial</h3>
+                                    </div>
+                                    <div class="cta-card-description">
+                                        <p>Use ReelFlow for 14-day free trial, available for qualified companies</p>
+                                    </div>
+                                    <div class="button-wrapper">
+                                        <a href="#" onclick="openTrialModal(event)" class="button">
+                                            <span class="button-text">Start free trial</span>
+                                            <img src="../assets/images/arrow_right_icon.svg" alt="Arrow" class="button-arrow">
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Card 2: Book a meeting -->
+                                <div class="cta-card cards-list_item">
+                                    <div class="cta-card-header">
+                                        <img src="../assets/images/web_cam_icon.svg" alt="Voice icon" class="icon-1x1-medium">
+                                        <h3 class="heading-style-h6">Book a meeting</h3>
+                                    </div>
+                                    <div class="cta-card-description">
+                                        <p>Find a slot in ReelFlow CEO & Co-Founder Chris Wickson's diary</p>
+                                    </div>
+                                    <div class="button-wrapper">
+                                        <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3l6RnBKjaPzWn3-U85qkk3zzLYIEeHAXPQF5fTEQRUdCk_huMtda7_H4RqtXfdqHIXXYCUIe7y" target="_blank" class="button">
+                                            <span class="button-text">Book now</span>
+                                            <img src="../assets/images/arrow_right_icon.svg" alt="Arrow" class="button-arrow">
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Card 3: Start a conversation -->
+                                <div class="cta-card cards-list_item">
+                                    <div class="cta-card-header">
+                                        <img src="../assets/images/artificial_intelligence_yellow_icon.svg" alt="AI icon" class="icon-1x1-medium">
+                                        <h3 class="heading-style-h6">Start a conversation</h3>
+                                    </div>
+                                    <div class="cta-card-description">
+                                        <p>Chat with Flick, our AI assistent, by voice or text</p>
+                                    </div>
+                                    <div class="button-wrapper">
+                                        <a href="#" onclick="openConversationModal(event)" class="button">
+                                            <span class="button-text">Start chat</span>
+                                            <img src="../assets/images/arrow_right_icon.svg" alt="Arrow" class="button-arrow">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- HubSpot Form Modal -->
+        <div id="trial-modal" class="modal-overlay" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 style="margin: 0; color: #1F0A38; font-family: 'BDO Grotesk', sans-serif;">Start Your Free Trial</h3>
+                    <button class="modal-close" onclick="closeTrialModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="hs-form-frame" data-region="eu1" data-form-id="a9cba3f8-09bc-45c8-ab4c-d654afc63c02" data-portal-id="145238537"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ElevenLabs Conversation Modal -->
+        <div id="conversation-modal" class="modal-overlay" style="display: none;">
+            <div class="modal-content conversation-modal">
+                <div class="modal-header">
+                    <h3 style="margin: 0; color: #1F0A38; font-family: 'BDO Grotesk', sans-serif;">Chat with Flick, ReelFlow's AI Assistant</h3>
+                    <button class="modal-close" onclick="closeConversationModal()">&times;</button>
+                </div>
+                <div class="modal-body" style="text-align: center; padding: 2rem;">
+                    <elevenlabs-convai 
+                        agent-id="agent_5601k2ykw3q6f2svss2pj8dqmfqt"
+                        override-first-message="Hi I'm Flick, ReelFlow's AI Assistant. Ask me anything about ReelFlow, by voice or text, and I'll be happy to help.">
+                    </elevenlabs-convai>
+                </div>
+            </div>
+        </div>
+
+    <!-- Custom CSS for Logo Animation -->
+    <style>
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .section_brands {
+            overflow: hidden;
+            padding: 2rem 0;
+        }
+
+        .brands_component {
+            display: flex;
+            align-items: center;
+        }
+
+        .brands_scroll-container {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .brands_list {
+            display: flex;
+            align-items: center;
+            gap: 5rem;
+            animation: scroll-left 30s linear infinite;
+            width: max-content;
+        }
+
+        .brands_wrapper {
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .brands_logo {
+            max-height: 5rem;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* Pause animation on hover */
+        .section_brands:hover .brands_list {
+            animation-play-state: paused;
+        }
+
+        @media screen and (max-width: 767px) {
+            .brands_list {
+                gap: 2rem;
+            }
+            
+            .brands_logo {
+                max-height: 3rem;
+            }
+        }
+
+        @media screen and (max-width: 479px) {
+            .brands_list {
+                flex-direction: column;
+                animation: none;
+                gap: 1.5rem;
+                padding: 1rem 0;
+            }
+
+            .brands_wrapper {
+                padding: 0.5rem;
+            }
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        .conversation-modal {
+            max-width: 600px;
+            max-height: 85vh;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+    </style>
+    </div>
+
+    <!-- ElevenLabs Script -->
+    <script src="https://elevenlabs.io/convai-widget/index.js" defer></script>
+
+    <!-- HubSpot Form Script -->
+    <script src="https://js-eu1.hsforms.net/forms/embed/145238537.js" defer></script>
+
+    <!-- Analytics -->
+    <script>
+        // Add your analytics tracking code here
+        // Example: Google Analytics, Mixpanel, etc.
+    </script>
+
+    <!-- Modal Functionality -->
+    <script>
+        function openTrialModal(event) {
+            event.preventDefault();
+            const modal = document.getElementById('trial-modal');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent body scrolling
+        }
+
+        function closeTrialModal() {
+            const modal = document.getElementById('trial-modal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore body scrolling
+        }
+
+        function openConversationModal(event) {
+            event.preventDefault();
+            const modal = document.getElementById('conversation-modal');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent body scrolling
+        }
+
+        function closeConversationModal() {
+            const modal = document.getElementById('conversation-modal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore body scrolling
+        }
+
+        // Smooth scroll to Get in Touch section
+        function scrollToGetInTouch(event) {
+            event.preventDefault();
+            const section = document.getElementById('get-in-touch-section');
+            if (section) {
+                section.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(event) {
+            const trialModal = document.getElementById('trial-modal');
+            const conversationModal = document.getElementById('conversation-modal');
+            
+            if (event.target === trialModal) {
+                closeTrialModal();
+            }
+            if (event.target === conversationModal) {
+                closeConversationModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeTrialModal();
+                closeConversationModal();
+            }
+        });
+    </script>
+
+    <!-- Tab Functionality -->
+    <script>
+        function switchTab(event, tabName) {
+            event.preventDefault();
+            
+            // Hide all tab panes
+            const tabPanes = document.querySelectorAll('.features_1_tab-pane');
+            tabPanes.forEach(pane => {
+                pane.classList.remove('w--tab-active');
+            });
+            
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.features_1_tab-content');
+            tabContents.forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            // Remove current class from all tab links
+            const tabLinks = document.querySelectorAll('.features_1_tab-link');
+            tabLinks.forEach(link => {
+                link.classList.remove('w--current');
+            });
+            
+            // Show the selected tab pane
+            const selectedPane = document.querySelector(`[data-w-tab="${tabName}"]`);
+            if (selectedPane) {
+                selectedPane.classList.add('w--tab-active');
+            }
+            
+            // Show the clicked tab content and add current class
+            const clickedLink = event.currentTarget;
+            clickedLink.classList.add('w--current');
+            const clickedContent = clickedLink.querySelector('.features_1_tab-content');
+            if (clickedContent) {
+                clickedContent.style.display = 'block';
+            }
+            
+            // Update the data-current attribute
+            const tabsContainer = document.querySelector('.features_1_tabs');
+            if (tabsContainer) {
+                tabsContainer.setAttribute('data-current', tabName);
+            }
+        }
+        
+        // Initialize tabs on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ensure only Planning tab content is visible initially
+            const tabContents = document.querySelectorAll('.features_1_tab-content');
+            tabContents.forEach((content, index) => {
+                content.style.display = index === 0 ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>

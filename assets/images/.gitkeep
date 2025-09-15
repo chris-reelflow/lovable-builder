@@ -1,0 +1,10 @@
+# Assets Directory
+
+This directory will contain your ReelFlow brand assets:
+
+- `reelflow-logo.svg` - Main logo for header
+- `reelflow-logo-light.svg` - Light logo for footer
+- `favicon.ico` - Site favicon
+- Other brand images and assets
+
+Replace this file with your actual brand assets when setting up the project.

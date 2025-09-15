@@ -1205,6 +1205,14 @@
             overflow: hidden;
             justify-content: center;
             white-space: nowrap;
+            padding-right: 2.5rem;
+        }
+
+        .cta-card .button:hover {
+            background-color: #1F0A38;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(31, 10, 56, 0.3);
         }
         
         .button-text {
@@ -1221,6 +1229,19 @@
             filter: brightness(0) invert(0);
             position: absolute;
             right: 1rem;
+            top: 50%;
+            transform: translateY(-50%) translateX(10px);
+        }
+
+        .cta-card .button:hover .button-text {
+            transform: translateX(-4px);
+        }
+
+        .cta-card .button:hover .button-arrow {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0);
+            filter: brightness(0) invert(1);
+        }
         }
         
         @media (min-width: 768px) {

@@ -128,12 +128,15 @@ async function generatePages(csvFile = null, baseUrl = 'https://chris-reelflow.g
         const sample = await fs.readFile(csvPath, 'utf8');
         const firstLine = (sample.split('\n')[0] || '').trim();
         if (firstLine.includes('\t')) separator = '\t';
-        headers = firstLine.split(separator).map(h => h.trim());
+        // headers will be provided by csv-parser's 'headers' event to avoid quoting issues
       } catch {}
 
       await new Promise((resolve, reject) => {
         fs.createReadStream(csvPath)
           .pipe(csv({ separator, mapHeaders: ({ header }) => header.trim() }))
+          .on('headers', (parsedHeaders) => {
+            headers = parsedHeaders.map(h => h.trim());
+          })
           .on('data', (data) => results.push(data))
           .on('end', async () => {
             console.log(`📊 Processing ${results.length} landing page(s) from ${baseCsvName}...`);
@@ -197,6 +200,10 @@ async function generatePages(csvFile = null, baseUrl = 'https://chris-reelflow.g
             
             // Write updated CSV with generated URLs
             try {
+              // Ensure headers from parser, fallback to keys from first row
+              if (headers.length === 0 && updatedResults.length > 0) {
+                headers = Object.keys(updatedResults[0]);
+              }
               // Add landing_page_url to headers if not already present
               if (!headers.includes('landing_page_url')) {
                 headers.push('landing_page_url');

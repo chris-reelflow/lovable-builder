@@ -163,11 +163,19 @@ async function generatePages(csvFile = null) {
                 // Generate HTML content
                 const htmlContent = populateTemplate(template, row);
                 
-                // Write index.html file
+                // Write index.html file in a pretty URL folder
                 const htmlPath = path.join(pageDir, 'index.html');
                 await fs.writeFile(htmlPath, htmlContent);
+
+                // Also write a fallback root-level file: /slug.html
+                // Adjust asset paths from ../assets to assets for root-level placement
+                const rootLevelContent = htmlContent
+                  .replace(/src="\.\.\/assets\//g, 'src="assets/')
+                  .replace(/href="\.\.\/assets\//g, 'href="assets/');
+                const htmlPathRoot = path.join(outputDir, `${companySlug}.html`);
+                await fs.writeFile(htmlPathRoot, rootLevelContent);
                 
-                console.log(`✅ Generated: /${companySlug}/index.html (${templateType} template from ${csvFileName})`);
+                console.log(`✅ Generated: /${companySlug}/index.html and /${companySlug}.html (${templateType} template from ${csvFileName})`);
               } catch (error) {
                 console.error(`❌ Error generating page for ${row.company_name}:`, error.message);
               }

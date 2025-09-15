@@ -415,6 +415,29 @@
                                         <p class="text-size-large" style="text-align: center;">{{hero_subheadline}}</p>
                                     </div>
                                     <div class="spacer-custom2"></div>
+                                    
+                                    <!-- See ReelFlow in action CTA button -->
+                                    <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
+                                        <a href="#" onclick="scrollToGetInTouch(event)" class="button w-button"
+                                        style="
+                                            background-color: #fcd456;
+                                            color: black; 
+                                            padding: 0.75rem 1.5rem; 
+                                            border-radius: 50px; 
+                                            font-size: 1rem;
+                                            text-decoration: none; 
+                                            display: inline-flex; 
+                                            align-items: center; 
+                                            font-weight: 400; 
+                                            font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+                                            border: none; 
+                                            transition: all 0.3s ease;
+                                        " 
+                                        onmouseover="this.style.backgroundColor='#1F0A38'; this.style.color='white';" 
+                                        onmouseout="this.style.backgroundColor='#fcd456'; this.style.color='black';">
+                                            See ReelFlow in action
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -797,32 +820,63 @@
                         <div class="cta_component text-align-center">
                             <h2 class="heading-style-h2">Are you ready to explore further?</h2>
                             <div class="spacer-small"></div>
-                            <p class="text-size-large">Book a meeting with ReelFlow CEO & Co-Founder, Chris Wickson</p>
+                            <p class="text-size-large">Click a button below</p>
                             <div class="spacer-medium"></div>
                             
-                            <!-- Simple button -->
-                            <div style="display: flex; justify-content: center;">
-                                <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3l6RnBKjaPzWn3-U85qkk3zzLYIEeHAXPQF5fTEQRUdCk_huMtda7_H4RqtXfdqHIXXYCUIe7y" target="_blank" class="button w-button"
-                                style="
-                                    background-color: #fcd456;
-                                    color: black; 
-                                    padding: 0.75rem 1.5rem; 
-                                    border-radius: 50px; 
-                                    font-size: 1rem;
-                                    text-decoration: none; 
-                                    display: inline-flex; 
-                                    align-items: center; 
-                                    font-weight: 400; 
-                                    font-family: 'BDO Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-                                    border: none; 
-                                    transition: all 0.3s ease;
-                                " 
-                                onmouseover="this.style.backgroundColor='#1F0A38'; this.style.color='white';" 
-                                onmouseout="this.style.backgroundColor='#fcd456'; this.style.color='black';">
-                                    Book a meeting
-                                </a>
+                            <!-- Three CTA Cards -->
+                            <div class="cta-cards-grid">
+                                <!-- Card 1: Start a free trial -->
+                                <div class="cta-card cards-list_item">
+                                    <div class="cta-card-header">
+                                        <img src="../assets/images/grow_graph_yellow_icon.svg" alt="Money icon" class="icon-1x1-medium">
+                                        <h3 class="heading-style-h6">Start a free trial</h3>
+                                    </div>
+                                    <div class="cta-card-description">
+                                        <p>Use ReelFlow for 14-day free trial, available for qualified companies</p>
+                                    </div>
+                                    <div class="button-wrapper">
+                                        <a href="#" onclick="openTrialModal(event)" class="button">
+                                            <span class="button-text">Start free trial</span>
+                                            <img src="../assets/images/arrow_right_icon.svg" alt="Arrow" class="button-arrow">
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Card 2: Book a meeting -->
+                                <div class="cta-card cards-list_item">
+                                    <div class="cta-card-header">
+                                        <img src="../assets/images/web_cam_icon.svg" alt="Voice icon" class="icon-1x1-medium">
+                                        <h3 class="heading-style-h6">Book a meeting</h3>
+                                    </div>
+                                    <div class="cta-card-description">
+                                        <p>Find a slot in ReelFlow CEO & Co-Founder Chris Wickson's diary</p>
+                                    </div>
+                                    <div class="button-wrapper">
+                                        <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3l6RnBKjaPzWn3-U85qkk3zzLYIEeHAXPQF5fTEQRUdCk_huMtda7_H4RqtXfdqHIXXYCUIe7y" target="_blank" class="button">
+                                            <span class="button-text">Book now</span>
+                                            <img src="../assets/images/arrow_right_icon.svg" alt="Arrow" class="button-arrow">
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Card 3: Start a conversation -->
+                                <div class="cta-card cards-list_item">
+                                    <div class="cta-card-header">
+                                        <img src="../assets/images/artificial_intelligence_yellow_icon.svg" alt="AI icon" class="icon-1x1-medium">
+                                        <h3 class="heading-style-h6">Start a conversation</h3>
+                                    </div>
+                                    <div class="cta-card-description">
+                                        <p>Chat with Flick, our AI assistent, by voice or text</p>
+                                    </div>
+                                    <div class="button-wrapper">
+                                        <a href="#" onclick="openConversationModal(event)" class="button">
+                                            <span class="button-text">Start chat</span>
+                                            <img src="../assets/images/arrow_right_icon.svg" alt="Arrow" class="button-arrow">
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </div>  
                     </div>
                 </div>
             </section>
@@ -1212,7 +1266,172 @@
                 padding: 0.5rem;
             }
         }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 0;
+            max-width: 90vw;
+            max-height: 90vh;
+            width: 500px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .conversation-modal {
+            width: 800px;
+            height: 600px;
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .hs-form-frame {
+            min-height: 300px;
+        }
+
+        @media (max-width: 640px) {
+            .modal-content {
+                width: 95vw;
+                margin: 1rem;
+            }
+            
+            .conversation-modal {
+                height: 80vh;
+            }
+        }
     </style>
+
+    <!-- HubSpot Form Modal -->
+    <div id="trial-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 style="margin: 0; color: #1F0A38; font-family: 'BDO Grotesk', sans-serif;">Start Your Free Trial</h3>
+                <button class="modal-close" onclick="closeTrialModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="hs-form-frame" data-region="eu1" data-form-id="a9cba3f8-09bc-45c8-ab4c-d654afc63c02" data-portal-id="145238537"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ElevenLabs Conversation Modal -->
+    <div id="conversation-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content conversation-modal">
+            <div class="modal-header">
+                <h3 style="margin: 0; color: #1F0A38; font-family: 'BDO Grotesk', sans-serif;">Chat with Flick, ReelFlow's AI Assistant</h3>
+                <button class="modal-close" onclick="closeConversationModal()">&times;</button>
+            </div>
+            <div class="modal-body" style="text-align: center; padding: 2rem;">
+                <elevenlabs-convai 
+                    agent-id="agent_5601k2ykw3q6f2svss2pj8dqmfqt"
+                    override-first-message="Hi I'm Flick, ReelFlow's AI Assistant. Ask me anything about ReelFlow, by voice or text, and I'll be happy to help.">
+                </elevenlabs-convai>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal JavaScript -->
+    <script>
+        // Modal Functions
+        function openTrialModal(event) {
+            event.preventDefault();
+            document.getElementById('trial-modal').style.display = 'flex';
+            // Load HubSpot script dynamically
+            if (!window.hbspt) {
+                const script = document.createElement('script');
+                script.src = '//js.hs-scripts.com/145238537.js';
+                script.async = true;
+                document.head.appendChild(script);
+            }
+        }
+
+        function closeTrialModal() {
+            document.getElementById('trial-modal').style.display = 'none';
+        }
+
+        function openConversationModal(event) {
+            event.preventDefault();
+            document.getElementById('conversation-modal').style.display = 'flex';
+        }
+
+        function closeConversationModal() {
+            document.getElementById('conversation-modal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(event) {
+            const trialModal = document.getElementById('trial-modal');
+            const conversationModal = document.getElementById('conversation-modal');
+            
+            if (event.target === trialModal) {
+                closeTrialModal();
+            }
+            if (event.target === conversationModal) {
+                closeConversationModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeTrialModal();
+                closeConversationModal();
+            }
+        });
+    </script>
+
+    <!-- ElevenLabs Script -->
+    <script src="https://elevenlabs.io/convai-widget/index.js" async></script>
+
+    <!-- HubSpot Script (lazy loaded) -->
+    <script id="hs-script-loader" async defer src="//js.hs-scripts.com/145238537.js"></script>
 
 </body>
 </html>

@@ -23,12 +23,12 @@ async function loadTemplate(templateType = 'website') {
     let templateName;
     if (templateType === 'abm') {
       templateName = 'abm-landing-page.html';
-    } else if (templateType === 'website-landing-page-cold-outbound') {
-      templateName = 'website-landing-page-cold-outbound.html';
-    } else if (templateType === 'website-landing-page-warm-outbound') {
-      templateName = 'website-landing-page-warm-outbound.html';
+    } else if (templateType === 'website-landing-page-full') {
+      templateName = 'website-landing-page-full.html';
+    } else if (templateType === 'website-landing-page-simple') {
+      templateName = 'website-landing-page-simple.html';
     } else {
-      templateName = 'website-landing-page-warm-outbound.html'; // default fallback
+      templateName = 'website-landing-page-simple.html'; // default fallback
     }
     const templatePath = path.join(__dirname, '../templates/', templateName);
     console.log(`📄 Loading template: ${templateName}`);
@@ -87,15 +87,15 @@ async function generatePages(csvFile = null) {
       csvFiles.push(csvFile);
     } else {
       // Process all available CSV files if no specific file provided
-      const websitesWarmPath = path.join(__dirname, '../data/websites-warm-outbound.csv');
-      const websitesColdPath = path.join(__dirname, '../data/websites-cold-outbound.csv');
+      const websitesSimplePath = path.join(__dirname, '../data/websites-simple.csv');
+      const websitesFullPath = path.join(__dirname, '../data/websites-full.csv');
       const abmPath = path.join(__dirname, '../data/abm.csv');
       
-      if (await fs.pathExists(websitesWarmPath)) {
-        csvFiles.push('websites-warm-outbound.csv');
+      if (await fs.pathExists(websitesSimplePath)) {
+        csvFiles.push('websites-simple.csv');
       }
-      if (await fs.pathExists(websitesColdPath)) {
-        csvFiles.push('websites-cold-outbound.csv');
+      if (await fs.pathExists(websitesFullPath)) {
+        csvFiles.push('websites-full.csv');
       }
       if (await fs.pathExists(abmPath)) {
         csvFiles.push('abm.csv');
@@ -141,12 +141,12 @@ async function generatePages(csvFile = null) {
                 
                 if (csvFileName === 'abm.csv' || useCase.toLowerCase() === 'abm') {
                   templateType = 'abm';
-                } else if (csvFileName === 'websites-cold-outbound.csv' || useCase.toLowerCase() === 'website landing page cold outbound') {
-                  templateType = 'website-landing-page-cold-outbound';
-                } else if (csvFileName === 'websites-warm-outbound.csv' || useCase.toLowerCase() === 'website landing page warm outbound') {
-                  templateType = 'website-landing-page-warm-outbound';
+                } else if (csvFileName === 'websites-full.csv' || useCase.toLowerCase() === 'website landing page full') {
+                  templateType = 'website-landing-page-full';
+                } else if (csvFileName === 'websites-simple.csv' || useCase.toLowerCase() === 'website landing page simple') {
+                  templateType = 'website-landing-page-simple';
                 } else {
-                  templateType = 'website-landing-page-warm-outbound'; // default fallback
+                  templateType = 'website-landing-page-simple'; // default fallback
                 }
                 
                 templateUsage[templateType] = (templateUsage[templateType] || 0) + 1;

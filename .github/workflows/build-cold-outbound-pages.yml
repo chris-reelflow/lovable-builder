@@ -43,8 +43,8 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./output
-        publish_branch: gh-pages-cold-outbound
-        force_orphan: true
+        publish_branch: gh-pages
+        destination_dir: cold-outbound
         
     - name: Summary
       run: |

@@ -43,8 +43,8 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./output
-        publish_branch: gh-pages-abm
-        force_orphan: true
+        publish_branch: gh-pages
+        destination_dir: abm
         
     - name: Summary
       run: |
